@@ -38,13 +38,10 @@ import { BaseAdminComponent } from './layouts/admin/base-admin/base-admin.compon
     AdminDashBoardComponent,
     AdminProductComponent,
     AdminUserComponent,
-    BaseAdminComponent
+    BaseAdminComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
