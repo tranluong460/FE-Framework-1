@@ -1,0 +1,55 @@
+footer {
+    margin-top: 0px;
+    padding-top: 0px;
+    background-color: #000000;
+    color: #b2b2b2;
+    position: relative;
+    display: block;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.newsletter {
+    font-size: x-large;
+    font-weight: bold;
+    position: relative;
+    clear: both;
+    padding-left: 20px;
+    text-align: left;
+    padding-top: 30px;
+}
+
+.background {
+    background-image: url('https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/main-banner-1-1903x975.jpg');
+    /* Đường dẫn đến hình ảnh nền */
+    background-size: cover;
+    /* Chỉnh kích thước ảnh để nó phủ đầy phần nền */
+    background-position: center;
+    /* Đặt vị trí ảnh là ở giữa */
+    height: 1000px;
+    /* Đặt chiều cao của phần nền */
+}
+
+ul {
+
+    list-style-type: none;
+    overflow: hidden;
+    padding-left: 500px;
+    padding-bottom: 150px;
+    /* Màu nền của menu */
+}
+
+li {
+    display: inline-block;
+    margin-right: 50px;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+}
