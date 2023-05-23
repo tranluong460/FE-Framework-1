@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-
+  constructor(private router: Router) { }
+  routerSignIn() {
+    this.router.navigate(['/auth/signIn'])
+  }
 }
