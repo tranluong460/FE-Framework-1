@@ -1,0 +1,93 @@
+.container {
+    background: white;
+    max-width: 960px;
+    max-height: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+
+}
+
+body {
+    height: 1500px;
+}
+
+.item {
+    margin: 5px;
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    width: 500px;
+    color: black;
+}
+
+.container {
+    display: flex;
+}
+
+
+
+.btn {
+    border: 1px solid;
+    color: white;
+    background-color: black;
+}
+
+.status {
+    display: flex;
+    width: 350px;
+
+}
+
+.navimg {
+    height: 120px;
+    margin-top: 370px;
+    width: 70px;
+    margin-left: 70px;
+}
+
+
+
+.des {
+    text-align: center;
+    margin-top: 20px;
+    border: black 1px solid;
+    width: 900px;
+    margin-left: 300px;
+}
+
+.related {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.products-titles {
+    font-size: 30px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.status2 {
+    display: flex;
+
+}
+
+.optionimg {
+    height: 220px;
+    margin-top: 20px;
+    width: 253px;
+    margin-left: 102px;
+
+}
+
+.fa {
+    margin-left: 50px;
+    font-size: 14px;
+}
+
+.fa-stack {
+
+
+    width: 2px;
+    height: 2px;
+
+}
