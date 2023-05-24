@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  items: any[];
+
+  constructor() {
+    this.items = Array(6).fill(0);
+  }
+}
