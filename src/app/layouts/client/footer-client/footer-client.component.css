@@ -15,3 +15,11 @@ footer {
   text-align: left;
   padding-top: 30px;
 }
+.menu-icon {
+  padding-left: 20px;
+  font-size: x-large;
+  padding-top: 10px;
+}
+.menu-icon ul a i {
+  margin-left: 10px;
+}
