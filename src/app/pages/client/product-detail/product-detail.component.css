@@ -18,13 +18,15 @@ body {
     line-height: 50px;
     width: 500px;
     color: black;
+
 }
+
+
 
 .container {
     display: flex;
+
 }
-
-
 
 .btn {
     border: 1px solid;
@@ -34,12 +36,17 @@ body {
 
 .status {
     display: flex;
-    width: 350px;
+    width: 300px;
+    gap: 10px;
+    margin-left: 230px;
+}
 
+.status .photo {
+    width: 80px;
 }
 
 .navimg {
-    height: 120px;
+    height: 100px;
     margin-top: 370px;
     width: 70px;
     margin-left: 70px;
@@ -72,22 +79,12 @@ body {
 }
 
 .optionimg {
-    height: 220px;
+    height: 200px;
     margin-top: 20px;
-    width: 253px;
-    margin-left: 102px;
-
+    width: 180px;
+    margin-left: 150px;
 }
 
-.fa {
-    margin-left: 50px;
-    font-size: 14px;
-}
-
-.fa-stack {
-
-
-    width: 2px;
-    height: 2px;
-
+.price {
+    margin-left: 150px;
 }
