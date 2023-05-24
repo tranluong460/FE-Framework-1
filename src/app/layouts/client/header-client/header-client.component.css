@@ -1,55 +1,58 @@
-footer {
-    margin-top: 0px;
-    padding-top: 0px;
-    background-color: #000000;
-    color: #b2b2b2;
-    position: relative;
-    display: block;
-}
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.newsletter {
-    font-size: x-large;
-    font-weight: bold;
-    position: relative;
-    clear: both;
-    padding-left: 20px;
-    text-align: left;
-    padding-top: 30px;
-}
-
 .background {
-    background-image: url('https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/main-banner-1-1903x975.jpg');
-    /* Đường dẫn đến hình ảnh nền */
+    background-image: url("https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/main-banner-1-1903x975.jpg");
     background-size: cover;
-    /* Chỉnh kích thước ảnh để nó phủ đầy phần nền */
     background-position: center;
-    /* Đặt vị trí ảnh là ở giữa */
-    height: 1000px;
-    /* Đặt chiều cao của phần nền */
+    height: 100vh;
 }
 
-ul {
-
-    list-style-type: none;
-    overflow: hidden;
-    padding-left: 500px;
-    padding-bottom: 150px;
-    /* Màu nền của menu */
+.header {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 100px;
 }
 
-li {
+.header-logo {
+    text-align: center;
     display: inline-block;
-    margin-right: 50px;
 }
 
-li a {
+.logo {
+    padding: 0;
+    text-align: center;
+}
+
+.logo img {
+    max-width: 100%;
+    text-align: center;
+    display: inline;
+}
+
+.background img {
+    width: 150px;
+    height: auto;
+}
+
+.menu {
+    font-size: 16px;
+}
+
+.menu li {
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 90px;
+}
+
+.menu li a {
     display: block;
-    color: black;
+    color: #000;
     text-decoration: none;
+}
+
+.icons {
+    font-size: 14px;
+}
+
+.icons i {
+    margin: 10px;
 }

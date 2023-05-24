@@ -1,0 +1,48 @@
+.background {
+    background-image: url("https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/main-banner-1-1903x975.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  .header {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 100px;
+  }
+  .header-logo {
+    text-align: center;
+    display: inline-block;
+  }
+  .logo {
+    padding: 0;
+    text-align: center;
+  }
+  .logo img {
+    max-width: 100%;
+    text-align: center;
+    display: inline;
+  }
+  .background img {
+    width: 150px;
+    height: auto;
+  }
+  .menu {
+    font-size: 16px;
+  }
+  .menu li {
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 90px;
+  }
+  .menu li a {
+    display: block;
+    color: #000;
+    text-decoration: none;
+  }
+  .icons {
+    font-size: 14px;
+  }
+  .icons i {
+    margin: 10px;
+  }
