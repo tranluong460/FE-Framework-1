@@ -1,25 +1,71 @@
 <div class="container">
   <div class="forms-container">
     <div class="signin-signup">
-      <form action="#" class="sign-up-form">
+      <form class="sign-up-form" [formGroup]="userForm" (ngSubmit)="onHandleSubmit()">
         <h2 class="title">Đăng ký</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Tên" />
+          <input type="text" formControlName="name" placeholder="Tên" />
         </div>
+        <span
+          *ngIf="userForm.controls.name.invalid && (userForm.controls.name.dirty || userForm.controls.name.touched)">
+          <span *ngIf="userForm.controls.name.errors?.['required']" class="text-red-500">Vui lòng nhập tên</span>
+        </span>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input type="email" formControlName="email" placeholder="Email" />
         </div>
+        <span
+          *ngIf="userForm.controls.email.invalid && (userForm.controls.email.dirty || userForm.controls.email.touched)">
+          <span *ngIf="userForm.controls.email.errors?.['required']" class="text-red-500">Vui lòng nhập email</span>
+          <span *ngIf="userForm.controls.email.errors?.['email']" class="text-red-500">Email không hợp lệ</span>
+          <span *ngIf="userForm.controls.email.errors?.['emailFound']" class="text-red-500">Email đã tồn
+            tại</span>
+        </span>
+        <div class="input-field">
+          <i class="fas fa-phone"></i>
+          <input type="text" formControlName="phone" placeholder="Số điện thoại" />
+        </div>
+        <span
+          *ngIf="userForm.controls.phone.invalid && (userForm.controls.phone.dirty || userForm.controls.phone.touched)">
+          <span *ngIf="userForm.controls.phone.errors?.['required']" class="text-red-500">Vui lòng nhập tên</span>
+        </span>
+        <div class="input-field">
+          <i class="fas fa-location-dot"></i>
+          <input type="text" formControlName="address" placeholder="Địa chỉ" />
+        </div>
+        <span
+          *ngIf="userForm.controls.address.invalid && (userForm.controls.address.dirty || userForm.controls.address.touched)">
+          <span *ngIf="userForm.controls.address.errors?.['required']" class="text-red-500">Vui lòng nhập tên</span>
+        </span>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Mật khẩu" />
+          <input type="password" formControlName="password" placeholder="Mật khẩu" />
         </div>
+        <span
+          *ngIf="userForm.controls.password.invalid && (userForm.controls.password.dirty || userForm.controls.password.touched)">
+          <span *ngIf="userForm.controls.password.errors?.['required']" class="text-red-500">Vui lòng nhập mật
+            khẩu</span>
+          <span *ngIf="userForm.controls.password.errors?.['minlength']" class="text-red-500">Mật khẩu phải có ít nhất 6
+            ký tự</span>
+          <span *ngIf="userForm.controls.password.errors?.['passNotFound']" class="text-red-500">Mật khẩu không
+            đúng</span>
+        </span>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Nhập lại mật khẩu" />
+          <input type="password" formControlName="confirmPassword" placeholder="Nhập lại mật khẩu" />
         </div>
-        <input type="submit" class="btn" value="Đăng ký" />
+        <span
+          *ngIf="userForm.controls.confirmPassword.invalid && (userForm.controls.confirmPassword.dirty || userForm.controls.confirmPassword.touched)">
+          <span *ngIf="userForm.controls.confirmPassword.errors?.['required']" class="text-red-500">Vui lòng nhập mật
+            khẩu</span>
+          <span *ngIf="userForm.controls.confirmPassword.errors?.['minlength']" class="text-red-500">Mật khẩu phải có ít
+            nhất 6
+            ký tự</span>
+          <span *ngIf="userForm.controls.confirmPassword.errors?.['passNotFound']" class="text-red-500">Mật khẩu không
+            đúng</span>
+        </span>
+        <input type="submit" class="btn" value="Đăng ký" [disabled]="!userForm.valid" />
       </form>
     </div>
   </div>
@@ -36,7 +82,9 @@
           Đăng nhập
         </button>
       </div>
-      <img src="img/log.svg" class="image" alt="" />
+      <img
+        src="https://marketplace.canva.com/EAE85VgPq3E/1/0/1600w/canva-v%E1%BA%BD-tay-h%C3%ACnh-tr%C3%B2n-logo-c3Jw1yOiXJw.jpg"
+        class="image" alt="" />
     </div>
   </div>
 </div>
