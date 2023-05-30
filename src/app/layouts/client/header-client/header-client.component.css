@@ -1,55 +1,92 @@
-footer {
-    margin-top: 0px;
-    padding-top: 0px;
-    background-color: #000000;
-    color: #b2b2b2;
-    position: relative;
-    display: block;
+.header {
+  display: flex;
+  padding: 8vh;
+  gap: 25vh;
+  justify-content: center;
 }
 
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+.logo a img {
+  width: 20vh;
 }
 
-.newsletter {
-    font-size: x-large;
-    font-weight: bold;
-    position: relative;
-    clear: both;
-    padding-left: 20px;
-    text-align: left;
-    padding-top: 30px;
+.menu {
+  display: flex;
+  font-weight: 600;
 }
 
-.background {
-    background-image: url('https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/main-banner-1-1903x975.jpg');
-    /* Đường dẫn đến hình ảnh nền */
-    background-size: cover;
-    /* Chỉnh kích thước ảnh để nó phủ đầy phần nền */
-    background-position: center;
-    /* Đặt vị trí ảnh là ở giữa */
-    height: 1000px;
-    /* Đặt chiều cao của phần nền */
+.menu li {
+  list-style: none;
 }
 
-ul {
-
-    list-style-type: none;
-    overflow: hidden;
-    padding-left: 500px;
-    padding-bottom: 150px;
-    /* Màu nền của menu */
+.menu li a {
+  text-decoration: none;
+  margin-left: 10vh;
+  color: #000;
 }
 
-li {
-    display: inline-block;
-    margin-right: 50px;
+.menu li a:hover {
+  color: #888888;
 }
 
-li a {
-    display: block;
-    color: black;
-    text-decoration: none;
+.icon button {
+  margin-left: 3vh;
+}
+
+.icon button i {
+  font-size: 18px;
+}
+
+.icon i:hover {
+  color: #888888;
+}
+
+.icon {
+  display: flex;
+}
+
+.cart-total {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: -30px;
+  color: #fff;
+  background: #000;
+  line-height: 18px;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0;
+  text-transform: lowercase;
+  display: block;
+  border-radius: 50%;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 4vh;
+    gap: 15vh;
+    align-items: center;
+  }
+
+  .logo a img {
+    width: 30vh;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu li a {
+    margin-left: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+  .icon button {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 }
