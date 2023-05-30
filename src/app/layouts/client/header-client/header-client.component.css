@@ -23,7 +23,6 @@
   margin-left: 10vh;
   color: #000;
 }
-
 .menu li a:hover {
   color: #888888;
 }
@@ -31,7 +30,6 @@
 .icon button {
   margin-left: 3vh;
 }
-
 .icon button i {
   font-size: 18px;
 }
@@ -39,11 +37,12 @@
 .icon i:hover {
   color: #888888;
 }
-
 .icon {
   display: flex;
 }
-
+.icon a {
+  color: #000;
+}
 .cart-total {
   position: absolute;
   margin-left: 10px;
