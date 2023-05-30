@@ -54,7 +54,7 @@
                 <h2>Sản phẩm nổi bật</h2>
             </div>
             <div class="products">
-                <div class="card-product">
+                <div *ngFor="let item of items; let i = index" class="card-product">
                     <div class="img-product">
                         <a href="123">
                             <div class="card-img">
@@ -67,12 +67,12 @@
                         <div class="button-group">
                             <button class="wishlist">
                                 <span>Yêu thích</span>
-                                <i class="fa fa-heart"></i>
+                                <i class="far fa-heart"></i>
                             </button>
                             <a href="123">
                                 <button class="quick-view">
                                     <span>Xem thông tin</span>
-                                    <i class="fa fa-eye"></i>
+                                    <i class="far fa-eye"></i>
                                 </button>
                             </a>
                             <button class="add-cart">

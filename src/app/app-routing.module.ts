@@ -36,7 +36,7 @@ const routes: Routes = [
       { path: 'products', component: ProductPageComponent },
       { path: 'cart', component: CartPageComponent },
       { path: 'cart/pay', component: PayPageComponent },
-      { path: 'productDetail', component: ProductDetailComponent },
+      { path: 'productDetail/:id', component: ProductDetailComponent },
       { path: 'search', component: SearchPageComponent },
     ],
   },
@@ -62,4 +62,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
