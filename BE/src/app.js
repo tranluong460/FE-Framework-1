@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express from "express";
 
+import authRouter from "./router/auth";
+
 import cors from "cors";
 
 dotenv.config();
@@ -15,7 +17,7 @@ app.use('/product') // Router quản lý sản phẩm
 app.use('/category') // Router quản lý danh mục
 app.use('/order') // Router quản lý đơn hàng
 app.use('/comment') // Router bình luận
-app.use('/') // Router đăng nhập, đăng kí
+app.use('/', authRouter)
 app.use('/') // Router quên mật khẩu
 
 mongoose.connect(process.env.URI)
