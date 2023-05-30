@@ -44,10 +44,10 @@ const productSchema = new mongoose.Schema({
             thumbnail_url: String
         }
     ],
-    brand: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
-    },
+    // brand: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Category'
+    // },
     specifications: [
         {
             name: {
@@ -72,12 +72,12 @@ const productSchema = new mongoose.Schema({
             ]
         }
     ],
-    comments: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
-    ]
+    // comments: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'Comment'
+    //     }
+    // ]
 }, { timestamps: true, versionKey: false });
 
 export default mongoose.model("Product", productSchema);
