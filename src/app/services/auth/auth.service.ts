@@ -9,9 +9,9 @@ import { ILoginUser, IRegisterUser } from 'src/app/interface/auth';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<any> {
-    return this.http.get('http://localhost:8080/user');
-  }
+  // getUser(): Observable<any> {
+  //   return this.http.get('http://localhost:8080/user');
+  // }
 
   login(data: ILoginUser): Observable<ILoginUser> {
     return this.http.post<ILoginUser>('http://localhost:8080/login', data);
