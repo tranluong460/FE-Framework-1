@@ -36,35 +36,29 @@ export const resetPassword = async (req, res) => {
     const { password, randomString, randomCode } = req.body
 
     try {
-        // Giải mã token để lấy email , randomString và randomCode
         const token = req.headers.authorization.split(" ")[1];
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-        // Tìm kiếm người dùng bằng email từ token
         const user = await User.findOne({ email: decoded.email });
 
-        // Nếu không tìm thấy người dùng, trả về lỗi 400
         if (!user) {
             return res.status(400).json({
                 message: "User không tồn tại",
             });
         }
 
-        // Kiểm tra mã bỏa mật
         if (randomString !== decoded.randomString || randomCode !== decoded.randomCode) {
             return res.status(400).json({
                 message: "Mã bảo mật không chính xác!",
             });
         }
 
-        // Nếu mật khẩu ngắn hơn 6 ký tự, trả về lỗi 400
         if (password.length < 6) {
             return res.status(400).json({
                 message: "Mật khẩu phải có độ dài từ 6 ký tự trở lên",
             });
         }
 
-        // Kiểm tra mật khẩu mới
         const isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
             return res.status(400).json({
@@ -74,16 +68,13 @@ export const resetPassword = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Cập nhật mật khẩu người dùng
         const userNew = await User.findOneAndUpdate({ email: decoded.email }, { password: hashedPassword }, { new: true });
 
-        // Trả về thông báo thành công
         return res.json({
             message: "Đổi mật khẩu thành công",
         });
     } catch (err) {
         console.error(err);
-        // Nếu token không hợp lệ, trả về lỗi 400
         return res.status(400).json({
             message: "Token không hợp lệ",
         });
