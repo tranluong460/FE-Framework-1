@@ -136,6 +136,7 @@
 .card-product {
   padding: 10px;
   box-sizing: border-box;
+  border: 1px solid grey;
 }
 .card-img {
   text-align: center;
@@ -162,7 +163,7 @@
   filter: blur(1.5px);
 }
 .img-product {
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 .card-product:hover .img1 {
   transform: scale(0.5);
