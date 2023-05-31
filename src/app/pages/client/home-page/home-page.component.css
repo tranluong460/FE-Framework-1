@@ -5,12 +5,25 @@
   font-family: "Roboto", sans-serif;
 }
 
-/* Sản phẩm hàng đầu */
-.top-product {
+/* Ảnh bìa */
+.banner-top {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.banner-top img {
+  width: auto;
+  height: auto;
+}
+/* Ảnh bìa */
+
+/* Sản phẩm hàng đầu */
+
+/* .top-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 .container {
   text-align: center;
   width: 100%;
@@ -46,7 +59,7 @@
   left: -20px;
   right: -20px;
 }
-.top-product-lists {
+/* .top-product-lists {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +67,8 @@
   padding: 7px 7px;
   background: #e6e6e6;
   width: 100%;
-}
-.item {
+} */
+/* .item {
   position: relative;
   padding: 0;
   text-align: center;
@@ -63,8 +76,8 @@
   margin: 10px;
   flex: 1 1 300px;
   max-width: 400px;
-}
-.inner img {
+} */
+/* .inner img {
   max-width: 100%;
   height: auto;
 }
@@ -82,20 +95,22 @@
   top: 35px;
   left: 0;
   right: 0;
-}
-.image-item {
+} */
+/* .image-item {
   position: relative;
   overflow: hidden;
 }
 .inner img {
-  height: 500px;
+  height: 400px;
   width: 100%;
   margin: 0 auto;
   transition: all 0.3s ease-in-out;
 }
 .inner img:hover {
   transform: scale(1.1);
-}
+} */
+
+/* Sản phẩm hàng đầu */
 
 /* Danh sách sản phẩm */
 .products {
@@ -103,9 +118,11 @@
   flex-wrap: wrap;
 }
 .card-product {
-  flex-basis: 33.33%;
+  flex-basis: 24%;
   padding: 10px;
   box-sizing: border-box;
+  border: 1px solid grey;
+  margin: 5px;
 }
 .card-img {
   text-align: center;
@@ -132,7 +149,7 @@
   filter: blur(1.5px);
 }
 .img-product {
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 .card-product:hover .img1 {
   transform: scale(0.5);
@@ -232,6 +249,18 @@
   color: #ffb700;
   font-size: 13px;
 }
+.show-product {
+  margin-top: 10px;
+}
+.show-product button {
+  border: 1px solid grey;
+  padding: 10px;
+}
+.show-product button:hover {
+  background-color: #888888;
+}
+
+/* Danh sách sản phẩm */
 
 /* Banner */
 .ctbanner {
@@ -240,12 +269,15 @@
   color: #f2f2f2;
 }
 .banner-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 .banner-img img {
-  width: 100%;
+  width: auto;
   transition: transform 2s ease;
 }
 .banner-img:hover img {
@@ -307,6 +339,7 @@
 .ctbanner:hover .banner-img img {
   transform: scale(1.1);
 }
+/* Banner */
 
 /* Dịch vụ */
 .service {
