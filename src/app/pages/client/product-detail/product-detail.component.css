@@ -145,7 +145,7 @@
 }
 .img1,
 .img2 {
-  width: 50%;
+  width: 70%;
   transition: transform 700ms ease 0s, opacity 400ms ease 0s;
 }
 .img1 {
