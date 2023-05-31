@@ -48,6 +48,9 @@ export class SignInComponent {
         if (this.errorMessage.includes('Email không tồn tại')) {
           this.userForm.controls.email.setErrors({ emailNotFound: true });
         }
+        if (this.errorMessage.includes('Tài khoản phải là email')) {
+          this.userForm.controls.email.setErrors({ emailNotFound: true });
+        }
         if (this.errorMessage.includes('Mật khẩu không đúng')) {
           this.userForm.controls.password.setErrors({ passNotFound: true });
         }
