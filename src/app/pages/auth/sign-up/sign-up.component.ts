@@ -38,7 +38,7 @@ export class SignUpComponent {
       phone: this.userForm.value.phone || '',
       address: this.userForm.value.address || '',
       password: this.userForm.value.password || '',
-      confirmPassword: this.userForm.value.password || '',
+      confirmPassword: this.userForm.value.confirmPassword || '',
     };
 
     this.authService.register(user).subscribe(
@@ -47,9 +47,11 @@ export class SignUpComponent {
       },
       (error) => {
         if (Array.isArray(error.error.message)) {
-          error.error.message.forEach((errorMessage: string) => {
-            this.errorMessage = errorMessage;
-          });
+          // error.error.message.forEach((errorMessage: string) => {
+          //   this.errorMessage = errorMessage;
+          // });
+
+          this.errorMessage = error.error.message[0];
         } else {
           this.errorMessage = error.error.message;
         }
