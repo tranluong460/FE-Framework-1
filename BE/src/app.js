@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import authRouter from "./router/auth";
+import forgotRouter from "./router/forgot";
 
 import cors from "cors";
 
@@ -18,7 +19,7 @@ app.use(cors())
 // app.use('/order') // Router quản lý đơn hàng
 // app.use('/comment') // Router bình luận
 app.use('/', authRouter)
-// app.use('/') // Router quên mật khẩu
+app.use('/', forgotRouter)
 
 mongoose.connect(process.env.URI)
 
