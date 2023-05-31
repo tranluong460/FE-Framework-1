@@ -13,12 +13,12 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/product') // Router quản lý sản phẩm
-app.use('/category') // Router quản lý danh mục
-app.use('/order') // Router quản lý đơn hàng
-app.use('/comment') // Router bình luận
+// app.use('/product') // Router quản lý sản phẩm
+// app.use('/category') // Router quản lý danh mục
+// app.use('/order') // Router quản lý đơn hàng
+// app.use('/comment') // Router bình luận
 app.use('/', authRouter)
-app.use('/') // Router quên mật khẩu
+// app.use('/') // Router quên mật khẩu
 
 mongoose.connect(process.env.URI)
 

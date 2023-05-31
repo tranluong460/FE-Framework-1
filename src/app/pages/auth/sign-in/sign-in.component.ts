@@ -39,21 +39,25 @@ export class SignInComponent {
       },
       (error) => {
         if (Array.isArray(error.error.message)) {
-          error.error.message.forEach((errorMessage: string) => {
-            this.errorMessage = errorMessage;
-          });
+          console.log(error.error.message);
+
+          // error.error.message.forEach((errorMessage: string) => {
+          //   this.errorMessage = errorMessage;
+          // });
+
+          this.errorMessage = error.error.message[0];
         } else {
           this.errorMessage = error.error.message;
         }
-        if (this.errorMessage.includes('Email không tồn tại')) {
-          this.userForm.controls.email.setErrors({ emailNotFound: true });
-        }
-        if (this.errorMessage.includes('Tài khoản phải là email')) {
-          this.userForm.controls.email.setErrors({ emailNotFound: true });
-        }
-        if (this.errorMessage.includes('Mật khẩu không đúng')) {
-          this.userForm.controls.password.setErrors({ passNotFound: true });
-        }
+        // if (this.errorMessage.includes('Email không tồn tại')) {
+        //   this.userForm.controls.email.setErrors({ emailNotFound: true });
+        // }
+        // if (this.errorMessage.includes('Tài khoản phải là email')) {
+        //   this.userForm.controls.email.setErrors({ emailNotFound: true });
+        // }
+        // if (this.errorMessage.includes('Mật khẩu không đúng')) {
+        //   this.userForm.controls.password.setErrors({ passNotFound: true });
+        // }
       }
     );
   }
