@@ -1,11 +1,7 @@
 <div class="container">
   <div class="forms-container">
     <div class="signin-signup">
-      <form
-        class="sign-in-form"
-        [formGroup]="userForm"
-        (ngSubmit)="onHandleSubmit()"
-      >
+      <form class="sign-in-form" [formGroup]="userForm" (ngSubmit)="onHandleSubmit()">
         <h2 class="title">Đăng nhập</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
@@ -20,11 +16,7 @@
         </span> -->
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input
-            type="password"
-            formControlName="password"
-            placeholder="Mật khẩu"
-          />
+          <input type="password" formControlName="password" placeholder="Mật khẩu" />
         </div>
         <!-- <span
           *ngIf="userForm.controls.password.invalid && (userForm.controls.password.dirty || userForm.controls.password.touched)">
@@ -37,6 +29,7 @@
         </span> -->
         <span class="text-red-500">{{ errorMessage }}</span>
         <input type="submit" value="Đăng nhập" class="btn" />
+        <a href="/auth/forgot-password" class="no-underline mx-4">Quên mật khẩu?</a>
       </form>
     </div>
   </div>

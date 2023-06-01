@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./reset-password.component.css'],
 })
 export class ResetPasswordComponent {
+  errorMessage: string = '';
   password: any;
-
   passwordForm = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(6)]],
     randomCode: [''],
@@ -30,15 +30,27 @@ export class ResetPasswordComponent {
   }
 
   onHandleSubmit() {
-    // if (this.passwordForm.valid) {
     const resetPassword: any = {
       password: this.passwordForm.value.password || '',
       randomCode: this.passwordForm.value.randomCode || '',
       randomString: this.randomString || '',
       // confirmPassword: this.passwordForm.value.confirmPassword || '',
     };
+    console.log(resetPassword);
 
-    this.authService.resetPassword(resetPassword).subscribe((password) => {});
-    // }
+    this.authService.resetPassword(resetPassword).subscribe(
+      (response) => {
+        console.log('Gửi thành công', response);
+        window.localStorage.setItem('accessCode', response.accessCode);
+      },
+      (error) => {
+        if (Array.isArray(error.error.message)) {
+          console.log(error.error.message);
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
+      }
+    );
   }
 }

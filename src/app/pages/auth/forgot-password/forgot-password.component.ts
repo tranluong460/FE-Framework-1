@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent {
+  errorMessage: string = '';
+
   emailForm = this.fb.group({
     email: [''],
   });
@@ -17,8 +19,19 @@ export class ForgotPasswordComponent {
       email: this.emailForm.value.email || '',
     };
 
-    this.authService.forgotPassword(email).subscribe((data) => {
-      window.localStorage.setItem('accessCode', data.accessCode);
-    });
+    this.authService.forgotPassword(email).subscribe(
+      (response) => {
+        console.log('Gửi thành công', response);
+        window.localStorage.setItem('accessCode', response.accessCode);
+      },
+      (error) => {
+        if (Array.isArray(error.error.message)) {
+          console.log(error.error.message);
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
+      }
+    );
   }
 }

@@ -29,11 +29,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'signIn', pathMatch: 'full' },
       { path: 'signIn', component: SignInComponent },
       { path: 'signUp', component: SignUpComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
       {
         path: 'reset-password/:randomString',
         component: ResetPasswordComponent,
       },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
 
