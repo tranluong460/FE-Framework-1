@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import authRouter from "./router/auth";
+import productRouter from "./router/product";
 import forgotRouter from "./router/forgot";
 import orderRouter from "./router/order";
 import categoriRouter from "./router/category";
