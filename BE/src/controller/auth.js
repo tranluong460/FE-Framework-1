@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import nodemailer from 'nodemailer'
 
 import { loginSchema } from "../validate/login";
 import { registerSchema } from "../validate/register";

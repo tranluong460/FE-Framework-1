@@ -22,6 +22,8 @@ import { AdminDashBoardComponent } from './pages/admin/admin-dash-board/admin-da
 import { AdminProductComponent } from './pages/admin/admin-product/admin-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { BaseAdminComponent } from './layouts/admin/base-admin/base-admin.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 
@@ -44,6 +46,8 @@ import { ContactPageComponent } from './pages/client/contact-page/contact-page.c
     AdminProductComponent,
     AdminUserComponent,
     BaseAdminComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     IntroducePageComponent,
     ContactPageComponent,
   ],

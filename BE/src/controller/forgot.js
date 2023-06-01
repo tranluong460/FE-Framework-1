@@ -23,7 +23,7 @@ export const getSecurityCode = async (req, res) => {
     let randomString = uuidv4()
     const token = jwt.sign({ email: email, randomCode: randomCode, randomString: randomString }, process.env.SECRET_KEY, { expiresIn: '3m' });
 
-    const resetPasswordUrl = `${process.env.APP_URL}/reset-password/token/${randomString}`;
+    const resetPasswordUrl = `${process.env.APP_URL}/auth/reset-password/token/${randomString}`;
 
     sendMail(user.name, user.email, randomCode, resetPasswordUrl)
     return res.status(200).json({
