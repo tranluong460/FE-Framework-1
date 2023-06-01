@@ -33,7 +33,7 @@ const routes: Routes = [
         path: 'reset-password/:randomString',
         component: ResetPasswordComponent,
       },
-      { path: 'reset-password', component: ForgotPasswordComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
 
