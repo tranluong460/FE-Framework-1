@@ -29,9 +29,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'signIn', pathMatch: 'full' },
       { path: 'signIn', component: SignInComponent },
       { path: 'signUp', component: SignUpComponent },
-      { path: 'reset-password/token/:randomString', component: ResetPasswordComponent },
-      { path: 'sendEmail', component: ForgotPasswordComponent }
-
+      {
+        path: 'reset-password/:randomString',
+        component: ResetPasswordComponent,
+      },
+      { path: 'reset-password', component: ForgotPasswordComponent },
     ],
   },
 
@@ -71,4 +73,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
