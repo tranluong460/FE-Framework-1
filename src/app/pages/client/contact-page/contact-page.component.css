@@ -1,0 +1,191 @@
+.container {
+  padding: 50px 10px 50px;
+  height: auto;
+  display: block;
+  justify-content: center;
+  align-content: center;
+}
+.container-child {
+  height: 100%;
+  width: var(--width-container);
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: stretch;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.left {
+  width: 50%;
+  order: 1;
+  padding: 0px 0px 0px 0px;
+  display: block;
+}
+.left-child {
+  width: 100%;
+  height: 10%;
+  position: relative;
+}
+.left-child h2 {
+  height: auto;
+  width: 100%;
+  color: var(--c-1678845110567, #0e0e0e);
+  font-size: 30px;
+  top: 0;
+  left: 0px;
+  text-align: left;
+  font-weight: 500;
+  padding: 0px 0px 15px;
+  border-style: dotted;
+  border-color: #ccc;
+  border-width: 0px 0px 1px;
+  text-transform: uppercase;
+  overflow: visible;
+  margin: 0px 0px 25px;
+  display: block;
+  position: relative;
+}
+.left-child form {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  top: 0;
+  transform: translateX(0px) translateY(0px);
+  left: 0px;
+  display: block;
+  position: relative;
+}
+.form-child {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.child1 {
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0px;
+  margin: 0px 0px 10px;
+  display: block;
+  position: relative;
+}
+.clid {
+  align-items: flex-start;
+  justify-content: space-between;
+  display: flex;
+}
+.input1 {
+  top: unset;
+  margin: 0px 5px 20px 0px;
+  display: inline-block;
+  left: unset;
+  border: 1px solid #ccc;
+  position: relative;
+}
+.input1 input {
+  outline: none;
+  width: 44vh;
+  padding: 10px 0px 10px 20px;
+}
+.input2 {
+  top: unset;
+  margin: 0px 5px 20px 0px;
+  display: inline-block;
+  left: unset;
+  border: 1px solid #ccc;
+  position: relative;
+}
+.input2 input {
+  outline: none;
+  width: 44vh;
+  padding: 10px 0px 10px 20px;
+}
+.child2 {
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0px;
+  margin: 0px 0px 30px;
+  display: inline-block;
+  transform: translateX(0px);
+  border: 1px solid #ccc;
+  position: relative;
+}
+.child2 textarea {
+  outline: none;
+  padding: 10px 0px 10px 20px;
+}
+.child3 {
+  width: 100%;
+  height: auto;
+  left: 0px;
+  top: 0;
+  overflow: visible;
+  display: block;
+  position: relative;
+}
+.child3 button {
+  width: auto;
+  height: auto;
+  left: 0px;
+  top: 0;
+  cursor: pointer;
+  background-color: var(--c-1678845110567, #0e0e0e);
+  color: #fff;
+  text-align: center;
+  transition: all 300ms ease;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: Lora;
+  padding: 3px 35px;
+  display: inline-flex;
+  position: relative;
+}
+.child3 button span {
+  padding: 10px 10px 10px 0px;
+}
+.form-child3 {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.right {
+  order: 2;
+  width: 50%;
+  padding: 0px 0px 0px 20px;
+  color: var(--c-1678845110567, #0e0e0e);
+  display: block;
+}
+.childa {
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0px;
+  padding: 7px;
+  display: block;
+  position: relative;
+}
+.childa a {
+  width: 100%;
+  color: var(--c-1678845110567, #0e0e0e);
+  font-size: 16px;
+  font-family: Lora;
+  text-align: center;
+  top: 0;
+  left: 0px;
+  height: auto;
+  font-weight: 400;
+  margin: 0px 0px 0px;
+  justify-content: flex-start;
+  display: inline-flex;
+  position: relative;
+  text-decoration: none;
+}
+.childa i {
+  align-self: center;
+  margin: 5px;
+}

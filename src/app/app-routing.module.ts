@@ -19,6 +19,8 @@ import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
+import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,8 @@ const routes: Routes = [
       { path: 'cart/pay', component: PayPageComponent },
       { path: 'productDetail/:id', component: ProductDetailComponent },
       { path: 'search', component: SearchPageComponent },
+      { path: 'introduce', component: IntroducePageComponent },
+      { path: 'contact', component: ContactPageComponent },
     ],
   },
 
