@@ -17,6 +17,7 @@ import { AdminUserComponent } from './pages/admin/admin-user/admin-user.componen
 import { ErrorPageComponent } from './pages/error/error-page/error-page.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
+import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path: 'cart/pay', component: PayPageComponent },
       { path: 'productDetail/:id', component: ProductDetailComponent },
       { path: 'search', component: SearchPageComponent },
+      { path: 'introduce', component: IntroducePageComponent },
     ],
   },
 
