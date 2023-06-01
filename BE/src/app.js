@@ -4,7 +4,7 @@ import express from "express";
 
 import authRouter from "./router/auth";
 import forgotRouter from "./router/forgot";
-
+import categoriRouter from "./router/category";
 import cors from "cors";
 
 dotenv.config();
@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(cors())
 
 // app.use('/product', productRouter)
-// app.use('/category') // Router quản lý danh mục
+app.use('/', categoriRouter) // Router quản lý danh mục
 // app.use('/order') // Router quản lý đơn hàng
 // app.use('/comment') // Router bình luận
 app.use('/', authRouter)
