@@ -7,7 +7,7 @@ import { ILoginUser, IRegisterUser } from 'src/app/interface/auth';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // getUser(): Observable<any> {
   //   return this.http.get('http://localhost:8080/user');
@@ -22,5 +22,12 @@ export class AuthService {
       'http://localhost:8080/register',
       data
     );
+
+  }
+  resetPasswordEmail(email: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/forgot-password', email);
+  }
+  resetPassword(password: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/reset-password', password);
   }
 }

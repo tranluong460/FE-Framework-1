@@ -22,6 +22,8 @@ import { AdminDashBoardComponent } from './pages/admin/admin-dash-board/admin-da
 import { AdminProductComponent } from './pages/admin/admin-product/admin-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { BaseAdminComponent } from './layouts/admin/base-admin/base-admin.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { BaseAdminComponent } from './layouts/admin/base-admin/base-admin.compon
     AdminProductComponent,
     AdminUserComponent,
     BaseAdminComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

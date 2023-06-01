@@ -17,6 +17,8 @@ import { AdminUserComponent } from './pages/admin/admin-user/admin-user.componen
 import { ErrorPageComponent } from './pages/error/error-page/error-page.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'signIn', pathMatch: 'full' },
       { path: 'signIn', component: SignInComponent },
       { path: 'signUp', component: SignUpComponent },
+      { path: 'reset-password/token/:randomString', component: ResetPasswordComponent },
+      { path: 'sendEmail', component: ForgotPasswordComponent }
+
     ],
   },
 
@@ -62,4 +67,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
