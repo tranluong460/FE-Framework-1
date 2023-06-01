@@ -15,7 +15,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// app.use('/product', productRouter)
+app.use('/product', productRouter)
 app.use('/', categoriRouter)
 app.use('/order', orderRouter)
 // app.use('/comment') // Router bình luận
