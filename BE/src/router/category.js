@@ -1,12 +1,17 @@
-import express from 'express';
-import { create, getAll, get, remove, update } from '../controller/category';
+import express from "express";
+import { create, del, edit, getAll, getOne } from "../controller/category";
+import { checkPermission } from "../middleware/checkPermission";
 
-const router = express.Router();
-router.post('/category', create);
-router.get('/category', getAll);
-router.get('/category/:id', get);
-router.put('/category/:id', update);
-router.delete('/category/:id', remove);
+const router = express.Router()
 
-export default router;
+router.get("/", getAll)
 
+router.get("/:id", getOne)
+
+router.post("/", checkPermission, create)
+
+router.put("/:id", checkPermission, edit)
+
+router.delete('/:id', checkPermission, del)
+
+export default router
