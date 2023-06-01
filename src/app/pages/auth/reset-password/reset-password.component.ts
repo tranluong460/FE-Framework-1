@@ -13,29 +13,34 @@ export class ResetPasswordComponent {
   passwordForm = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(6)]],
     randomCode: [''],
-    randomString: ['']
+    // confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
   })
+
+  randomString!: string|any;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: ActivatedRoute,
   ) {
-
+    this.router.paramMap.subscribe((params) => {
+       this.randomString = params.get('randomString');
+    });
   }
 
   onHandleSubmit() {
-    if (this.passwordForm.valid) {
+    // if (this.passwordForm.valid) {
       const resetPassword: any = {
-        password: this.passwordForm.value.password || "",
+        password: this.passwordForm.value.password || '',
         randomCode: this.passwordForm.value.randomCode || '',
-        randomString: this.passwordForm.value.randomString || '',
-
+        randomString: this.randomString || '',
+        // confirmPassword: this.passwordForm.value.confirmPassword || '',
       }
+      console.log(resetPassword);
 
       this.authService.resetPassword(resetPassword).subscribe((password) => {
         console.log('product', password);
       })
-    }
+    // }
   }
 }

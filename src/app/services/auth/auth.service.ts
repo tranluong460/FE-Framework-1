@@ -28,6 +28,11 @@ export class AuthService {
     return this.http.post<any>('http://localhost:8080/forgot-password', email);
   }
   resetPassword(password: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/reset-password', password);
+
+    return this.http.post<any>('http://localhost:8080/reset-password', password, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('accessCode')
+      }
+    });
   }
 }

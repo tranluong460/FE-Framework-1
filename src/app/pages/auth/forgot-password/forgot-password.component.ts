@@ -17,7 +17,7 @@ export class ForgotPasswordComponent {
       email: this.emailForm.value.email || ''
     }
     this.authService.resetPasswordEmail(email).subscribe(data => {
-      console.log('gui ma cho gmail');
+      window.localStorage.setItem('accessCode', data.accessCode)
     })
   }
 }
