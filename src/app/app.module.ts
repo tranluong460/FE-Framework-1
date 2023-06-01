@@ -23,6 +23,7 @@ import { AdminProductComponent } from './pages/admin/admin-product/admin-product
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 import { BaseAdminComponent } from './layouts/admin/base-admin/base-admin.component';
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
+import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { IntroducePageComponent } from './pages/client/introduce-page/introduce-
     AdminUserComponent,
     BaseAdminComponent,
     IntroducePageComponent,
+    ContactPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ import { ErrorPageComponent } from './pages/error/error-page/error-page.componen
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
+import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
       { path: 'productDetail/:id', component: ProductDetailComponent },
       { path: 'search', component: SearchPageComponent },
       { path: 'introduce', component: IntroducePageComponent },
+      { path: 'contact', component: ContactPageComponent },
     ],
   },
 
