@@ -10,6 +10,8 @@ import { NgClass } from '@angular/common';
 export class ProductDetailComponent {
   product: any;
 
+  comments:any;
+
   products: any;
 
   activeTab: number = 0;
@@ -25,11 +27,14 @@ export class ProductDetailComponent {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id).subscribe((product) => {
+          this.comments= product?.comments;
+          console.log(this.comments)
         this.product = product;
       });
     });
     this.productService.getAllProducts().subscribe((data) => {
       this.products = data;
+     
     });
   }
 }
