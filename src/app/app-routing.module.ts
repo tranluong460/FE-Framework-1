@@ -42,7 +42,7 @@ const routes: Routes = [
     component: BaseClientComponent,
     children: [
       { path: '', component: HomePageComponent },
-      { path: 'products', component: ProductPageComponent },
+      { path: 'product', component: ProductPageComponent },
       { path: 'cart', component: CartPageComponent },
       { path: 'cart/pay', component: PayPageComponent },
       { path: 'productDetail/:id', component: ProductDetailComponent },

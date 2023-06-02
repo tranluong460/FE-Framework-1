@@ -1,53 +1,51 @@
 <div class="product">
-    
-   <div class="profile">
-    <div class="img-prod xl:w-2/3">
-        <img src="{{items.images?.[0].base_url}}" alt="img-prod">
-        <div class="img-mini ">
-            <div>
-                <img src="{{items.images?.[0].base_url}}" alt="img">
-            </div>
-            <div>
-                <img src="{{items.images?.[0].base_url}}" alt="img">
-            </div>
-            <div>
-                <img src="{{items.images?.[0].base_url}}" alt="img">
-            </div>
-            <div>
-                <img src="{{items.images?.[0].base_url}}" alt="img">
-            </div>
+  <div class="profile">
+    <div class="img-prod">
+      <img src="{{items.images?.[0].base_url}}" alt="img-prod" />
+      <div class="img-mini">
+        <div>
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
         </div>
+        <div>
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
+        </div>
+        <div>
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
+        </div>
+        <div>
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
+        </div>
+      </div>
     </div>
     <div class="info">
-        <h3 class="product-title">{{items.name}}</h3>
-        <div class="detail">
-            <div class="rate">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-            </div>
-            <p><b>Brand :</b> {{items.brand.slug}}</p>
-            <p><b>Product Code :</b> Product 16</p>
-            <p><b>Availability :</b> In Stock</p>
+      <h3 class="product-title">{{ items.name }}</h3>
+      <div class="detail">
+        <div class="rate">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
         </div>
-        <div class="prices">
-            <div class="price">
-                <del class="old-price">{{items.original_price}}đ</del>
-                <span class="special-price">{{items.price}}đ</span>
-            </div>
-            <div class="add-carts flex items-center mt-4">
-                <input type="text" class="border border-gray-300 px-2 py-1 mr-2">
-                <button class="px-4 py-2 bg-blue-500 text-white rounded">Add To Cart</button>
-            </div>
+        <p><b>Brand :</b> {{ items.brand.name }}</p>
+        <p><b>Product Code :</b> Product 16</p>
+        <p><b>Availability :</b> In Stock</p>
+      </div>
+      <div class="prices">
+        <div class="price">
+          <del class="old-price">{{ items.original_price }}đ</del>
+          <span class="special-price">{{ items.price }}đ</span>
         </div>
+        <div class="add-carts">
+          <input type="text" />
+          <button>Add To Cart</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-
-    <div class="review">
-        <!-- <div>
+  <div class="review">
+    <!-- <div>
             <div>
                 <p>Description</p>
             </div>
@@ -68,57 +66,61 @@
             </div>
         </div>
         <div> -->
-        <!-- </div> -->
-    </div>
+    <!-- </div> -->
+  </div>
 
-    <div class="container">
-        <div class="box-heading">
-            <h2>Sản phẩm</h2>
-        </div>
-        <div class="products">
-            <div *ngFor="let item of product; let i = index" class="card-product">
-                <div class="img-product">
-                    <a href="productDetail/1">
-                        <div class="card-img">
-                            <img src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/g/a/galaxys23ultra_front_green_221122_2.jpg"
-                                alt="product" class="img1">
-                            <img src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/o/p/oppo-reno8t-vang1-thumb-600x600.jpg"
-                                alt="product" class="img2">
-                        </div>
-                    </a>
-                    <div class="button-group">
-                        <button class="wishlist">
-                            <span>Yêu thích</span>
-                            <i class="far fa-heart"></i>
-                        </button>
-                        <a href="productDetail/1">
-                            <button class="quick-view">
-                                <span>Xem thông tin</span>
-                                <i class="far fa-eye"></i>
-                            </button>
-                        </a>
-                        <button class="add-cart">
-                            <span>Thêm vào giỏ hàng</span>
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="info-product">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <h4 class="product-name">
-                        <a href="productDetail/1">
-                            Aliquam Quaerat
-                        </a>
-                    </h4>
-                    <p class="product-price">1.900.000đ</p>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="box-heading">
+      <h2>Sản phẩm</h2>
     </div>
+    <div class="products">
+      <div *ngFor="let item of items; let i = index" class="card-product">
+        <div class="img-product">
+          <a href="productDetail/1">
+            <div class="card-img">
+              <img
+                src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/g/a/galaxys23ultra_front_green_221122_2.jpg"
+                alt="product"
+                class="img1"
+              />
+              <img
+                src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/o/p/oppo-reno8t-vang1-thumb-600x600.jpg"
+                alt="product"
+                class="img2"
+              />
+            </div>
+          </a>
+          <div class="button-group">
+            <button class="wishlist">
+              <span>Yêu thích</span>
+              <i class="far fa-heart"></i>
+            </button>
+            <a href="productDetail/1">
+              <button class="quick-view">
+                <span>Xem thông tin</span>
+                <i class="far fa-eye"></i>
+              </button>
+            </a>
+            <button class="add-cart">
+              <span>Thêm vào giỏ hàng</span>
+              <i class="fa fa-shopping-cart"></i>
+            </button>
+          </div>
+        </div>
+        <div class="info-product">
+          <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <h4 class="product-name">
+            <a href="productDetail/1"> Aliquam Quaerat </a>
+          </h4>
+          <p class="product-price">1.900.000đ</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
