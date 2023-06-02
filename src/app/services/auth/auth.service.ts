@@ -29,15 +29,22 @@ export class AuthService {
     );
   }
 
-  forgotPassword(data: IForgotPassword): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/forgot-password', data);
+  forgotPassword(data: IForgotPassword): Observable<IForgotPassword> {
+    return this.http.post<IForgotPassword>(
+      'http://localhost:8080/forgot-password',
+      data
+    );
   }
 
-  resetPassword(data: IResetPassword): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/reset-password', data, {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessCode'),
-      },
-    });
+  resetPassword(data: IResetPassword): Observable<IResetPassword> {
+    return this.http.post<IResetPassword>(
+      'http://localhost:8080/reset-password',
+      data,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('accessCode'),
+        },
+      }
+    );
   }
 }
