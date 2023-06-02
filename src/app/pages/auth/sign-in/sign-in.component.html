@@ -1,34 +1,65 @@
 <div class="container">
   <div class="forms-container">
     <div class="signin-signup">
-      <form action="#" class="sign-in-form">
+      <form
+        class="sign-in-form"
+        [formGroup]="userForm"
+        (ngSubmit)="onHandleSubmit()"
+      >
         <h2 class="title">Đăng nhập</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Email" />
+          <input type="text" formControlName="email" placeholder="Email" />
         </div>
+        <!-- <span
+          *ngIf="userForm.controls.email.invalid && (userForm.controls.email.dirty || userForm.controls.email.touched)">
+          <span *ngIf="userForm.controls.email.errors?.['required']" class="text-red-500">Vui lòng nhập email</span>
+          <span *ngIf="userForm.controls.email.errors?.['email']" class="text-red-500">Email không hợp lệ</span>
+          <span *ngIf="userForm.controls.email.errors?.['emailNotFound']" class="text-red-500">Email không tồn
+            tại</span>
+        </span> -->
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Mật khẩu" />
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Mật khẩu"
+          />
         </div>
-        <input type="submit" value="Đăng nhập" class="btn solid" />
+        <!-- <span
+          *ngIf="userForm.controls.password.invalid && (userForm.controls.password.dirty || userForm.controls.password.touched)">
+          <span *ngIf="userForm.controls.password.errors?.['required']" class="text-red-500">Vui lòng nhập mật
+            khẩu</span>
+          <span *ngIf="userForm.controls.password.errors?.['minlength']" class="text-red-500">Mật khẩu phải có ít nhất 6
+            ký tự</span>
+          <span *ngIf="userForm.controls.password.errors?.['passNotFound']" class="text-red-500">Mật khẩu không
+            đúng</span>
+        </span> -->
+        <span class="text-red-500">{{ errorMessage }}</span>
+        <input type="submit" value="Đăng nhập" class="btn" />
+        <a href="/auth/forgot-password" class="no-underline mx-4"
+          >Quên mật khẩu?</a
+        >
       </form>
     </div>
   </div>
-
   <div class="panels-container">
     <div class="panel left-panel">
       <div class="content">
         <h3>Bạn là người mới ?</h3>
         <p>
-          Bản thân khách hàng, khách hàng sẽ có thể theo đuổi sự thành công của công ty. Bạn phải, không có lý do. Thứ
-          gì đó!
+          Bản thân khách hàng, khách hàng sẽ có thể theo đuổi sự thành công của
+          công ty. Bạn phải, không có lý do. Thứ gì đó!
         </p>
         <button (click)="routers()" class="btn transparent" id="sign-up-btn">
           Đăng ký
         </button>
       </div>
-      <img src="img/log.svg" class="image" alt="" />
+      <!-- <img
+        src="https://capricathemes.com/opencart/OPC02/OPC020033/image/catalog/logo.png"
+        class="image"
+        alt="logo"
+      /> -->
     </div>
   </div>
 </div>

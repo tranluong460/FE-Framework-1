@@ -1,33 +1,46 @@
 <nav class="header">
-    <div class="logo">
-        <a href="/">
-            <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/catalog/logo.png" alt="logo">
-        </a>
-    </div>
-    <div class="menu">
-        <li><a href="">Sculpture</a></li>
-        <li><a href="">Frames</a></li>
-        <li><a href="">Relief</a></li>
-        <li><a href="">Statue</a></li>
-        <li><a href="">More</a></li>
-
-    </div>
-    <div class="icon">
-        <button class="search-icon">
-            <a href="cart">
-                <i class="fas fa-search fa-lg"></i>
-            </a>
+  <div class="logo">
+    <a href="/">
+      <img
+        src="https://capricathemes.com/opencart/OPC02/OPC020033/image/catalog/logo.png"
+        alt="logo"
+      />
+    </a>
+  </div>
+  <div class="menu">
+    <ul>
+      <li><a href="/">Trang Chủ</a></li>
+      <li><a href="introduce">Giới thiệu</a></li>
+      <li class="sub-menu-parent">
+        <a href="product">Sản phẩm</a>
+        <ul class="sub-menu">
+          <li *ngFor="let cate of cates">
+            <a href="product/{{ cate.name }} "> {{ cate.name }} </a>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#">Tin tức</a></li>
+      <li><a href="contact">Liên hệ</a></li>
+    </ul>
+  </div>
+  <div class="icon">
+    <button class="search-icon">
+      <mat-dialog-actions>
+        <button (click)="openDialog()">
+          <i class="fas fa-search fa-lg"></i>
         </button>
-        <button class="user-icon">
-            <a href="cart">
-                <i class="fa fa-user fa-lg"></i>
-            </a>
-        </button>
-        <button class="cart-icon">
-            <a href="cart">
-                <i class="fa fa-shopping-cart fa-lg"></i>
-                <span class="cart-total">0</span>
-            </a>
-        </button>
-    </div>
+      </mat-dialog-actions>
+    </button>
+    <button class="user-icon">
+      <a href="auth">
+        <i class="fa fa-user fa-lg"></i>
+      </a>
+    </button>
+    <button class="cart-icon">
+      <a href="cart">
+        <i class="fa fa-shopping-cart fa-lg"></i>
+        <span class="cart-total">0</span>
+      </a>
+    </button>
+  </div>
 </nav>

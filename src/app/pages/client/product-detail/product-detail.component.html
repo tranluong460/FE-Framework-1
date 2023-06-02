@@ -1,138 +1,192 @@
-<div class="product">
-    <div class="profile">
-        <div class="img-prod">
-            <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/02-481x553.jpg"
-                alt="img-prod">
-            <div class="img-mini">
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/04-481x553.jpg"
-                        alt="img">
+<div *ngIf="product; else loadingContent">
+  <div class="wrap-breadcrumb parallax-breadcrumb">
+    <ul class="breadcrumb">
+      <li>
+        <a href="/"><i class="fa-solid fa-house"></i></a>
+      </li>
+      <li>
+        <a href="productDetail/{{ product._id }}">{{ product.name }}</a>
+      </li>
+    </ul>
+  </div>
 
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/05-481x553.jpg"
-                        alt="img">
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/06-481x553.jpg"
-                        alt="img">
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/08-481x553.jpg"
-                        alt="img">
-                </div>
+  <div class="product">
+    <div class="profile">
+      <div class="img-prod">
+        <img
+          src="{{ product.images?.[0].base_url }}"
+          alt="img-prod"
+          class="border w-[500px]"
+        />
+        <div class="img-mini">
+          <div *ngFor="let img of product.images; let i = index">
+            <div *ngIf="i < 4" class="border">
+              <img src="{{ img.base_url }}" alt="img" class="p-1" />
             </div>
+          </div>
         </div>
-        <div class="info">
-            <h3 class="product-title">
-                Aliquam Quaerat
-            </h3>
-            <div class="detail">
-                <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>
-                    <b>Brand :</b> Canon
-                </p>
-                <p>
-                    <b>Product Code :</b> Product 16
-                </p>
-                <p>
-                    <b>Availability :</b> In Stock
-                </p>
-            </div>
-            <div class="prices">
-                <div class="price">
-                    <del class="old-price">$108.80</del>
-                    <span class="special-price">$89.0</span>
-                </div>
-                <div class="add-carts">
-                    <input type="text">
-                    <button>
-                        Add To Cart
-                    </button>
-                </div>
-            </div>
+      </div>
+      <div class="info">
+        <h3 class="product-title">{{ product.name }}</h3>
+        <div class="detail">
+          <div class="rate">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <p><b>Brand:</b> {{ product.brand.name }}</p>
+          <p><b>Product Code:</b> Product 16</p>
+          <p><b>Availability:</b> In Stock</p>
         </div>
+        <div class="prices">
+          <div class="price">
+            <del class="old-price">{{ product.original_price }}đ</del>
+            <span class="special-price">{{ product.price }}đ</span>
+          </div>
+          <div class="add-carts">
+            <button>Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="review">
-        <!-- <div>
-            <div>
-                <p>Description</p>
-            </div>
-            <div>
-                <p>
-                    -Intel Core 2 Duo processor
-                </p>
-                <p>Powered by an Intel Core 2 Duo processor at speeds up to 2.16GHz, the new MacBook is the fastest</p>
-                <p>-1GB memory, larger hard drives</p>
-                <p>The new MacBook now comes with 1GB of memory standard and larger hard drives for the entire line
-                    perfect for running more of your favorite</p>
-                <p>-Sleek, 1.08-inch-thin design</p>
-                <p>MacBook makes it easy to hit the road thanks to its tough polycarbonate
-                    case, built-in wireless technologies, and innovative MagSafe Power </p>
-                <p>-Built-in iSight camera</p>
-                <p>Right out of the box, you can have a video chat with friends or family,2
-                    record a video at your desk</p>
-            </div>
+    <div class="description-specifications-comment">
+      <ul class="nav-tab">
+        <li [ngClass]="{ active: activeTab === 0 }">
+          <button (click)="changeTab(0)">Mô tả</button>
+        </li>
+        <li [ngClass]="{ active: activeTab === 1 }">
+          <button (click)="changeTab(1)">Thông số kỹ thuật</button>
+        </li>
+        <li [ngClass]="{ active: activeTab === 2 }">
+          <button (click)="changeTab(2)">Bình luận</button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div
+          class="tab-bane"
+          *ngIf="activeTab === 0"
+          [ngClass]="{ active: activeTab === 0 }"
+        >
+          {{ product.short_description }}
         </div>
-        <div> -->
-        <!-- </div> -->
+        <div
+          class="tab-bane"
+          *ngIf="activeTab === 1"
+          [ngClass]="{ active: activeTab === 1 }"
+        >
+          Thông số kỹ thuật content
+        </div>
+        <div
+          class="tab-bane"
+          *ngIf="activeTab === 2"
+          [ngClass]="{ active: activeTab === 2 }"
+        >
+          <div class="bg-gray-100 px-4 py-2 rounded-lg mt-5">
+            <h2 class="text-lg font-bold mb-4">Các bình luận về sản phẩm</h2>
+            <ul class="divide-y divide-gray-200">
+              <li class="py-4">
+                <div class="flex space-x-3">
+                  <div class="flex-shrink-0">
+                    <img
+                      class="h-10 w-10 rounded-full"
+                      src="https://via.placeholder.com/150"
+                      alt=""
+                    />
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-900">
+                      Trần Văn Lương
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      <time datetime="2023-04-12 T19:20">02/06/2023</time>
+                    </div>
+                    <div class="mt-1 text-sm text-gray-700">
+                      Thấy thế nào? Xịn chưa?
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <mat-label>Nhập bình luận</mat-label>
+                <textarea matInput placeholder="Tối thiểu 50 kí tự"></textarea>
+              </mat-form-field>
+              <div class="flex justify-end">
+                <button mat-raised-button color="primary">Bình luận</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="container">
-        <div class="box-heading">
-            <h2>Sản phẩm</h2>
-        </div>
-        <div class="products">
-            <div *ngFor="let item of items; let i = index" class="card-product">
-                <div class="img-product">
-                    <a href="123">
-                        <div class="card-img">
-                            <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/03-278x320.jpg"
-                                alt="product" class="img1">
-                            <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/08-278x320.jpg"
-                                alt="product" class="img2">
-                        </div>
-                    </a>
-                    <div class="button-group">
-                        <button class="wishlist">
-                            <span>Yêu thích</span>
-                            <i class="far fa-heart"></i>
-                        </button>
-                        <a href="123">
-                            <button class="quick-view">
-                                <span>Xem thông tin</span>
-                                <i class="far fa-eye"></i>
-                            </button>
-                        </a>
-                        <button class="add-cart">
-                            <span>Thêm vào giỏ hàng</span>
-                            <i class="fa fa-shopping-cart"></i>
-                        </button>
-                    </div>
+      <div class="box-heading">
+        <h2>Sản phẩm cùng loại</h2>
+      </div>
+      <div class="products">
+        <div *ngFor="let item of products; let i = index">
+          <div class="card-product" *ngIf="i < 4">
+            <div class="img-product">
+              <a href="productDetail/{{ item._id }}">
+                <div class="card-img">
+                  <img
+                    src="{{item.images?.[0].base_url}}"
+                    alt="product"
+                    class="img1"
+                  />
+                  <img
+                    src="{{item.images?.[1].base_url}}"
+                    alt="product"
+                    class="img2"
+                  />
                 </div>
-                <div class="info-product">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <h4 class="product-name">
-                        <a href="123">
-                            Aliquam Quaerat
-                        </a>
-                    </h4>
-                    <p class="product-price">1.900.000đ</p>
-                </div>
+              </a>
+              <div class="button-group">
+                <button class="wishlist">
+                  <span>Yêu thích</span>
+                  <i class="far fa-heart"></i>
+                </button>
+                <a href="productDetail/{{ item._id }}">
+                  <button class="quick-view">
+                    <span>Xem thông tin</span>
+                    <i class="far fa-eye"></i>
+                  </button>
+                </a>
+                <button class="add-cart">
+                  <span>Thêm vào giỏ hàng</span>
+                  <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
             </div>
+            <div class="info-product">
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <h4 class="product-name">
+                <a href="productDetail/{{ item._id }}">
+                  {{ item.name }}
+                </a>
+              </h4>
+              <p class="product-price">{{ item.price }}đ</p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+<ng-template #loadingContent>
+  <div class="flex justify-center h-screen items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -14,9 +14,13 @@ import { AdminDashBoardComponent } from './pages/admin/admin-dash-board/admin-da
 import { AdminProductComponent } from './pages/admin/admin-product/admin-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 
-import { ErrorPageComponent } from './pages/error/error-page/error-page.component';
+import { ErrorPageComponent } from './pages/sub/error-page/error-page.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
+import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 
 const routes: Routes = [
   {
@@ -25,6 +29,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'signIn', pathMatch: 'full' },
       { path: 'signIn', component: SignInComponent },
       { path: 'signUp', component: SignUpComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      {
+        path: 'reset-password/:randomString',
+        component: ResetPasswordComponent,
+      },
     ],
   },
 
@@ -33,11 +42,13 @@ const routes: Routes = [
     component: BaseClientComponent,
     children: [
       { path: '', component: HomePageComponent },
-      { path: 'products', component: ProductPageComponent },
+      { path: 'product', component: ProductPageComponent },
       { path: 'cart', component: CartPageComponent },
       { path: 'cart/pay', component: PayPageComponent },
       { path: 'productDetail/:id', component: ProductDetailComponent },
       { path: 'search', component: SearchPageComponent },
+      { path: 'introduce', component: IntroducePageComponent },
+      { path: 'contact', component: ContactPageComponent },
     ],
   },
 

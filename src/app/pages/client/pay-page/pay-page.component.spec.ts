@@ -8,7 +8,7 @@ describe('PayPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PayPageComponent]
+      declarations: [PayPageComponent],
     });
     fixture = TestBed.createComponent(PayPageComponent);
     component = fixture.componentInstance;
