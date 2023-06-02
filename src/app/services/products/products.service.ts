@@ -18,7 +18,7 @@ export class ProductsService {
   createProduct(product: any): Observable<any> {
     return this.http.post<any>(`http://localhost:8080/product`, product);
   }
-  
+
   deleteProduct(id: any): Observable<any> {
     return this.http.delete<any>(`http://localhost:8080/product/${id}`);
   }
