@@ -34,6 +34,7 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogSearchComponent } from './pages/sub/dialog-search/dialog-search.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ResetPasswordComponent,
     IntroducePageComponent,
     ContactPageComponent,
+    DialogSearchComponent,
   ],
   imports: [
     BrowserModule,
