@@ -29,7 +29,7 @@ export class AuthService {
     );
   }
 
-  forgotPassword(data: IForgotPassword): Observable<IForgotPassword> {
+  forgotPassword(data: IForgotPassword): Observable<any> {
     return this.http.post<IForgotPassword>(
       'http://localhost:8080/forgot-password',
       data
