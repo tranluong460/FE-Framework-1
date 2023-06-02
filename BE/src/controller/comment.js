@@ -1,29 +1,40 @@
-import Comment from "../models/comment"
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-export const getAll = async (req, res) => {
-    try {
-        const comment = await Comment.find()
-        if (comment.length === 0) {
-            return res.status(404).json({
-                message: 'khong co du lieu'
-            })
-        }
-        return res.status(200).json({
-            message: comment
-        })
-    } catch (error) {
-        return res.status(404).json({
-            message: error.message
-        })
-    }
-}
-export const get = async (req, res) => {
-    try {
-        const comment = await Comment.findById(req.params.id)
+import User from "../models/user";
+import Comment from "../models/comment";
+import Product from "../models/product";
 
-    } catch (error) {
-        return res.status(404).json({
-            message: error.message
-        })
+dotenv.config();
+
+const create = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Bạn chưa đăng nhập" });
     }
-}
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findById(decoded.id);
+
+    const newComment = await Comment.create({
+      ...req.body,
+      user: user._id,
+      content: req.body.content,
+    });
+
+    await Product.findByIdAndUpdate(
+      req.params.id,
+      { $push: { comments: newComment._id } },
+      { new: true }
+    );
+
+    return res.status(200).json({ message: "Thêm bình luận thành công" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Đã có lỗi xảy ra" });
+  }
+};
+
+export { create };
