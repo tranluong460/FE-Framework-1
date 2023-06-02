@@ -40,7 +40,7 @@
 }
 .container-child {
   height: 100%;
-  width: var(--width-container);
+  width: 1300px;
   max-width: 100%;
   display: flex;
   justify-content: center;
@@ -53,7 +53,7 @@
   z-index: 1;
 }
 .left {
-  width: 50%;
+  width: auto;
   order: 1;
   padding: 0px 0px 0px 0px;
   display: block;
@@ -221,4 +221,8 @@
 .childa i {
   align-self: center;
   margin: 5px;
+}
+.childa .address > a > span {
+  flex: 1;
+  text-align: left;
 }
