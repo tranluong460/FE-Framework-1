@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { IResetPassword } from 'src/app/interface/auth';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class ResetPasswordComponent {
   errorMessage: string = '';
+
   password: any;
+
   passwordForm = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(6)]],
     randomCode: [''],
@@ -30,13 +33,11 @@ export class ResetPasswordComponent {
   }
 
   onHandleSubmit() {
-    const resetPassword: any = {
+    const resetPassword: IResetPassword = {
       password: this.passwordForm.value.password || '',
       randomCode: this.passwordForm.value.randomCode || '',
       randomString: this.randomString || '',
-      // confirmPassword: this.passwordForm.value.confirmPassword || '',
     };
-    console.log(resetPassword);
 
     this.authService.resetPassword(resetPassword).subscribe(
       (response) => {
@@ -45,7 +46,6 @@ export class ResetPasswordComponent {
       },
       (error) => {
         if (Array.isArray(error.error.message)) {
-          console.log(error.error.message);
           this.errorMessage = error.error.message[0];
         } else {
           this.errorMessage = error.error.message;

@@ -11,3 +11,13 @@ export interface IRegisterUser {
   password: string;
   confirmPassword: string;
 }
+
+export interface IForgotPassword {
+  email: string;
+}
+
+export interface IResetPassword {
+  password: string;
+  randomCode: string;
+  randomString: string;
+}

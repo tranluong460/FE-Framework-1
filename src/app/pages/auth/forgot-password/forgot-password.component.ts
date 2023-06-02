@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormBuilder } from '@angular/forms';
+import { IForgotPassword } from 'src/app/interface/auth';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -15,7 +16,7 @@ export class ForgotPasswordComponent {
 
   constructor(private authService: AuthService, private fb: FormBuilder) {}
   onSubmit() {
-    const email = {
+    const email: IForgotPassword = {
       email: this.emailForm.value.email || '',
     };
 

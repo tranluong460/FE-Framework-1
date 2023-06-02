@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ILoginUser, IRegisterUser } from 'src/app/interface/auth';
+import {
+  IForgotPassword,
+  ILoginUser,
+  IRegisterUser,
+  IResetPassword,
+} from 'src/app/interface/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -24,19 +29,15 @@ export class AuthService {
     );
   }
 
-  forgotPassword(email: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/forgot-password', email);
+  forgotPassword(data: IForgotPassword): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/forgot-password', data);
   }
 
-  resetPassword(password: any): Observable<any> {
-    return this.http.post<any>(
-      'http://localhost:8080/reset-password',
-      password,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessCode'),
-        },
-      }
-    );
+  resetPassword(data: IResetPassword): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/reset-password', data, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessCode'),
+      },
+    });
   }
 }
