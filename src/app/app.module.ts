@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { HomePageComponent } from './pages/client/home-page/home-page.component';
 import { ProductPageComponent } from './pages/client/product-page/product-page.component';
 import { HeaderClientComponent } from './layouts/client/header-client/header-client.component';
@@ -26,6 +28,7 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,8 @@ import { ContactPageComponent } from './pages/client/contact-page/contact-page.c
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
