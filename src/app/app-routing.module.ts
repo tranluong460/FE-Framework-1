@@ -14,7 +14,7 @@ import { AdminDashBoardComponent } from './pages/admin/admin-dash-board/admin-da
 import { AdminProductComponent } from './pages/admin/admin-product/admin-product.component';
 import { AdminUserComponent } from './pages/admin/admin-user/admin-user.component';
 
-import { ErrorPageComponent } from './pages/error/error-page/error-page.component';
+import { ErrorPageComponent } from './pages/sub/error-page/error-page.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-password.component';
