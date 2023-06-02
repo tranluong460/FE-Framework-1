@@ -1,7 +1,7 @@
 .header {
   display: flex;
-  padding: 8vh;
-  gap: 25vh;
+  padding: 5vh;
+  gap: 20vh;
   justify-content: center;
 }
 
