@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post<ILoginUser>('http://localhost:8080/login', data);
   }
 
-  register(data: IRegisterUser): Observable<IRegisterUser> {
+  register(data: IRegisterUser): Observable<any> {
     return this.http.post<IRegisterUser>(
       'http://localhost:8080/register',
       data
