@@ -14,17 +14,12 @@
       <li class="sub-menu-parent">
         <a href="product">Sản phẩm</a>
         <ul class="sub-menu">
-          <li>
-            <a href="product/apple"> Apple </a>
-          </li>
-          <li>
-            <a href="product/samsung"> Samsung </a>
-          </li>
-          <li>
-            <a href="product/oppo"> Oppo </a>
+          <li *ngFor="let cate of cates">
+            <a href="product/{{ cate.name }} "> {{ cate.name }} </a>
           </li>
         </ul>
       </li>
+      <li><a href="#">Tin tức</a></li>
       <li><a href="contact">Liên hệ</a></li>
     </ul>
   </div>
