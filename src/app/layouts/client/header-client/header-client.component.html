@@ -25,9 +25,11 @@
   </div>
   <div class="icon">
     <button class="search-icon">
-      <a href="#">
-        <i class="fas fa-search fa-lg"></i>
-      </a>
+      <mat-dialog-actions>
+        <button (click)="openDialog()">
+          <i class="fas fa-search fa-lg"></i>
+        </button>
+      </mat-dialog-actions>
     </button>
     <button class="user-icon">
       <a href="auth">
