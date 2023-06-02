@@ -1,64 +1,50 @@
 <div class="product">
-    <div class="profile">
-        <div class="img-prod">
-            <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/02-481x553.jpg"
-                alt="img-prod">
-            <div class="img-mini">
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/04-481x553.jpg"
-                        alt="img">
-
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/05-481x553.jpg"
-                        alt="img">
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/06-481x553.jpg"
-                        alt="img">
-                </div>
-                <div>
-                    <img src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/08-481x553.jpg"
-                        alt="img">
-                </div>
+    
+   <div class="profile">
+    <div class="img-prod xl:w-2/3">
+        <img src="{{items.images?.[0].base_url}}" alt="img-prod">
+        <div class="img-mini ">
+            <div>
+                <img src="{{items.images?.[0].base_url}}" alt="img">
             </div>
-        </div>
-        <div class="info">
-            <h3 class="product-title">
-                Aliquam Quaerat
-            </h3>
-            <div class="detail">
-                <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>
-                    <b>Brand :</b> Canon
-                </p>
-                <p>
-                    <b>Product Code :</b> Product 16
-                </p>
-                <p>
-                    <b>Availability :</b> In Stock
-                </p>
+            <div>
+                <img src="{{items.images?.[0].base_url}}" alt="img">
             </div>
-            <div class="prices">
-                <div class="price">
-                    <del class="old-price">$108.80</del>
-                    <span class="special-price">$89.0</span>
-                </div>
-                <div class="add-carts">
-                    <input type="text">
-                    <button>
-                        Add To Cart
-                    </button>
-                </div>
+            <div>
+                <img src="{{items.images?.[0].base_url}}" alt="img">
+            </div>
+            <div>
+                <img src="{{items.images?.[0].base_url}}" alt="img">
             </div>
         </div>
     </div>
+    <div class="info">
+        <h3 class="product-title">{{items.name}}</h3>
+        <div class="detail">
+            <div class="rate">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <p><b>Brand :</b> {{items.brand.slug}}</p>
+            <p><b>Product Code :</b> Product 16</p>
+            <p><b>Availability :</b> In Stock</p>
+        </div>
+        <div class="prices">
+            <div class="price">
+                <del class="old-price">{{items.original_price}}đ</del>
+                <span class="special-price">{{items.price}}đ</span>
+            </div>
+            <div class="add-carts flex items-center mt-4">
+                <input type="text" class="border border-gray-300 px-2 py-1 mr-2">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">Add To Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <div class="review">
         <!-- <div>
@@ -90,7 +76,7 @@
             <h2>Sản phẩm</h2>
         </div>
         <div class="products">
-            <div *ngFor="let item of items; let i = index" class="card-product">
+            <div *ngFor="let item of product; let i = index" class="card-product">
                 <div class="img-product">
                     <a href="productDetail/1">
                         <div class="card-img">
