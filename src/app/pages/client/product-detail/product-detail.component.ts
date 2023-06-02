@@ -1,29 +1,35 @@
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent {
-  items: any;
   product: any;
-  id!: string | any;
+
+  products: any;
+
+  activeTab: number = 0;
+
+  changeTab(index: number) {
+    this.activeTab = index;
+  }
+
   constructor(
     private productService: ProductsService,
     private router: ActivatedRoute
   ) {
     this.router.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-      console.log(typeof this.id);
-      this.productService.getProduct(this.id).subscribe((product) => {
-        this.items = product;
+      const id = params.get('id');
+      this.productService.getProduct(id).subscribe((product) => {
+        this.product = product;
       });
     });
     this.productService.getAllProducts().subscribe((data) => {
-      this.product = data;
+      this.products = data;
     });
   }
 }
