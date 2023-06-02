@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
+// import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -11,14 +12,10 @@ import { CommentsService } from '../../../services/comments/comments.service';
 })
 export class ProductDetailComponent {
   product: any;
-
   products: any;
-
   comments: any;
-
   activeTab: number = 0;
-
-  errorMessage: string = '';
+  errorMessage: any;
 
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],
@@ -32,7 +29,7 @@ export class ProductDetailComponent {
     private productService: ProductsService,
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService
+    private commentsService: CommentsService // private _snackBar: MatSnackBar
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -51,16 +48,26 @@ export class ProductDetailComponent {
       content: this.commentForm.value.content || '',
     };
 
-    this.commentsService
-      .createComment(comment, this.product._id)
-      .subscribe((response) => {
-        console.log('Bình luận thành công', response);
-      },(error) => {
+    this.commentsService.createComment(comment, this.product._id).subscribe(
+      (response) => {
+        this.errorMessage = 'Bình luận thành công!';
+      },
+      (error) => {
         if (Array.isArray(error.error.message)) {
           this.errorMessage = error.error.message[0];
         } else {
           this.errorMessage = error.error.message;
         }
-      });
+      }
+    );
   }
+
+  // }
+
+  // openSnackBar() {
+  //   this._snackBar.open(this.errorMessage, 'Đóng', {
+  //     duration: 3000,
+  //     verticalPosition: 'top',
+  //   });
+  // }
 }

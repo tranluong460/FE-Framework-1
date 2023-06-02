@@ -35,7 +35,7 @@ export class SignInComponent {
 
     this.authService.login(user).subscribe(
       (response) => {
-        console.log('Đăng nhập thành công', response);
+        localStorage.setItem('token', response.accessToken);
       },
       (error) => {
         if (Array.isArray(error.error.message)) {

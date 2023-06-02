@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomePageComponent } from './pages/client/home-page/home-page.component';
 import { ProductPageComponent } from './pages/client/product-page/product-page.component';
@@ -76,6 +77,7 @@ import { DialogSearchComponent } from './pages/sub/dialog-search/dialog-search.c
     MatDividerModule,
     MatIconModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
