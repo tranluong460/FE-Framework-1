@@ -151,15 +151,15 @@
       <div class="products">
         <div *ngFor="let item of items; let i = index" class="card-product">
           <div class="img-product">
-            <a href="productDetail/1">
+            <a href="productDetail/{{ item._id }}">
               <div class="card-img">
                 <img
-                  src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/g/a/galaxys23ultra_front_green_221122_2.jpg"
+                  src="{{item.images?.[0].base_url}}"
                   alt="product"
                   class="img1"
                 />
                 <img
-                  src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/o/p/oppo-reno8t-vang1-thumb-600x600.jpg"
+                  src="{{item.images?.[1].base_url}}"
                   alt="product"
                   class="img2"
                 />
@@ -170,7 +170,7 @@
                 <span>Yêu thích</span>
                 <i class="far fa-heart"></i>
               </button>
-              <a href="productDetail/1">
+              <a href="productDetail/{{ item._id }}">
                 <button class="quick-view">
                   <span>Xem thông tin</span>
                   <i class="far fa-eye"></i>
@@ -191,9 +191,11 @@
               <i class="fa fa-star"></i>
             </div>
             <h4 class="product-name">
-              <a href="productDetail/1"> Aliquam Quaerat </a>
+              <a href="productDetail/{{ item._id }}">
+                {{ item.name }}
+              </a>
             </h4>
-            <p class="product-price">1.900.000đ</p>
+            <p class="product-price">{{ item.price }}đ</p>
           </div>
         </div>
       </div>

@@ -1,39 +1,24 @@
 <div class="product">
   <div class="profile">
     <div class="img-prod">
-      <img
-        src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/02-481x553.jpg"
-        alt="img-prod"
-      />
+      <img src="{{items.images?.[0].base_url}}" alt="img-prod" />
       <div class="img-mini">
         <div>
-          <img
-            src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/04-481x553.jpg"
-            alt="img"
-          />
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
         </div>
         <div>
-          <img
-            src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/05-481x553.jpg"
-            alt="img"
-          />
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
         </div>
         <div>
-          <img
-            src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/06-481x553.jpg"
-            alt="img"
-          />
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
         </div>
         <div>
-          <img
-            src="https://capricathemes.com/opencart/OPC02/OPC020033/image/cache/catalog/08-481x553.jpg"
-            alt="img"
-          />
+          <img src="{{items.images?.[0].base_url}}" alt="img" />
         </div>
       </div>
     </div>
     <div class="info">
-      <h3 class="product-title">Aliquam Quaerat</h3>
+      <h3 class="product-title">{{ items.name }}</h3>
       <div class="detail">
         <div class="rate">
           <i class="fa fa-star"></i>
@@ -42,14 +27,14 @@
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
         </div>
-        <p><b>Brand :</b> Canon</p>
+        <p><b>Brand :</b> {{ items.brand.name }}</p>
         <p><b>Product Code :</b> Product 16</p>
         <p><b>Availability :</b> In Stock</p>
       </div>
       <div class="prices">
         <div class="price">
-          <del class="old-price">$108.80</del>
-          <span class="special-price">$89.0</span>
+          <del class="old-price">{{ items.original_price }}đ</del>
+          <span class="special-price">{{ items.price }}đ</span>
         </div>
         <div class="add-carts">
           <input type="text" />

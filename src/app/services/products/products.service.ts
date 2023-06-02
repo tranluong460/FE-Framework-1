@@ -11,7 +11,7 @@ export class ProductsService {
     return this.http.get<any>('http://localhost:8080/product');
   }
 
-  getProduct(id: number): Observable<any> {
+  getProduct(id: any): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/product/${id}`);
   }
 
@@ -19,7 +19,7 @@ export class ProductsService {
     return this.http.post<any>(`http://localhost:8080/product`, product);
   }
 
-  deleteProduct(id: number): Observable<any> {
+  deleteProduct(id: any): Observable<any> {
     return this.http.delete<any>(`http://localhost:8080/product/${id}`);
   }
 

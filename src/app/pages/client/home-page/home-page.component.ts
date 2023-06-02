@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnDestroy,
 } from '@angular/core';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,8 +15,11 @@ import {
 export class HomePageComponent implements OnInit, OnDestroy {
   items: any[];
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+  constructor(private renderer: Renderer2, private elementRef: ElementRef,
+    private productsService: ProductsService) {
     this.items = Array(6).fill(0);
+    this.productsService.getAllProducts().subscribe(data=>{this.items = data
+    });
   }
 
   private counter = 1;
