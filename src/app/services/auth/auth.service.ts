@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post<ILoginUser>('http://localhost:8080/login', data);
   }
 
-  register(data: IRegisterUser): Observable<any> {
+  register(data: IRegisterUser): Observable<IRegisterUser> {
     return this.http.post<IRegisterUser>(
       'http://localhost:8080/register',
       data
@@ -36,7 +36,7 @@ export class AuthService {
     );
   }
 
-  resetPassword(data: IResetPassword): Observable<IResetPassword> {
+  resetPassword(data: IResetPassword): Observable<any> {
     return this.http.post<IResetPassword>(
       'http://localhost:8080/reset-password',
       data,
