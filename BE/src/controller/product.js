@@ -21,7 +21,12 @@ const getAll = async (req, res) => {
 
 const getOne = async (req, res) => {
     try {
-        const data = await Product.findById(req.params.id).populate('brand')
+        const data = await Product.findById(req.params.id).populate('brand').populate({
+            path: 'comments',
+            populate: {
+                path: 'user', select: 'name'
+            }
+        });
 
         if (data.length === 0) {
             return res.status(200).json({
