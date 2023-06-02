@@ -3,6 +3,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
+import { CommentsService } from '../../../services/comments/comments.service';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -17,6 +18,8 @@ export class ProductDetailComponent {
 
   activeTab: number = 0;
 
+  errorMessage: string = '';
+
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],
   });
@@ -28,7 +31,8 @@ export class ProductDetailComponent {
   constructor(
     private productService: ProductsService,
     private router: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private commentsService: CommentsService
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -47,6 +51,16 @@ export class ProductDetailComponent {
       content: this.commentForm.value.content || '',
     };
 
-    console.log(comment);
+    this.commentsService
+      .createComment(comment, this.product._id)
+      .subscribe((response) => {
+        console.log('Bình luận thành công', response);
+      },(error) => {
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
+      });
   }
 }
