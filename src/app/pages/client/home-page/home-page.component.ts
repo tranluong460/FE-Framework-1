@@ -15,10 +15,14 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   items: any[];
 
-  constructor(private renderer: Renderer2, private elementRef: ElementRef,
-    private productsService: ProductsService) {
+  constructor(
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
+    private productsService: ProductsService
+  ) {
     this.items = Array(6).fill(0);
-    this.productsService.getAllProducts().subscribe(data=>{this.items = data
+    this.productsService.getAllProducts().subscribe((data) => {
+      this.items = data;
     });
   }
 

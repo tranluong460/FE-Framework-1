@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -10,18 +9,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailComponent {
   items: any;
-  product: any
- id !: string| any;
-  constructor(private poductService: ProductsService,
-    private router : ActivatedRoute) {
-      this.router.paramMap.subscribe((params) => {
+  product: any;
+  id!: string | any;
+  constructor(
+    private productService: ProductsService,
+    private router: ActivatedRoute
+  ) {
+    this.router.paramMap.subscribe((params) => {
       this.id = params.get('id');
-      console.log(typeof(this.id));
-    this.poductService.getProduct(this.id).subscribe((product) => {this.items = product
-    console.log(product);})
+      console.log(typeof this.id);
+      this.productService.getProduct(this.id).subscribe((product) => {
+        this.items = product;
+      });
     });
-    this.product = Array(6).fill(0);
-    this.poductService.getAllProducts().subscribe(data=>{this.product = data
+    this.productService.getAllProducts().subscribe((data) => {
+      this.product = data;
     });
   }
 }
