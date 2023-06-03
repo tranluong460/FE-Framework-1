@@ -37,6 +37,8 @@ import { IntroducePageComponent } from './pages/client/introduce-page/introduce-
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogSearchComponent } from './pages/sub/dialog-search/dialog-search.component';
+import { AdminCategoryComponent } from './pages/admin/admin-category/admin-category.component';
+import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { DialogSearchComponent } from './pages/sub/dialog-search/dialog-search.c
     IntroducePageComponent,
     ContactPageComponent,
     DialogSearchComponent,
+    AdminCategoryComponent,
+    AdminOrderComponent,
   ],
   imports: [
     BrowserModule,

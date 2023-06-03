@@ -21,6 +21,8 @@ import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { IntroducePageComponent } from './pages/client/introduce-page/introduce-page.component';
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
+import { AdminCategoryComponent } from './pages/admin/admin-category/admin-category.component';
+import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
 
 const routes: Routes = [
   {
@@ -60,6 +62,8 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashBoardComponent },
       { path: 'products', component: AdminProductComponent },
       { path: 'users', component: AdminUserComponent },
+      { path: 'categories', component: AdminCategoryComponent },
+      { path: 'orders', component: AdminOrderComponent },
     ],
   },
 
