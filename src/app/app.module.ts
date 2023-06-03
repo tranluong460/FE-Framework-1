@@ -39,6 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogSearchComponent } from './pages/sub/dialog-search/dialog-search.component';
 import { AdminCategoryComponent } from './pages/admin/admin-category/admin-category.component';
 import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
+import { HeaderAdminComponent } from './layouts/admin/header-admin/header-admin.component';
+import { NavAdminComponent } from './layouts/admin/nav-admin/nav-admin.component';
+import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +69,9 @@ import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.compo
     DialogSearchComponent,
     AdminCategoryComponent,
     AdminOrderComponent,
+    HeaderAdminComponent,
+    NavAdminComponent,
+    FooterAdminComponent,
   ],
   imports: [
     BrowserModule,
