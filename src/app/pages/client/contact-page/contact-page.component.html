@@ -15,14 +15,14 @@
       <div class="left-child">
         <h2>Gửi thông tin cho chúng tôi!</h2>
       </div>
-      <form>
+      <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
         <div class="form-child">
           <div class="child1">
             <div class="clid">
               <div class="input1">
                 <input
                   type="text"
-                  name="name"
+                  formControlName="name"
                   placeholder="Họ và tên *"
                   autocomplete="off"
                 />
@@ -30,7 +30,7 @@
               <div class="input2">
                 <input
                   type="text"
-                  name="email"
+                  formControlName="email"
                   placeholder="Email *"
                   autocomplete="off"
                 />
@@ -42,7 +42,7 @@
               <div class="input1">
                 <input
                   type="text"
-                  name="phone"
+                  formControlName="phone"
                   placeholder="Số điện thoại *"
                   autocomplete="off"
                 />
@@ -50,7 +50,7 @@
               <div class="input2">
                 <input
                   type="text"
-                  name="address"
+                  formControlName="address"
                   placeholder="Địa chỉ"
                   autocomplete="off"
                 />
@@ -59,12 +59,15 @@
           </div>
           <div class="child2">
             <textarea
-              name="content"
+              formControlName="content"
               placeholder="Nội dung"
               rows="5"
               cols="80"
               autocomplete="off"
             ></textarea>
+          </div>
+          <div class="text-center text-red-500 p-3">
+            {{ errorMessage }}
           </div>
           <div class="child3">
             <div class="form-child3">
