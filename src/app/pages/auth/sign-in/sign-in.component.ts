@@ -36,11 +36,10 @@ export class SignInComponent {
     this.authService.login(user).subscribe(
       (response) => {
         localStorage.setItem('token', response.accessToken);
+        this.router.navigate(['/']);
       },
       (error) => {
         if (Array.isArray(error.error.message)) {
-          console.log(error.error.message);
-
           // error.error.message.forEach((errorMessage: string) => {
           //   this.errorMessage = errorMessage;
           // });

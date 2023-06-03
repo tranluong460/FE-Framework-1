@@ -115,6 +115,12 @@
                 </div>
               </li>
             </ul>
+            <div
+              class="text-gray-500 text-center p-3"
+              *ngIf="!comments || comments.length === 0"
+            >
+              Không có bình luận.
+            </div>
 
             <form
               class="example-form"
