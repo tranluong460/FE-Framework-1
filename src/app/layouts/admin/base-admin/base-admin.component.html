@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<div class="admin contailer-fluid">
+  <div class="top-admin">
+    <app-header-admin></app-header-admin>
+  </div>
+  <div class="mid-admin flex flex-col md:flex-row">
+    <div class="left-admin">
+      <app-nav-admin></app-nav-admin>
+    </div>
+    <div class="right-admin">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="bottom-admin">
+    <app-footer-admin></app-footer-admin>
+  </div>
+</div>
