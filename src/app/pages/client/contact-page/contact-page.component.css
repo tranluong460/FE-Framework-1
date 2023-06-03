@@ -186,6 +186,10 @@
   align-content: center;
   justify-content: center;
 }
+.form-child3 button:hover {
+  background-color: #ccc;
+  color: #0e0e0e;
+}
 .right {
   order: 2;
   width: 50%;
@@ -222,7 +226,14 @@
   align-self: center;
   margin: 5px;
 }
-.childa .address > a > span {
+.childa .address > a > span,
+.childa .phone > a > span,
+.childa .mail > a > span {
   flex: 1;
   text-align: left;
+}
+.childa .address > a > span:hover,
+.childa .phone > a > span:hover,
+.childa .mail > a > span:hover {
+  color: #0d6efd;
 }
