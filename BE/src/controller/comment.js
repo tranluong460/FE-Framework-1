@@ -5,7 +5,7 @@ import User from "../models/user";
 import Comment from "../models/comment";
 import Product from "../models/product";
 
-import { commentSchema } from '../validate/comment'
+import { commentSchema } from "../validate/comment";
 
 dotenv.config();
 

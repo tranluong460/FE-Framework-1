@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const FormEmail = (name, email, randomCode, resetPasswordUrl) => {
-    return /*html*/ `
+  return /*html*/ `
         <div style="margin: 5px auto 5px; padding: 5px; max-width: 600px; background: linear-gradient(to left,#7347c1,#0674ec); border: 5px solid transparent; background-repeat: no-repeat; background-origin: padding-box,border-box">
             <table cellpadding="0" cellspacing="0" border="0" align="center" style="background:white">
                 <tbody>
