@@ -441,7 +441,7 @@
   display: grid;
   place-items: center;
 }
-.row {
+.rowH {
   display: flex;
   flex-wrap: wrap;
 }

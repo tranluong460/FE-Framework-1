@@ -142,7 +142,7 @@
   height: auto;
   top: 0;
   left: 0px;
-  margin: 0px 0px 30px;
+  margin: 0px 0px 20px;
   display: inline-block;
   transform: translateX(0px);
   border: 1px solid #ccc;
@@ -179,7 +179,7 @@
   position: relative;
 }
 .child3 button span {
-  padding: 10px 10px 10px 0px;
+  padding: 5px;
 }
 .form-child3 {
   display: flex;
