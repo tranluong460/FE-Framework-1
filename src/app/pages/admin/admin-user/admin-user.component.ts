@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './admin-user.component.html',
   styleUrls: ['./admin-user.component.css'],
 })
-export class AdminUserComponent {}
+export class AdminUserComponent {
+  selectedValue: string = '';
+
+  onSubmit() {
+    console.log(this.selectedValue);
+  }
+}

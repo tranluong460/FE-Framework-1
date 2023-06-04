@@ -34,7 +34,11 @@
           </td>
           <td>
             <div class="md:flex md:gap-1 md:justify-center">
-              <button class="btn btn-primary">
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#updateStatus"
+              >
                 <span>Cập nhật trạng thái</span>
               </button>
             </div>
@@ -52,5 +56,80 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="updateStatus">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Trạng thái đơn hàng</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="select" class="form-label">Chọn trạng thái:</label>
+          <select
+            id="select"
+            name="select"
+            class="form-select"
+            [(ngModel)]="selectedValue"
+          >
+            <!-- <option selected>Chọn trạng thái</option> -->
+            <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+            <option value="Đang xử lý">Đang xử lý</option>
+            <option value="Đang giao hàng">Đang giao hàng</option>
+            <option value="Đã giao hàng">Đã giao hàng</option>
+            <option value="Đã hủy">Đã hủy</option>
+            <option value="Đã hoàn tiền">Đã hoàn tiền</option>
+            <option value="Đã hoàn thành">Đã hoàn thành</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit()"
+          data-bs-toggle="modal"
+          data-bs-target="#alert"
+        >
+          Lưu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="alert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <span>Cập nhật trạng thái thành công!</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

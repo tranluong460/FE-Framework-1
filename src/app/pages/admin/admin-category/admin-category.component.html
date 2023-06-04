@@ -26,7 +26,11 @@
           </td>
           <td>
             <div class="md:flex md:gap-1 md:justify-center">
-              <button class="btn btn-primary">
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#editCategory"
+              >
                 <span>Sửa</span>
               </button>
               <button class="btn btn-danger">
@@ -47,5 +51,62 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="editCategory">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Chỉnh sửa thông tin danh mục</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>Form thông tin danh mục</form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#alert"
+        >
+          <span>Lưu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="alert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <span>Chỉnh sửa thông tin danh mục thành công!</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
