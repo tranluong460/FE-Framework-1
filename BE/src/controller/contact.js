@@ -10,25 +10,32 @@ dotenv.config();
 
 const create = async (req, res) => {
   try {
+    // Validate dữ liệu liên hệ
     const { error } = contactSchema.validate(req.body, { abortEarly: false });
     if (error) {
+      // Nếu có lỗi validate, trả về danh sách lỗi cho client
       const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
+      return res.json({
         message: errors,
       });
     }
 
+    // Tạo mới liên hệ
     const contact = await Contact.create(req.body);
 
+    // Gửi email
     sendContact(req.body);
 
-    return res.status(200).json({
+    // Trả về thông báo cho client khi thành công và thông tin liên hệ đã được tạo mới
+    return res.json({
       message: "Gửi liên hệ thành công",
       contact,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Đã có lỗi xảy ra" });
+
+    // Thông báo cho client khi có lỗi xảy ra
+    return res.json({ message: "Đã có lỗi xảy ra" });
   }
 };
 

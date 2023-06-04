@@ -3,18 +3,28 @@ import { orderSchema } from "../validate/order";
 
 const getAll = async (req, res) => {
   try {
+    // Lấy tất cả các đơn hàng từ cơ sở dữ liệu
     const data = await Order.find()
-      .populate("user")
-      .populate("products.product");
+      .populate("user") // Tham chiếu đến model User để lấy thông tin người dùng
+      .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm trong đơn hàng
 
+    // Kiểm tra xem có dữ liệu đơn hàng hay không
     if (data.length === 0) {
-      return res.status(200).json({
+      return res.json({
         message: "Không có dữ liệu",
       });
     }
-    return res.json(data);
+
+    // Trả về dữ liệu đơn hàng cho client
+    return res.json({
+      message: "Thông tin các đơn hàng",
+      data,
+    });
   } catch (err) {
-    return res.status(404).json({
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi trong quá trình xử lý
+    return res.json({
       message: err,
     });
   }
@@ -22,18 +32,28 @@ const getAll = async (req, res) => {
 
 const getOne = async (req, res) => {
   try {
+    // Tìm đơn hàng dựa trên ID được truyền vào
     const data = await Order.findById(req.params.id)
-      .populate("user")
-      .populate("products.product");
+      .populate("user") // Tham chiếu đến model User để lấy thông tin người dùng liên quan
+      .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm liên quan
 
+    // Kiểm tra xem có dữ liệu đơn hàng hay không
     if (data.length === 0) {
-      return res.status(200).json({
+      return res.json({
         message: "Không có dữ liệu",
       });
     }
-    return res.json(data);
+
+    // Trả về dữ liệu đơn hàng cho client
+    return res.json({
+      message: "Thông tin đơn hàng",
+      data,
+    });
   } catch (err) {
-    return res.status(404).json({
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi trong quá trình xử lý
+    return res.json({
       message: err,
     });
   }
@@ -41,21 +61,30 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
+    // Kiểm tra hợp lệ của dữ liệu đơn hàng
     const { error } = orderSchema.validate(req.body, { abortEarly: false });
+
     if (error) {
+      // Nếu có lỗi, lấy danh sách các lỗi và trả về cho client
       const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
+      return res.json({
         message: errors,
       });
     }
 
+    // Tạo đơn hàng mới
     const order = await Order.create(req.body);
-    return res.status(200).json({
-      message: "Thêm đơn hàng thành công",
+
+    // Trả về thông báo thành công và đơn hàng vừa được tạo
+    return res.json({
+      message: "Tạo đơn hàng thành công",
       order,
     });
   } catch (err) {
-    return res.status(404).json({
+    console.log(err);
+
+    // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
+    return res.json({
       message: err,
     });
   }
@@ -63,31 +92,37 @@ const create = async (req, res) => {
 
 const edit = async (req, res) => {
   try {
+    // Kiểm tra hợp lệ của dữ liệu đơn hàng
     const { error } = orderSchema.validate(req.body, { abortEarly: false });
     if (error) {
+      // Nếu có lỗi, lấy danh sách các lỗi và trả về cho client
       const errors = error.details.map((err) => err.message);
-      return res.status(400).json({
+      return res.json({
         message: errors,
       });
     }
 
-    const order = await Order.findOneAndUpdate(
-      { _id: req.params.id },
-      { status: req.body.status },
-      { new: true }
-    );
-
+    // Kiểm tra xem đơn hàng có tồn tại hay không
+    const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({
+      return res.json({
         message: "Không tìm thấy đơn hàng",
       });
     }
-    return res.status(200).json({
+
+    // Cập nhật trạng thái đơn hàng
+    order.status = req.body.status;
+    await order.save();
+
+    return res.json({
       message: "Cập nhật đơn hàng thành công",
-      data: order,
+      order,
     });
   } catch (err) {
-    return res.status(500).json({
+    console.log(err);
+
+    // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
+    return res.json({
       message: err.message,
     });
   }
@@ -95,13 +130,25 @@ const edit = async (req, res) => {
 
 const del = async (req, res) => {
   try {
-    const data = await Order.findOneAndDelete({ _id: req.params.id });
+    // Kiểm tra xem đơn hàng có tồn tại hay không
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.json({
+        message: "Không tìm thấy đơn hàng",
+      });
+    }
+
+    // Xóa đơn hàng
+    await order.remove();
 
     return res.json({
-      message: "Xóa dữ liệu thành công",
+      message: "Xóa đơn hàng thành công",
     });
   } catch (err) {
-    return res.status(404).json({
+    console.log(err);
+
+    // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
+    return res.json({
       message: err,
     });
   }
