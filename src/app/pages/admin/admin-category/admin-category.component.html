@@ -1,11 +1,11 @@
-<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50">
+<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-full">
   <div class="text-center">
     <div class="p-3 text-2xl text-black">
       <h3 class="font-bold pl-2">Quản lý danh mục</h3>
     </div>
   </div>
 
-  <div class="table-responsive p-3">
+  <div class="table-responsive p-3 md:w-full w-screen">
     <table class="table table-hover">
       <thead class="text-center">
         <tr>
@@ -15,7 +15,7 @@
           <th scope="col" class="md:w-screen">Thao tác</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let item of categories; index as i">
         <tr>
           <th scope="row" class="text-center">1</th>
           <td class="text-center">
@@ -25,7 +25,7 @@
             <span>Apple</span>
           </td>
           <td>
-            <div class="md:flex md:gap-1 md:justify-center">
+            <div class="flex gap-1 justify-center">
               <button
                 class="btn btn-primary"
                 data-bs-toggle="modal"

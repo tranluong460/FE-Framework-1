@@ -8,7 +8,13 @@ import { Component } from '@angular/core';
 export class AdminOrderComponent {
   selectedValue: string = '';
 
+  orders: any[];
+
   onSubmit() {
     console.log(this.selectedValue);
+  }
+
+  constructor() {
+    this.orders = Array(14).fill(0);
   }
 }

@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './admin-product.component.html',
   styleUrls: ['./admin-product.component.css'],
 })
-export class AdminProductComponent {}
+export class AdminProductComponent {
+  products: any[];
+
+  constructor() {
+    this.products = Array(14).fill(0);
+  }
+}

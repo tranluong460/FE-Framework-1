@@ -1,4 +1,4 @@
-<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50">
+<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-full">
   <div class="text-center">
     <div class="p-3 text-2xl text-black">
       <h3 class="font-bold pl-2">Quản lý người dùng</h3>
@@ -14,12 +14,12 @@
           <th scope="col" class="md:w-screen">Email</th>
           <th scope="col" class="md:w-screen">Số điện thoại</th>
           <th scope="col" class="md:w-screen">Địa chỉ</th>
-          <th scope="col" class="md:w-screen">Mật khẩu</th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">Mật khẩu</th>
           <th scope="col" class="md:w-screen">Thao tác</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let item of users; index as i">
           <th scope="row" class="text-center">1</th>
           <td class="text-center">
             <span>Trần Văn Lương</span>
@@ -33,11 +33,11 @@
           <td>
             <span> Đại Mão - Đại Thành - Hiệp Hòa - Bắc Giang </span>
           </td>
-          <td class="text-center">
+          <td class="text-center md:table-cell hidden">
             <span>*********</span>
           </td>
           <td>
-            <div class="md:flex md:gap-1 md:justify-center">
+            <div class="flex gap-1 justify-center">
               <button
                 class="btn btn-danger"
                 data-bs-toggle="modal"

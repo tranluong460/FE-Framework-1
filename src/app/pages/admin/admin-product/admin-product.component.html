@@ -1,4 +1,4 @@
-<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50">
+<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-full">
   <div class="text-center">
     <div class="p-3 text-2xl text-black">
       <h3 class="font-bold pl-2">Quản lý sản phẩm</h3>
@@ -12,16 +12,21 @@
           <th scope="col" class="md:w-screen">STT</th>
           <th scope="col" class="md:w-screen">Tên sản phẩm</th>
           <th scope="col" class="md:w-screen">Giá</th>
-          <th scope="col" class="md:w-screen">Giá gốc</th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">Giá gốc</th>
           <th scope="col" class="md:w-screen">Danh mục</th>
-          <th scope="col" class="md:w-screen">Mô tả ngắn</th>
-          <th scope="col" class="md:w-screen">Mô tả</th>
-          <th scope="col" class="md:w-screen">Thông số kỹ thuật</th>
-          <th scope="col" class="md:w-screen">Hình ảnh</th>
+          <th scope="col" class="md:w-screen md:hidden table-cell">Chi tiết</th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">
+            Mô tả ngắn
+          </th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">Mô tả</th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">
+            Thông số kỹ thuật
+          </th>
+          <th scope="col" class="md:w-screen md:table-cell hidden">Hình ảnh</th>
           <th scope="col" class="md:w-screen">Thao tác</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let item of products; index as i">
         <tr class="text-center">
           <th scope="row">1</th>
           <td>
@@ -30,13 +35,22 @@
           <td>
             <span>12.650.000đ</span>
           </td>
-          <td>
+          <td class="md:table-cell hidden">
             <span>14.990.000đ</span>
           </td>
           <td>
             <span>Apple</span>
           </td>
-          <td>
+          <td class="md:hidden table-cell">
+            <button
+              type="submit"
+              data-bs-toggle="modal"
+              data-bs-target="#detail_prod"
+            >
+              Xem
+            </button>
+          </td>
+          <td class="md:table-cell hidden">
             <button
               type="submit"
               data-bs-toggle="modal"
@@ -45,7 +59,7 @@
               <span class="hover:text-blue-500">Xem</span>
             </button>
           </td>
-          <td>
+          <td class="md:table-cell hidden">
             <button
               type="submit"
               data-bs-toggle="modal"
@@ -55,7 +69,7 @@
             </button>
           </td>
 
-          <td>
+          <td class="md:table-cell hidden">
             <button
               type="submit"
               data-bs-toggle="modal"
@@ -64,7 +78,7 @@
               <span class="hover:text-blue-500">Xem</span>
             </button>
           </td>
-          <td>
+          <td class="md:table-cell hidden">
             <img
               src="https://thuthuatnhanh.com/wp-content/uploads/2023/03/hinh-anh-cuc-tinh-y.jpg"
               alt="product"
@@ -72,7 +86,7 @@
             />
           </td>
           <td>
-            <div class="md:flex md:gap-1 md:justify-center">
+            <div class="flex gap-1 justify-center">
               <button
                 class="btn btn-primary"
                 data-bs-toggle="modal"
@@ -101,7 +115,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Short description -->
 <div class="modal" id="short_description">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -110,7 +124,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Description -->
 <div class="modal" id="description">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -119,7 +133,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Specifications -->
 <div class="modal" id="specifications">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -128,7 +142,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Edit Product -->
 <div class="modal" id="editProduct">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -162,7 +176,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Edit Product Success -->
 <div class="modal" id="alert">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -180,6 +194,28 @@
         <div class="alert alert-success">
           <span>Chỉnh sửa thông tin sản phẩm thành công!</span>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Detail Product -->
+<div class="modal" id="detail_prod">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Tên sản phẩm</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>Chi tiết sản phẩm</form>
       </div>
     </div>
   </div>

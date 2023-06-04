@@ -1,4 +1,4 @@
-<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50">
+<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-full">
   <div class="text-center">
     <div class="p-3 text-2xl text-black">
       <h3 class="font-bold pl-2">Quản lý đơn hàng</h3>
@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let item of orders; index as i">
           <th scope="row" class="text-center">1</th>
           <td class="text-center">
             <span>Lương</span>
@@ -33,7 +33,7 @@
             <span>Đang lấy hàng</span>
           </td>
           <td>
-            <div class="md:flex md:gap-1 md:justify-center">
+            <div class="flex gap-1 justify-center">
               <button
                 class="btn btn-primary"
                 data-bs-toggle="modal"

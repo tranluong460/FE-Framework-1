@@ -8,7 +8,13 @@ import { Component } from '@angular/core';
 export class AdminUserComponent {
   selectedValue: string = '';
 
+  users: any[];
+
   onSubmit() {
     console.log(this.selectedValue);
+  }
+
+  constructor() {
+    this.users = Array(14).fill(0);
   }
 }
