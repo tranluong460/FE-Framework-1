@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AdminCategoryComponent {
   categories: any[];
 
+  p: number = 1;
+
   constructor() {
     this.categories = Array(14).fill(0);
   }

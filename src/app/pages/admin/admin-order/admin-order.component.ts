@@ -10,6 +10,8 @@ export class AdminOrderComponent {
 
   orders: any[];
 
+  p: number = 1;
+
   onSubmit() {
     console.log(this.selectedValue);
   }

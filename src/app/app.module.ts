@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
@@ -88,6 +89,7 @@ import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.
     MatIconModule,
     MatDialogModule,
     MatSnackBarModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -10,6 +10,8 @@ export class AdminUserComponent {
 
   users: any[];
 
+  p: number = 1;
+
   onSubmit() {
     console.log(this.selectedValue);
   }
