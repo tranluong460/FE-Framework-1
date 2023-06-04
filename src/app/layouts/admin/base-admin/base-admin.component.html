@@ -1,16 +1,10 @@
-<div class="admin contailer-fluid">
-  <div class="top-admin">
-    <app-header-admin></app-header-admin>
-  </div>
-  <div class="mid-admin flex flex-col md:flex-row">
-    <div class="left-admin">
-      <app-nav-admin></app-nav-admin>
-    </div>
-    <div class="right-admin">
+<div class="overflow-x-hidden text-body bg-body dark:bg-dark-bg flex">
+  <app-nav-admin></app-nav-admin>
+  <div class="main-content">
+    <div class="relative rounded-tl-3xl">
+      <app-header-admin></app-header-admin>
       <router-outlet></router-outlet>
+      <app-footer-admin></app-footer-admin>
     </div>
-  </div>
-  <div class="bottom-admin">
-    <app-footer-admin></app-footer-admin>
   </div>
 </div>
