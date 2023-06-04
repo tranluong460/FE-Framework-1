@@ -38,7 +38,11 @@
           </td>
           <td>
             <div class="md:flex md:gap-1 md:justify-center">
-              <button class="btn btn-danger">
+              <button
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#bandUser"
+              >
                 <span>Khóa tài khoản</span>
               </button>
             </div>
@@ -56,5 +60,76 @@
       <li class="page-item"><a class="page-link" href="#">3</a></li>
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="bandUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Khóa tài khoản</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="select" class="form-label">Thời gian khóa:</label>
+          <select
+            id="select"
+            name="select"
+            class="form-select"
+            [(ngModel)]="selectedValue"
+          >
+            <!-- <option selected>Chọn trạng thái</option> -->
+            <option value="3 ngày">3 ngày</option>
+            <option value="7 ngày">7 ngày</option>
+            <option value="Vĩnh viễn">Vĩnh viễn</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit()"
+          data-bs-toggle="modal"
+          data-bs-target="#alert"
+        >
+          Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="alert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <strong>Thành công!</strong>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
