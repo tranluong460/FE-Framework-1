@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {
     this.items = Array(6).fill(0);
     this.productsService.getAllProducts().subscribe((data) => {
-      this.items = data;
+      this.items = data.data;
     });
   }
 

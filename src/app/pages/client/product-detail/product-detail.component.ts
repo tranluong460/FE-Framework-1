@@ -34,12 +34,12 @@ export class ProductDetailComponent {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
       this.productService.getProduct(id).subscribe((product) => {
-        this.product = product;
-        this.comments = product.comments;
+        this.product = product.data;
+        this.comments = product.data.comments;
       });
     });
     this.productService.getAllProducts().subscribe((data) => {
-      this.products = data;
+      this.products = data.data;
     });
   }
 
