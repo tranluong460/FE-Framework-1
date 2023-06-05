@@ -43,19 +43,19 @@ export class SignUpComponent {
 
     this.authService.register(user).subscribe(
       (response) => {
-        if (Array.isArray(response.message)) {
-          this.errorMessage = response.message[0];
-        } else {
-          if (response.message === 'Đăng ký thành công') {
-            localStorage.setItem('token', response.accessToken);
-            this.router.navigate(['/']);
-          } else {
-            this.errorMessage = response.message;
-          }
-        }
+        console.log('Response', response);
+
+        this.errorMessage = response.message;
+        this.router.navigate(['/auth/signIn']);
       },
       (error) => {
-        console.log(error);
+        console.log('Error', error);
+
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
       }
     );
   }

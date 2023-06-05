@@ -34,14 +34,14 @@ export class ContactPageComponent {
 
     this.contactService.createContact(contact).subscribe(
       (response) => {
-        if (Array.isArray(response.message)) {
-          this.errorMessage = response.message[0];
-        } else {
-          this.errorMessage = response.message;
-        }
+        console.log('Response', response);
+
+        this.errorMessage = response.message;
       },
       (error) => {
-        console.log(error);
+        console.log('Error', error);
+
+        this.errorMessage = error.error.message[0];
       }
     );
   }

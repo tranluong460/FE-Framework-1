@@ -42,18 +42,19 @@ export class ResetPasswordComponent {
 
     this.authService.resetPassword(resetPassword).subscribe(
       (response) => {
-        if (Array.isArray(response.message)) {
-          this.errorMessage = response.message[0];
-        } else {
-          if (response.message === 'Đổi mật khẩu thành công') {
-            this.routerPage.navigate(['auth/signIn']);
-          } else {
-            this.errorMessage = response.message;
-          }
-        }
+        console.log('Response', response);
+
+        this.errorMessage = response.message;
+        this.routerPage.navigate(['/auth/signIn']);
       },
       (error) => {
-        console.log(error);
+        console.log('Error', error);
+
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
       }
     );
   }

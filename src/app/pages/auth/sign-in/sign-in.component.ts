@@ -35,19 +35,20 @@ export class SignInComponent {
 
     this.authService.login(user).subscribe(
       (response) => {
-        if (Array.isArray(response.message)) {
-          this.errorMessage = response.message[0];
-        } else {
-          if (response.message === 'Đăng nhập thành công') {
-            localStorage.setItem('token', response.accessToken);
-            this.router.navigate(['/']);
-          } else {
-            this.errorMessage = response.message;
-          }
-        }
+        console.log('Response', response);
+
+        this.errorMessage = response.message;
+        localStorage.setItem('token', response.accessToken);
+        this.router.navigate(['/']);
       },
       (error) => {
-        console.log(error);
+        console.log('Error', error);
+
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
       }
     );
   }
