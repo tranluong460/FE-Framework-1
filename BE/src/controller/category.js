@@ -7,8 +7,8 @@ const getAll = async (req, res) => {
     const data = await Category.find();
 
     // Kiểm tra xem có dữ liệu nào không
-    if (!data) {
-      return res.status(204).json({
+    if (!data || data.length === 0) {
+      return res.status(200).json({
         message: "Không có dữ liệu",
       });
     }

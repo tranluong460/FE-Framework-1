@@ -4,10 +4,18 @@ import { productSchema } from "../validate/product";
 const getAll = async (req, res) => {
   try {
     // Lấy tất cả sản phẩm từ cơ sở dữ liệu và gắn thông tin danh mục (brand) cho mỗi sản phẩm
-    const data = await Product.find().populate("brand");
+    const data = await Product.find()
+      .populate("brand")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          select: "name",
+        },
+      });
 
     // Kiểm tra nếu không có sản phẩm nào được tìm thấy
-    if (!data) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
         message: "Không có dữ liệu",
       });

@@ -15,7 +15,7 @@ export const getUser = async (req, res) => {
     const users = await User.find();
 
     // Kiểm tra xem có người dùng nào không
-    if (!users) {
+    if (!users || users.length === 0) {
       return res.status(200).json({
         message: "Không có dữ liệu",
       });
@@ -59,7 +59,7 @@ export const login = async (req, res) => {
     // Tìm người dùng trong cơ sở dữ liệu bằng email
     const user = await User.findOne({ email });
 
-    if (!user) {
+    if (!user || user.length === 0) {
       // Trả về lỗi nếu email không tồn tại trong cơ sở dữ liệu
       return res.status(404).json({
         message: "Email không tồn tại",
