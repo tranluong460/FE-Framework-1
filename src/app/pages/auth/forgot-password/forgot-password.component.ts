@@ -22,16 +22,18 @@ export class ForgotPasswordComponent {
 
     this.authService.forgotPassword(email).subscribe(
       (response) => {
-        console.log('Gửi thành công', response);
-        window.localStorage.setItem('accessCode', response.accessCode);
+        if (Array.isArray(response.message)) {
+          this.errorMessage = response.message[0];
+        } else {
+          if (response.message === 'Gửi mã thành công') {
+            window.localStorage.setItem('accessCode', response.accessCode);
+          } else {
+            this.errorMessage = response.message;
+          }
+        }
       },
       (error) => {
-        if (Array.isArray(error.error.message)) {
-          console.log(error.error.message);
-          this.errorMessage = error.error.message[0];
-        } else {
-          this.errorMessage = error.error.message;
-        }
+        console.log(error);
       }
     );
   }

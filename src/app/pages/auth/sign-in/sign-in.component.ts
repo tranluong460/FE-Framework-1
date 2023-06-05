@@ -35,28 +35,19 @@ export class SignInComponent {
 
     this.authService.login(user).subscribe(
       (response) => {
-        localStorage.setItem('token', response.accessToken);
-        this.router.navigate(['/']);
+        if (Array.isArray(response.message)) {
+          this.errorMessage = response.message[0];
+        } else {
+          if (response.message === 'Đăng nhập thành công') {
+            localStorage.setItem('token', response.accessToken);
+            this.router.navigate(['/']);
+          } else {
+            this.errorMessage = response.message;
+          }
+        }
       },
       (error) => {
-        if (Array.isArray(error.error.message)) {
-          // error.error.message.forEach((errorMessage: string) => {
-          //   this.errorMessage = errorMessage;
-          // });
-
-          this.errorMessage = error.error.message[0];
-        } else {
-          this.errorMessage = error.error.message;
-        }
-        // if (this.errorMessage.includes('Email không tồn tại')) {
-        //   this.userForm.controls.email.setErrors({ emailNotFound: true });
-        // }
-        // if (this.errorMessage.includes('Tài khoản phải là email')) {
-        //   this.userForm.controls.email.setErrors({ emailNotFound: true });
-        // }
-        // if (this.errorMessage.includes('Mật khẩu không đúng')) {
-        //   this.userForm.controls.password.setErrors({ passNotFound: true });
-        // }
+        console.log(error);
       }
     );
   }

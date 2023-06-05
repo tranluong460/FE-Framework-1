@@ -14,7 +14,7 @@ export class ContactPageComponent {
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required]],
-    address: [''],
+    address: ['', [Validators.required]],
     content: ['', [Validators.required]],
   });
 
@@ -34,17 +34,15 @@ export class ContactPageComponent {
 
     this.contactService.createContact(contact).subscribe(
       (response) => {
-        this.errorMessage = 'Phản hồi thành công!';
+        if (Array.isArray(response.message)) {
+          this.errorMessage = response.message[0];
+        } else {
+          this.errorMessage = response.message;
+        }
       },
       (error) => {
-        if (Array.isArray(error.error.message)) {
-          this.errorMessage = error.error.message[0];
-        } else {
-          this.errorMessage = error.error.message;
-        }
+        console.log(error);
       }
     );
-
-    console.log(contact);
   }
 }

@@ -18,7 +18,7 @@ export class HeaderClientComponent {
   ) {
     this.categoryService
       .getAllCategories()
-      .subscribe((cate) => (this.cates = cate));
+      .subscribe((cate) => (this.cates = cate.data));
   }
 
   openDialog(): void {

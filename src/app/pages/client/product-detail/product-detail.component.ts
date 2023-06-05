@@ -50,19 +50,17 @@ export class ProductDetailComponent {
 
     this.commentsService.createComment(comment, this.product._id).subscribe(
       (response) => {
-        this.errorMessage = 'Bình luận thành công!';
+        if (Array.isArray(response.message)) {
+          this.errorMessage = response.message[0];
+        } else {
+          this.errorMessage = response.message;
+        }
       },
       (error) => {
-        if (Array.isArray(error.error.message)) {
-          this.errorMessage = error.error.message[0];
-        } else {
-          this.errorMessage = error.error.message;
-        }
+        console.log(error);
       }
     );
   }
-
-  // }
 
   // openSnackBar() {
   //   this._snackBar.open(this.errorMessage, 'Đóng', {

@@ -28,7 +28,7 @@ const create = async (req, res) => {
 
     // Trả về thông báo cho client khi thành công và thông tin liên hệ đã được tạo mới
     return res.json({
-      message: "Gửi liên hệ thành công",
+      message: "Phản hồi thành công",
       contact,
     });
   } catch (err) {

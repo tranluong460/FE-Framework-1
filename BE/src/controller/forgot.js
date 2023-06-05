@@ -40,7 +40,7 @@ export const getSecurityCode = async (req, res) => {
 
   // Trả về thông báo cho client khi thành công và mã truy cập (token)
   return res.json({
-    message: "Gửi mã thành công!",
+    message: "Gửi mã thành công",
     accessCode: token,
   });
 };
