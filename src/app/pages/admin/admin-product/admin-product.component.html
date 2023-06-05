@@ -99,7 +99,11 @@
               >
                 <span>Sửa</span>
               </button>
-              <button class="btn btn-danger">
+              <button
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#delete_prod"
+              >
                 <span>Xóa</span>
               </button>
             </div>
@@ -192,6 +196,63 @@
       <div class="modal-body">
         <div class="alert alert-success">
           <span>Chỉnh sửa thông tin sản phẩm thành công!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Delete Product -->
+<div class="modal" id="delete_prod">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Xóa sản phẩm</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>Chi tiết sản phẩm muốn xóa</form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#delete_success"
+        >
+          <span>Đồng ý</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Delete Product Success -->
+<div class="modal" id="delete_success">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <span>Xóa sản phẩm thành công!</span>
         </div>
       </div>
     </div>
