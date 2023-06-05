@@ -16,7 +16,7 @@ export const getSecurityCode = async (req, res) => {
   // Nếu không tìm thấy người dùng, trả về thông báo cho client
   const user = await User.findOne({ email });
   if (!user) {
-    return res.json({
+    return res.status(404).json({
       message: "Email không tồn tại",
     });
   }
@@ -39,7 +39,7 @@ export const getSecurityCode = async (req, res) => {
   sendMail(user.name, user.email, randomCode, resetPasswordUrl);
 
   // Trả về thông báo cho client khi thành công và mã truy cập (token)
-  return res.json({
+  return res.status(200).json({
     message: "Gửi mã thành công",
     accessCode: token,
   });
@@ -60,7 +60,7 @@ export const resetPassword = async (req, res) => {
 
     // Nếu không tìm thấy người dùng, trả về thông báo cho client
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         message: "User không tồn tại",
       });
     }
@@ -70,14 +70,14 @@ export const resetPassword = async (req, res) => {
       randomString !== decoded.randomString ||
       randomCode !== decoded.randomCode
     ) {
-      return res.json({
+      return res.status(400).json({
         message: "Mã bảo mật không chính xác!",
       });
     }
 
     // Kiểm tra độ dài mật khẩu mới
     if (password.length < 6) {
-      return res.json({
+      return res.status(400).json({
         message: "Mật khẩu phải có độ dài từ 6 ký tự trở lên",
       });
     }
@@ -85,7 +85,7 @@ export const resetPassword = async (req, res) => {
     // Kiểm tra xem mật khẩu mới có giống với mật khẩu cũ không
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      return res.json({
+      return res.status(400).json({
         message: "Không được giống mật khẩu cũ",
       });
     }
@@ -101,15 +101,15 @@ export const resetPassword = async (req, res) => {
     );
 
     // Trả về thông báo cho client khi đổi mật khẩu thành công
-    return res.json({
+    return res.status(200).json({
       message: "Đổi mật khẩu thành công",
     });
   } catch (err) {
     console.error(err);
 
-    // Trả về thông báo cho client khi token không hợp lệ
-    return res.json({
-      message: "Token không hợp lệ",
+    // Trả về thông báo cho client khi có lỗi xảy ra trong quá trình đổi mật khẩu
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi đổi mật khẩu",
     });
   }
 };

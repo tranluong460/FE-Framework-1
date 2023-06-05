@@ -8,6 +8,7 @@ export const errorMessages = (fieldName) => {
     "number.base": `${fieldName} phải là số`,
     "number.empty": `${fieldName} là bắt buộc`,
     "number.min": `${fieldName} phải lớn hơn 0`,
+    "number.max": `${fieldName} phải nhỏ hơn hoặc bằng giá trị tối đa`,
 
     "array.base": `${fieldName} phải là mảng`,
     "array.min": `${fieldName} không được để trống`,

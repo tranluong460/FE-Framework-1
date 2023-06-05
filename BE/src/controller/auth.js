@@ -15,8 +15,8 @@ export const getUser = async (req, res) => {
     const users = await User.find();
 
     // Kiểm tra xem có người dùng nào không
-    if (users.length === 0) {
-      return res.json({
+    if (!users) {
+      return res.status(200).json({
         message: "Không có dữ liệu",
       });
     }
@@ -28,7 +28,7 @@ export const getUser = async (req, res) => {
     });
 
     // Trả về danh sách người dùng không bao gồm thông tin mật khẩu
-    return res.json({
+    return res.status(200).json({
       message: "Danh sách người dùng",
       usersWithoutPassword,
     });
@@ -36,7 +36,7 @@ export const getUser = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi nếu có lỗi xảy ra trong quá trình lấy thông tin
-    return res.json({
+    return res.status(500).json({
       message: "Đã có lỗi xảy ra khi lấy danh sách người dùng",
     });
   }
@@ -49,10 +49,9 @@ export const login = async (req, res) => {
 
     // Kiểm tra dữ liệu đầu vào sử dụng schema
     const { error } = loginSchema.validate(req.body, { abortEarly: false });
-
     if (error) {
       // Trả về lỗi nếu dữ liệu đầu vào không hợp lệ
-      return res.json({
+      return res.status(400).json({
         message: error.details.map((err) => err.message),
       });
     }
@@ -62,7 +61,7 @@ export const login = async (req, res) => {
 
     if (!user) {
       // Trả về lỗi nếu email không tồn tại trong cơ sở dữ liệu
-      return res.json({
+      return res.status(404).json({
         message: "Email không tồn tại",
       });
     }
@@ -72,7 +71,7 @@ export const login = async (req, res) => {
 
     if (!isMatch) {
       // Trả về lỗi nếu mật khẩu không đúng
-      return res.json({
+      return res.status(401).json({
         message: "Mật khẩu không đúng",
       });
     }
@@ -86,7 +85,7 @@ export const login = async (req, res) => {
     user.password = undefined;
 
     // Trả về thông tin đăng nhập thành công và mã thông báo
-    return res.json({
+    return res.status(200).json({
       message: "Đăng nhập thành công",
       accessToken: token,
       user,
@@ -95,7 +94,7 @@ export const login = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi nếu có lỗi xảy ra trong quá trình đăng nhập
-    return res.json({
+    return res.status(500).json({
       message: "Đã có lỗi xảy ra khi đăng nhập",
     });
   }
@@ -104,18 +103,17 @@ export const login = async (req, res) => {
 export const register = async (req, res) => {
   try {
     const { error } = registerSchema.validate(req.body, { abortEarly: false });
-
     if (error) {
       // Trả về lỗi nếu dữ liệu đầu vào không hợp lệ
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
 
     if (req.body.password.length < 6) {
       // Trả về lỗi nếu mật khẩu không đạt yêu cầu độ dài tối thiểu
-      return res.json({
+      return res.status(400).json({
         message: "Mật khẩu phải có độ dài từ 6 ký tự trở lên",
       });
     }
@@ -124,7 +122,7 @@ export const register = async (req, res) => {
 
     if (userExist) {
       // Trả về lỗi nếu email đã tồn tại trong cơ sở dữ liệu
-      return res.json({
+      return res.status(400).json({
         message: "Email đã tồn tại",
       });
     }
@@ -134,7 +132,7 @@ export const register = async (req, res) => {
 
     if (!isPhoneNumberValid) {
       // Trả về lỗi nếu số điện thoại không đúng định dạng
-      return res.json({
+      return res.status(400).json({
         message: "Số điện thoại không đúng định dạng",
       });
     }
@@ -151,7 +149,7 @@ export const register = async (req, res) => {
     });
 
     // Trả về thông tin tạo tài khoản thành công
-    return res.json({
+    return res.status(201).json({
       message: "Đăng ký thành công",
       user,
     });
@@ -159,7 +157,7 @@ export const register = async (req, res) => {
     console.log(error);
 
     // Trả về lỗi nếu có lỗi xảy ra trong quá trình đăng ký
-    return res.json({
+    return res.status(500).json({
       message: "Đã có lỗi xảy ra khi đăng ký",
     });
   }

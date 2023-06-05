@@ -10,6 +10,11 @@ export const productSchema = joi
       .min(1)
       .required()
       .messages(errorMessages("Giá gốc")),
+    quantity: joi
+      .number()
+      .min(0)
+      .required()
+      .messages(errorMessages("Số lượng")),
     short_description: joi
       .string()
       .required()

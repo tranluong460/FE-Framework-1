@@ -9,14 +9,14 @@ const getAll = async (req, res) => {
       .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm trong đơn hàng
 
     // Kiểm tra xem có dữ liệu đơn hàng hay không
-    if (data.length === 0) {
-      return res.json({
+    if (!data) {
+      return res.status(404).json({
         message: "Không có dữ liệu",
       });
     }
 
     // Trả về dữ liệu đơn hàng cho client
-    return res.json({
+    return res.status(200).json({
       message: "Thông tin các đơn hàng",
       data,
     });
@@ -24,8 +24,8 @@ const getAll = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi nếu có lỗi trong quá trình xử lý
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -38,14 +38,14 @@ const getOne = async (req, res) => {
       .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm liên quan
 
     // Kiểm tra xem có dữ liệu đơn hàng hay không
-    if (data.length === 0) {
-      return res.json({
-        message: "Không có dữ liệu",
+    if (!data) {
+      return res.status(404).json({
+        message: "Không tìm thấy đơn hàng",
       });
     }
 
     // Trả về dữ liệu đơn hàng cho client
-    return res.json({
+    return res.status(200).json({
       message: "Thông tin đơn hàng",
       data,
     });
@@ -53,8 +53,8 @@ const getOne = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi nếu có lỗi trong quá trình xử lý
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -67,7 +67,7 @@ const create = async (req, res) => {
     if (error) {
       // Nếu có lỗi, lấy danh sách các lỗi và trả về cho client
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -76,7 +76,7 @@ const create = async (req, res) => {
     const order = await Order.create(req.body);
 
     // Trả về thông báo thành công và đơn hàng vừa được tạo
-    return res.json({
+    return res.status(201).json({
       message: "Tạo đơn hàng thành công",
       order,
     });
@@ -84,8 +84,8 @@ const create = async (req, res) => {
     console.log(err);
 
     // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -97,7 +97,7 @@ const edit = async (req, res) => {
     if (error) {
       // Nếu có lỗi, lấy danh sách các lỗi và trả về cho client
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -105,7 +105,7 @@ const edit = async (req, res) => {
     // Kiểm tra xem đơn hàng có tồn tại hay không
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.json({
+      return res.status(404).json({
         message: "Không tìm thấy đơn hàng",
       });
     }
@@ -114,7 +114,7 @@ const edit = async (req, res) => {
     order.status = req.body.status;
     await order.save();
 
-    return res.json({
+    return res.status(200).json({
       message: "Cập nhật đơn hàng thành công",
       order,
     });
@@ -122,8 +122,8 @@ const edit = async (req, res) => {
     console.log(err);
 
     // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
-    return res.json({
-      message: err.message,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -133,7 +133,7 @@ const del = async (req, res) => {
     // Kiểm tra xem đơn hàng có tồn tại hay không
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return res.json({
+      return res.status(404).json({
         message: "Không tìm thấy đơn hàng",
       });
     }
@@ -141,15 +141,15 @@ const del = async (req, res) => {
     // Xóa đơn hàng
     await order.remove();
 
-    return res.json({
+    return res.status(200).json({
       message: "Xóa đơn hàng thành công",
     });
   } catch (err) {
     console.log(err);
 
     // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };

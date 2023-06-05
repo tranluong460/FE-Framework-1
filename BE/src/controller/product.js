@@ -7,23 +7,23 @@ const getAll = async (req, res) => {
     const data = await Product.find().populate("brand");
 
     // Kiểm tra nếu không có sản phẩm nào được tìm thấy
-    if (data.length === 0) {
-      return res.json({
+    if (!data) {
+      return res.status(404).json({
         message: "Không có dữ liệu",
       });
     }
 
     // Trả về danh sách sản phẩm
-    return res.json({
-      message: "Danh sách sách phẩm",
+    return res.status(200).json({
+      message: "Danh sách sản phẩm",
       data,
     });
   } catch (err) {
     console.log(err);
 
     // Trả về lỗi nếu có
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -42,23 +42,23 @@ const getOne = async (req, res) => {
       });
 
     // Kiểm tra nếu không tìm thấy sản phẩm
-    if (data.length === 0) {
-      return res.json({
-        message: "Không có dữ liệu",
+    if (!data) {
+      return res.status(404).json({
+        message: "Không tìm thấy sản phẩm",
       });
     }
 
     // Trả về thông tin sản phẩm
-    return res.json({
-      message: "Thông tin sách phẩm",
+    return res.status(200).json({
+      message: "Thông tin sản phẩm",
       data,
     });
   } catch (err) {
     console.log(err);
 
     // Trả về lỗi nếu có lỗi xảy ra
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -69,7 +69,7 @@ const create = async (req, res) => {
     const { error } = productSchema.validate(req.body, { abortEarly: false });
     if (error) {
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -78,7 +78,7 @@ const create = async (req, res) => {
     const product = await Product.create(req.body);
 
     // Trả về thông báo cho client khi thành công
-    return res.json({
+    return res.status(201).json({
       message: "Thêm sản phẩm thành công",
       product,
     });
@@ -86,8 +86,8 @@ const create = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi nếu có
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -98,7 +98,7 @@ const edit = async (req, res) => {
     const { error } = productSchema.validate(req.body, { abortEarly: false });
     if (error) {
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -110,14 +110,14 @@ const edit = async (req, res) => {
       { new: true }
     );
 
-    if (data.length === 0) {
-      return res.json({
-        message: "Cập nhật dữ liệu không thành công",
+    if (!data) {
+      return res.status(404).json({
+        message: "Không tìm thấy sản phẩm",
       });
     }
 
     // Trả về dữ liệu đã được cập nhật
-    return res.json({
+    return res.status(200).json({
       message: "Cập nhật sản phẩm thành công",
       data,
     });
@@ -125,8 +125,8 @@ const edit = async (req, res) => {
     console.log(err);
 
     // Trả về lỗi xảy ra nếu có
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };
@@ -137,15 +137,15 @@ const del = async (req, res) => {
     const data = await Product.findOneAndDelete({ _id: req.params.id });
 
     // Trả về thông báo xóa dữ liệu thành công
-    return res.json({
+    return res.status(200).json({
       message: "Xóa dữ liệu thành công",
     });
   } catch (err) {
     console.log(err);
 
     // Trả về thông báo lỗi nếu có lỗi xảy ra
-    return res.json({
-      message: err,
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
     });
   }
 };

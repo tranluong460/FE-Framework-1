@@ -15,7 +15,7 @@ const create = async (req, res) => {
     if (error) {
       // Nếu có lỗi validate, trả về danh sách lỗi cho client
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -27,7 +27,7 @@ const create = async (req, res) => {
     sendContact(req.body);
 
     // Trả về thông báo cho client khi thành công và thông tin liên hệ đã được tạo mới
-    return res.json({
+    return res.status(201).json({
       message: "Phản hồi thành công",
       contact,
     });
@@ -35,7 +35,9 @@ const create = async (req, res) => {
     console.error(err);
 
     // Thông báo cho client khi có lỗi xảy ra
-    return res.json({ message: "Đã có lỗi xảy ra" });
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi tạo phản hồi",
+    });
   }
 };
 

@@ -16,7 +16,9 @@ const create = async (req, res) => {
 
     // Nếu không tồn tại token, trả về mã lỗi 401 và thông báo cho client
     if (!token) {
-      return res.json({ message: "Bạn chưa đăng nhập" });
+      return res.status(401).json({
+        message: "Bạn chưa đăng nhập",
+      });
     }
 
     // Validate dữ liệu bình luận
@@ -24,7 +26,7 @@ const create = async (req, res) => {
     if (error) {
       // Nếu có lỗi validate, trả về danh sách lỗi cho client
       const errors = error.details.map((err) => err.message);
-      return res.json({
+      return res.status(400).json({
         message: errors,
       });
     }
@@ -48,12 +50,17 @@ const create = async (req, res) => {
     );
 
     // Trả về thông báo cho client khi thành công
-    return res.json({ message: "Thêm bình luận thành công" });
+    return res.status(201).json({
+      message: "Thêm bình luận thành công",
+      newComment,
+    });
   } catch (err) {
     console.error(err);
 
     // Thông báo cho client khi có lỗi xảy ra
-    return res.json({ message: "Đã có lỗi xảy ra" });
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi bình luận",
+    });
   }
 };
 
