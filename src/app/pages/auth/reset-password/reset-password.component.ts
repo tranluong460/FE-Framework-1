@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IResetPassword } from 'src/app/interface/auth';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -25,7 +25,8 @@ export class ResetPasswordComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private routerPage: Router
   ) {
     this.router.paramMap.subscribe((params) => {
       this.randomString = params.get('randomString');
@@ -41,15 +42,18 @@ export class ResetPasswordComponent {
 
     this.authService.resetPassword(resetPassword).subscribe(
       (response) => {
-        console.log('Gửi thành công', response);
-        window.localStorage.setItem('accessCode', response.accessCode);
+        if (Array.isArray(response.message)) {
+          this.errorMessage = response.message[0];
+        } else {
+          if (response.message === 'Đổi mật khẩu thành công') {
+            this.routerPage.navigate(['auth/signIn']);
+          } else {
+            this.errorMessage = response.message;
+          }
+        }
       },
       (error) => {
-        if (Array.isArray(error.error.message)) {
-          this.errorMessage = error.error.message[0];
-        } else {
-          this.errorMessage = error.error.message;
-        }
+        console.log(error);
       }
     );
   }

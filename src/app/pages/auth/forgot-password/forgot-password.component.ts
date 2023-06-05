@@ -26,6 +26,7 @@ export class ForgotPasswordComponent {
           this.errorMessage = response.message[0];
         } else {
           if (response.message === 'Gửi mã thành công') {
+            this.errorMessage = response.message;
             window.localStorage.setItem('accessCode', response.accessCode);
           } else {
             this.errorMessage = response.message;
