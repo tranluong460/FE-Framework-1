@@ -24,19 +24,20 @@
             let item of users | paginate : { itemsPerPage: 5, currentPage: p };
             index as i
           "
+          [ngClass]="{ 'disabled-row': item.isLockAccount === true }"
         >
-          <th scope="row" class="text-center">1</th>
+          <th scope="row" class="text-center">{{ i + 1 }}</th>
           <td class="text-center">
-            <span>Trần Văn Lương</span>
+            <span>{{ item.name }}</span>
           </td>
           <td class="text-center">
-            <span>tranluong460@gmail.com</span>
+            <span>{{ item.email }}</span>
           </td>
           <td class="text-center">
-            <span>0367370371</span>
+            <span>{{ item.phone }}</span>
           </td>
-          <td>
-            <span> Đại Mão - Đại Thành - Hiệp Hòa - Bắc Giang </span>
+          <td class="text-center">
+            <span>{{ item.address }}</span>
           </td>
           <td class="text-center md:table-cell hidden">
             <span>*********</span>
@@ -47,6 +48,7 @@
                 class="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#bandUser"
+                (click)="lockAccount(item._id)"
               >
                 <span>Khóa tài khoản</span>
               </button>
@@ -68,7 +70,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Khóa tài khoản</h4>
+        <h4 class="modal-title">Khóa tài khoản: {{ user?.email }}</h4>
         <button
           type="button"
           class="btn-close"
@@ -87,8 +89,8 @@
             [(ngModel)]="selectedValue"
           >
             <!-- <option selected>Chọn trạng thái</option> -->
-            <option value="3 ngày">3 ngày</option>
-            <option value="7 ngày">7 ngày</option>
+            <!-- <option value="3 ngày">3 ngày</option>
+            <option value="7 ngày">7 ngày</option> -->
             <option value="Vĩnh viễn">Vĩnh viễn</option>
           </select>
         </div>
@@ -99,7 +101,7 @@
         <button
           type="button"
           class="btn btn-primary"
-          (click)="onSubmit()"
+          (click)="onSubmit(user?._id)"
           data-bs-toggle="modal"
           data-bs-target="#alert"
         >

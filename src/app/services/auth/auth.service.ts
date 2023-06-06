@@ -14,9 +14,25 @@ import {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  // getUser(): Observable<any> {
-  //   return this.http.get('http://localhost:8080/user');
-  // }
+  getUser(): Observable<any> {
+    return this.http.get<any[]>('http://localhost:8080/user');
+  }
+
+  getOneUser(id: any): Observable<any> {
+    return this.http.get<any[]>(`http://localhost:8080/user/${id}`);
+  }
+
+  lockAccount(id: any): Observable<any> {
+    return this.http.post<any>(
+      `http://localhost:8080/lockAccount/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
+    );
+  }
 
   login(data: ILoginUser): Observable<any> {
     return this.http.post<ILoginUser>('http://localhost:8080/login', data);
