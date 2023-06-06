@@ -42,6 +42,65 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const getOneUser = async (req, res) => {
+  try {
+    // Lấy thông tin người dùng từ cơ sở dữ liệu
+    const users = await User.findById(req.params.id);
+
+    // Kiểm tra xem có người dùng không
+    if (!users) {
+      return res.status(200).json({
+        message: "Không tìm thấy người dùng",
+      });
+    }
+
+    // Loại bỏ trường mật khẩu khỏi đối tượng người dùng
+    const { password, ...userWithoutPassword } = users.toObject();
+
+    // Trả về thông tin người dùng không bao gồm thông tin mật khẩu
+    return res.status(200).json({
+      message: "Thông tin người dùng",
+      userWithoutPassword,
+    });
+  } catch (err) {
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi xảy ra trong quá trình lấy thông tin
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi lấy thông tin người dùng",
+    });
+  }
+};
+
+// Khóa tài khoản
+export const lockAccount = async (req, res) => {
+  try {
+    // Kiểm tra xem người dùng có tồn tại hay không
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({
+        message: "Không tìm thấy người dùng",
+      });
+    }
+
+    // Cập nhật trạng thái người dùng
+    user.isLockAccount = true;
+    await user.save();
+
+    return res.status(200).json({
+      message: "Khóa tài khoản thành công",
+      user,
+    });
+  } catch (err) {
+    console.log(err);
+
+    // Nếu có lỗi trong quá trình xử lý, trả về thông báo lỗi cho client
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
+    });
+  }
+};
+
 // Hàm đăng nhập
 export const login = async (req, res) => {
   try {
