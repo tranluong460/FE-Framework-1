@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { Router } from '@angular/router';
+
 // import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-detail',
@@ -29,7 +32,9 @@ export class ProductDetailComponent {
     private productService: ProductsService,
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService // private _snackBar: MatSnackBar
+    private commentsService: CommentsService, // private _snackBar: MatSnackBar
+    private cartService: CartService,
+    private navigate: Router
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -60,6 +65,10 @@ export class ProductDetailComponent {
     );
   }
 
+  addCart(item: any) {
+    this.cartService.addToCart(item)
+    this.navigate.navigate(['/cart']);
+  }
   // openSnackBar() {
   //   this._snackBar.open(this.errorMessage, 'Đóng', {
   //     duration: 3000,

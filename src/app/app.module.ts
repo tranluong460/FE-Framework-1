@@ -94,4 +94,4 @@ import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -9,16 +9,18 @@
         class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
       >
         <img
-          src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          src="{{ item.product.images[0].base_url }}"
           alt="product-image"
           class="w-full rounded-lg sm:w-40"
         />
         <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
           <div class="mt-5 sm:mt-0">
             <h2 class="text-lg font-bold text-gray-900">
-              Apple IPad 10.2-Inch (9th Gen) Wi-Fi, 2021
+              {{ item.product.name }}
             </h2>
-            <p class="mt-1 text-xs text-gray-700">36EU - 4US</p>
+            <p class="mt-1 text-xs text-gray-700">
+              {{ item.product.brand.slug }}
+            </p>
           </div>
           <div
             class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6"
@@ -26,23 +28,24 @@
             <div class="flex items-center border-gray-100">
               <span
                 class="cursor-pointer rounded-l bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                (click)="onDecrea(item.product.id)"
               >
                 -
               </span>
               <input
                 class="h-8 w-8 border bg-white text-center text-xs outline-none"
                 type="text"
-                value="2"
-                min="1"
+                value="{{ item.quantity }}"
               />
               <span
                 class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                (click)="onIncrea(item.product.id)"
               >
                 +
               </span>
             </div>
             <div class="flex items-center space-x-4">
-              <p class="text-sm">7.190.000đ</p>
+              <p class="text-sm">{{ price }}đ</p>
             </div>
           </div>
         </div>
@@ -55,6 +58,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
+            (click)="removeCart(item)"
           >
             <path
               stroke-linecap="round"
@@ -71,7 +75,7 @@
     >
       <div class="mb-2 flex justify-between">
         <p class="text-gray-700">Tổng phụ</p>
-        <p class="text-gray-700">7.190.000đ</p>
+        <p class="text-gray-700">{{ sumPrice }}đ</p>
       </div>
       <div class="flex justify-between">
         <p class="text-gray-700">Phí vận chuyển</p>
@@ -81,7 +85,7 @@
       <div class="flex justify-between">
         <p class="text-lg font-bold">Tổng</p>
         <div class="">
-          <p class="mb-1 text-lg font-bold">14.000.000đ</p>
+          <p class="mb-1 text-lg font-bold">{{ payPrice }}đ</p>
           <!-- <p class="text-sm text-gray-700">including VAT</p> -->
         </div>
       </div>
