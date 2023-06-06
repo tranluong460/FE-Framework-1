@@ -16,12 +16,16 @@ export class AdminUserComponent {
   p: number = 1;
 
   onSubmit(id: any) {
-    this.authService.lockAccount(id).subscribe((data) => {});
+    this.authService.lockAccount(id).subscribe((data) => {
+      this.authService.getUser().subscribe((data) => {
+        this.users = data.usersWithoutPassword;
+      });
+    });
   }
 
   constructor(private authService: AuthService) {
     this.authService.getUser().subscribe((data) => {
-      this.users = data.usersWithoutPassword;
+      // this.users = data.usersWithoutPassword;
     });
   }
 
