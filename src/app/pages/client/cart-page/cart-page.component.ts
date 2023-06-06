@@ -6,9 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart-page.component.css'],
 })
 export class CartPageComponent {
-  items: any[];
+  items: any;
 
   constructor() {
-    this.items = Array(2).fill(0);
+    const cart: any = sessionStorage.getItem('cart');
+    this.items = JSON.parse(cart)
   }
 }

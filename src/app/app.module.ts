@@ -96,4 +96,4 @@ import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
