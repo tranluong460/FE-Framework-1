@@ -33,24 +33,24 @@
         "
       >
         <tr class="text-center">
-          <th scope="row">1</th>
+          <th scope="row">{{ i + 1 }}</th>
           <td>
-            <span>Apple iPad mini (6th Gen) Wi-Fi, 2021</span>
+            <span>{{ item.name }}</span>
           </td>
           <td>
-            <span>12.650.000đ</span>
+            <span>{{ item.price }}đ</span>
           </td>
           <td class="md:table-cell hidden">
-            <span>14.990.000đ</span>
+            <span>{{ item.original_price }}đ</span>
           </td>
           <td>
-            <span>Apple</span>
+            <span>{{ item.brand?.slug }}</span>
           </td>
           <td class="md:hidden table-cell">
             <button
-              type="submit"
               data-bs-toggle="modal"
               data-bs-target="#detail_prod"
+              (click)="getItemById(item.id)"
             >
               Xem
             </button>
@@ -85,7 +85,7 @@
           </td>
           <td class="md:table-cell hidden">
             <img
-              src="https://thuthuatnhanh.com/wp-content/uploads/2023/03/hinh-anh-cuc-tinh-y.jpg"
+              src="{{item.images?.[0].base_url}}"
               alt="product"
               class="w-[100px] h-[100px]"
             />
@@ -122,7 +122,7 @@
 <div class="modal" id="short_description">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">Mô tả ngắn</div>
+      <div class="modal-body">{{ product?.short_description }}</div>
     </div>
   </div>
 </div>
