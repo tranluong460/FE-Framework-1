@@ -23,15 +23,17 @@
         "
       >
         <tr>
-          <th scope="row" class="text-center">1</th>
+          <th scope="row" class="text-center">{{i+1}}</th>
           <td class="text-center">
-            <span>Lương</span>
+            <span>
+              {{item.user.name}}
+            </span>
           </td>
           <td class="text-center">
-            <span>Sản phẩm rất tốt</span>
+            <span>{{item.content}}</span>
           </td>
           <td class="text-center">
-            <span>10/02</span>
+            <span>{{item.createdAt}}</span>
           </td>
           <td>
             <div class="flex gap-1 justify-center">
