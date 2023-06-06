@@ -25,7 +25,7 @@ export class AdminUserComponent {
 
   constructor(private authService: AuthService) {
     this.authService.getUser().subscribe((data) => {
-      this.users = data.usersWithoutPassword;
+      // this.users = data.usersWithoutPassword;
     });
   }
 

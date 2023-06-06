@@ -5,63 +5,75 @@
     </div>
   </div>
 
-  <div class="table-responsive p-3">
-    <table class="table table-hover">
-      <thead class="text-center">
-        <tr>
-          <th scope="col" class="md:w-screen">STT</th>
-          <th scope="col" class="md:w-screen">Tên người dùng</th>
-          <th scope="col" class="md:w-screen">Email</th>
-          <th scope="col" class="md:w-screen">Số điện thoại</th>
-          <th scope="col" class="md:w-screen">Địa chỉ</th>
-          <th scope="col" class="md:w-screen md:table-cell hidden">Mật khẩu</th>
-          <th scope="col" class="md:w-screen">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let item of users | paginate : { itemsPerPage: 5, currentPage: p };
-            index as i
-          "
-          [ngClass]="{ 'disabled-row': item.isLockAccount === true }"
-        >
-          <th scope="row" class="text-center">{{ i + 1 }}</th>
-          <td class="text-center">
-            <span>{{ item.name }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.email }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.phone }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.address }}</span>
-          </td>
-          <td class="text-center md:table-cell hidden">
-            <span>*********</span>
-          </td>
-          <td>
-            <div class="flex gap-1 justify-center">
-              <button
-                class="btn btn-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#bandUser"
-                (click)="lockAccount(item._id)"
-              >
-                <span>Khóa tài khoản</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="users.length !== 0; else loadingContent">
+    <div class="table-responsive p-3">
+      <table class="table table-hover">
+        <thead class="text-center">
+          <tr>
+            <th scope="col" class="md:w-screen">STT</th>
+            <th scope="col" class="md:w-screen">Tên người dùng</th>
+            <th scope="col" class="md:w-screen">Email</th>
+            <th scope="col" class="md:w-screen">Số điện thoại</th>
+            <th scope="col" class="md:w-screen">Địa chỉ</th>
+            <th scope="col" class="md:w-screen md:table-cell hidden">
+              Mật khẩu
+            </th>
+            <th scope="col" class="md:w-screen">Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="
+              let item of users
+                | paginate : { itemsPerPage: 5, currentPage: p };
+              index as i
+            "
+            [ngClass]="{ 'disabled-row': item.isLockAccount === true }"
+          >
+            <th scope="row" class="text-center">{{ i + 1 }}</th>
+            <td class="text-center">
+              <span>{{ item.name }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.email }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.phone }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.address }}</span>
+            </td>
+            <td class="text-center md:table-cell hidden">
+              <span>*********</span>
+            </td>
+            <td>
+              <div class="flex gap-1 justify-center">
+                <button
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#bandUser"
+                  (click)="lockAccount(item._id)"
+                >
+                  <span>Khóa tài khoản</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex justify-end mr-5 mt-3">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 
-  <div class="flex justify-end mr-5 mt-3">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
+  <ng-template #loadingContent>
+    <div class="md:1 lg:2 xl:3">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
 
 <!-- The Modal -->
