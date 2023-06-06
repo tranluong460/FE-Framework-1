@@ -1,188 +1,232 @@
 <main role="main">
-    <div class="container mt-4">
-        <form class="needs-validation" name="frmthanhtoan" method="post" action="#">
-            <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
+  <div class="container mt-4">
+    <form class="needs-validation" name="frmthanhtoan" method="post" action="#">
+      <input type="hidden" name="kh_tendangnhap" value="dnpcuong" />
 
-            <div class="py-5 text-center">
-                <i class="fa fa-credit-card fa-4x" aria-hidden="true" style="margin-bottom: 50px;"></i>
-                <h2>Thanh toán</h2>
-                <p class="lead">Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi Đặt hàng.</p>
+      <div class="py-5 text-center">
+        <i
+          class="fa fa-credit-card fa-4x"
+          aria-hidden="true"
+          style="margin-bottom: 50px"
+        ></i>
+        <h2>Thanh toán</h2>
+        <p class="lead">
+          Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi
+          Đặt hàng.
+        </p>
+      </div>
+
+      <div class="row" style="margin-right: 60px">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span>Giỏ hàng : 2 Sản Phẩm</span>
+            <span class="badge badge-secondary badge-pill">2</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2" />
+            <input
+              type="hidden"
+              name="sanphamgiohang[1][gia]"
+              value="11800000.00"
+            />
+            <input type="hidden" name="sanphamgiohang[1][soluong]" value="2" />
+
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <tbody>
+                <tr class="product">
+                  <td class="product__image">
+                    <div class="product-thumbnail">
+                      <div class="product-thumbnail__wrapper" data-tg-static="">
+                        <img
+                          src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/googleshoppingsonduongmediheal.jpg?v=1678198704733"
+                          alt=""
+                          class="product-thumbnail__image"
+                        />
+                      </div>
+                      <span class="product-thumbnail__quantity"></span>
+                    </div>
+                  </td>
+                  <th class="product__description">
+                    <span class="product__description__name text-muted">
+                      Son Dưỡng Mediheal Hỗ Trợ Giảm Thâm Môi Ban Ngày 10ml
+                    </span>
+                  </th>
+                  <td class="product__quantity visually-hidden">
+                    <em>Số lượng:</em> 3
+                  </td>
+                  <td class="product__price">186.000₫</td>
+                </tr>
+              </tbody>
+            </li>
+            <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4" />
+            <input
+              type="hidden"
+              name="sanphamgiohang[2][gia]"
+              value="14990000.00"
+            />
+            <input type="hidden" name="sanphamgiohang[2][soluong]" value="8" />
+
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <tbody>
+                <tr class="product">
+                  <td class="product__image">
+                    <div class="product-thumbnail">
+                      <div class="product-thumbnail__wrapper" data-tg-static="">
+                        <img
+                          src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/12a7837c0c1e8408db7234f27b403b.jpg?v=1678198705697"
+                          alt=""
+                          class="product-thumbnail__image"
+                        />
+                      </div>
+                      <span class="product-thumbnail__quantity"> </span>
+                    </div>
+                  </td>
+                  <th class="product__description">
+                    <span class="product__description__name text-muted">
+                      Son Kem Lì Black Rouge A04 Rasberry Syrup Đỏ Cherry 4.5g
+                    </span>
+
+                    <span class="product__description__property"> </span>
+                  </th>
+                  <td class="product__quantity visually-hidden">
+                    <em>Số lượng:</em> 1
+                  </td>
+                  <td class="product__price">189.000₫</td>
+                </tr>
+              </tbody>
+            </li>
+          </ul>
+
+          <div>
+            <label for="">
+              <h5>Vận chuyển</h5>
+            </label>
+            <select
+              name=""
+              id=""
+              class="form-control"
+              placeholder=""
+              role="presentation"
+            >
+              <option value="" class="from-control">Hoả tốc</option>
+              <option value="" class="from-control">Ship thường</option>
+            </select>
+          </div>
+          <div>
+            <h5>Phương thức thanh toán</h5>
+            <input type="radio" />Thanh toán COD
+            <input type="radio" style="margin-left: 50px" />Thanh toán thẻ ngân
+            hàng
+          </div>
+          <div>
+            <tr>
+              <th>Tạm tính:</th>
+              <td style="padding-left: 240px">365.000₫</td>
+            </tr>
+
+            <tr>
+              <th>Phí VC:</th>
+              <td style="padding-left: 250px">40.000₫</td>
+            </tr>
+          </div>
+
+          <hr />
+          <div>
+            <tr>
+              <th>Tổng:</th>
+              <td style="padding-left: 270px">405.000₫</td>
+            </tr>
+          </div>
+          <button
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+            name="btnDatHang"
+            style="margin-top: 50px"
+          >
+            Đặt hàng
+          </button>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Thông tin khách hàng</h4>
+
+          <div class="row">
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_ten">Họ tên</label>
+              <input
+                type="text"
+                value="{{ user.name }}"
+                class="form-control"
+                name="kh_ten"
+                id="kh_ten"
+                placeholder="Họ và tên "
+              />
+            </div>
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_email">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="kh_email"
+                id="kh_email"
+                value="{{ user.email }}"
+                placeholder="Email "
+              />
+            </div>
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_diachi">Địa chỉ</label>
+              <input
+                type="text"
+                class="form-control"
+                name="kh_diachi"
+                id="kh_diachi"
+                placeholder="Địa chỉ  "
+                value="{{ user.address }}"
+              />
             </div>
 
-            <div class="row" style="margin-right: 60px;">
-                <div class="col-md-4 order-md-2 mb-4">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span>Giỏ hàng : 2 Sản Phẩm</span>
-                        <span class="badge badge-secondary badge-pill">2</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2">
-                        <input type="hidden" name="sanphamgiohang[1][gia]" value="11800000.00">
-                        <input type="hidden" name="sanphamgiohang[1][soluong]" value="2">
-
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <tbody>
-
-                                <tr class="product">
-                                    <td class="product__image">
-                                        <div class="product-thumbnail">
-                                            <div class="product-thumbnail__wrapper" data-tg-static="">
-                                                <img src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/googleshoppingsonduongmediheal.jpg?v=1678198704733"
-                                                    alt="" class="product-thumbnail__image">
-                                            </div>
-                                            <span class="product-thumbnail__quantity"></span>
-                                        </div>
-                                    </td>
-                                    <th class="product__description">
-                                        <span class="product__description__name text-muted">
-                                            Son Dưỡng Mediheal Hỗ Trợ Giảm Thâm Môi Ban Ngày 10ml
-                                        </span>
-
-
-                                    </th>
-                                    <td class="product__quantity visually-hidden"><em>Số lượng:</em> 3</td>
-                                    <td class="product__price">
-
-                                        186.000₫
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-
-
-                        </li>
-                        <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4">
-                        <input type="hidden" name="sanphamgiohang[2][gia]" value="14990000.00">
-                        <input type="hidden" name="sanphamgiohang[2][soluong]" value="8">
-
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <tbody>
-
-                                <tr class="product">
-                                    <td class="product__image">
-                                        <div class="product-thumbnail">
-                                            <div class="product-thumbnail__wrapper" data-tg-static="">
-                                                <img src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/12a7837c0c1e8408db7234f27b403b.jpg?v=1678198705697"
-                                                    alt="" class="product-thumbnail__image">
-                                            </div>
-                                            <span class="product-thumbnail__quantity"> </span>
-                                        </div>
-                                    </td>
-                                    <th class="product__description">
-                                        <span class="product__description__name text-muted">
-                                            Son Kem Lì Black Rouge A04 Rasberry Syrup Đỏ Cherry 4.5g
-                                        </span>
-
-                                        <span class="product__description__property">
-
-                                        </span>
-
-
-                                    </th>
-                                    <td class="product__quantity visually-hidden"><em>Số lượng:</em> 1</td>
-                                    <td class="product__price">
-
-                                        189.000₫
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </li>
-                    </ul>
-
-                    <div>
-                        <label for="">
-                            <h5>Vận chuyển</h5>
-                        </label>
-                        <select name="" id="" class="form-control" placeholder="" role="presentation">
-                            <option value="" class="from-control">Hoả tốc</option>
-                            <option value="" class="from-control">Ship thường</option>
-
-                        </select>
-                    </div>
-                    <div>
-                        <h5>Phương thức thanh toán</h5>
-                        <input type="radio">Thanh toán COD
-                        <input type="radio" style="margin-left: 50px;">Thanh toán thẻ ngân hàng
-                    </div>
-                    <div>
-                        <tr>
-                            <th>Tạm tính:</th>
-                            <td style="padding-left: 240px;">365.000₫</td>
-                        </tr>
-
-                        <tr>
-                            <th>Phí VC:</th>
-                            <td style="padding-left: 250px;">40.000₫</td>
-                        </tr>
-                    </div>
-
-                    <hr>
-                    <div>
-                        <tr>
-                            <th>Tổng:</th>
-                            <td style="padding-left: 270px;">405.000₫</td>
-                        </tr>
-                    </div>
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnDatHang"
-                        style="margin-top: 50px;">Đặt
-                        hàng</button>
-
-                </div>
-                <div class="col-md-8 order-md-1">
-                    <h4 class="mb-3">Thông tin khách hàng</h4>
-
-                    <div class="row">
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_ten">Họ tên</label>
-                            <input type="text" class="form-control" name="kh_ten" id="kh_ten" placeholder="Họ và tên ">
-                        </div>
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_email">Email</label>
-                            <input type="text" class="form-control" name="kh_email" id="kh_email" placeholder="Email ">
-                        </div>
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_diachi">Địa chỉ</label>
-                            <input type="text" class="form-control" name="kh_diachi" id="kh_diachi"
-                                placeholder="Địa chỉ  ">
-                        </div>
-
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_dienthoai">Điện thoại</label>
-                            <input type="text" class="form-control" name="kh_dienthoai" id="kh_dienthoai"
-                                placeholder="Số điện thoại ">
-                        </div>
-
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_ngaysinh">Thành phố</label>
-                            <select name="" id="" class="form-control" placeholder="Thành phố" role="presentation">
-
-                                <option value=""></option>
-                                <option value="" class="from-control">Hà Nội</option>
-                                <option value="" class="from-control">Huế</option>
-                                <option value="" class="from-control">Bắc Giang</option>
-                                <option value="" class="from-control">Bắc Ninh</option>
-                                <option value="" class="from-control">Hà Nam</option>
-                                <option value="" class="from-control">TP Hồ Chí Minh</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12" style="width: 500px;">
-                            <label for="kh_cmnd">Ghi chú</label>
-                            <textarea name="" id="" cols="30" rows="10" class="form-control">
-
-                            </textarea>
-                        </div>
-                    </div>
-                    <br>
-
-
-
-                </div>
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_dienthoai">Điện thoại</label>
+              <input
+                type="text"
+                class="form-control"
+                name="kh_dienthoai"
+                id="kh_dienthoai"
+                placeholder="Số điện thoại "
+                value="{{ user.phone }}"
+              />
             </div>
-        </form>
 
-    </div>
-
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_ngaysinh">Thành phố</label>
+              <select
+                name=""
+                id=""
+                class="form-control"
+                placeholder="Thành phố"
+                role="presentation"
+              >
+                <option value=""></option>
+                <option value="" class="from-control">Hà Nội</option>
+                <option value="" class="from-control">Huế</option>
+                <option value="" class="from-control">Bắc Giang</option>
+                <option value="" class="from-control">Bắc Ninh</option>
+                <option value="" class="from-control">Hà Nam</option>
+                <option value="" class="from-control">TP Hồ Chí Minh</option>
+              </select>
+            </div>
+            <div class="col-md-12" style="width: 500px">
+              <label for="kh_cmnd">Ghi chú</label>
+              <textarea name="" id="" cols="30" rows="10" class="form-control">
+              </textarea>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </form>
+  </div>
 </main>
