@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { Router } from '@angular/router';
+
 // import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +20,12 @@ export class ProductDetailComponent {
   activeTab: number = 0;
   errorMessage: any;
 
+  cart: any = {
+    user: "",
+    products: [],
+    totalPrice: 0
+  }
+
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],
   });
@@ -29,7 +38,9 @@ export class ProductDetailComponent {
     private productService: ProductsService,
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService // private _snackBar: MatSnackBar
+    private commentsService: CommentsService, // private _snackBar: MatSnackBar
+    private cartService: CartService,
+    private navigate: Router
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -66,4 +77,28 @@ export class ProductDetailComponent {
   //     verticalPosition: 'top',
   //   });
   // }
+
+  addToCart(product: any) {
+    const cartData = sessionStorage.getItem("cart");
+    this.cart = cartData ? JSON.parse(cartData) : sessionStorage.setItem("cart", JSON.stringify(this.cart))
+
+    const checkProduct = this.cart.products.findIndex((prod: any) => prod.product._id === product._id
+    )
+
+    if (checkProduct !== -1) {
+      this.cart.products[checkProduct].quantity += 1
+    }
+    else {
+      const newProduct = {
+        "product": product,
+        "quantity": 1
+      }
+
+      this.cart.products.push(newProduct);
+    }
+
+    this.cart.totalPrice += product.price;
+
+    sessionStorage.setItem("cart", JSON.stringify(this.cart));
+  }
 }
