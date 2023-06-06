@@ -12,7 +12,7 @@ dotenv.config();
 export const getAll = async (req, res) => {
   try {
     // Lấy danh sách dữ liệu từ cơ sở dữ liệu
-    const data = await Comment.find();
+    const data = await Comment.find().populate("user");
 
     // Kiểm tra xem có dữ liệu nào không
     if (!data || data.length === 0) {
