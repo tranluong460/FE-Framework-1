@@ -21,7 +21,7 @@ export class SignInComponent {
     private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   routers() {
     this.router.navigate(['/auth/signUp']);
@@ -39,6 +39,7 @@ export class SignInComponent {
 
         this.errorMessage = response.message;
         localStorage.setItem('token', response.accessToken);
+        localStorage.setItem('user', JSON.stringify(response.user));
         this.router.navigate(['/']);
       },
       (error) => {
