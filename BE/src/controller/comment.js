@@ -9,6 +9,33 @@ import { commentSchema } from "../validate/comment";
 
 dotenv.config();
 
+export const getAll = async (req, res) => {
+  try {
+    // Lấy danh sách dữ liệu từ cơ sở dữ liệu
+    const data = await Comment.find();
+
+    // Kiểm tra xem có dữ liệu nào không
+    if (!data || data.length === 0) {
+      return res.status(200).json({
+        message: "Không có dữ liệu",
+      });
+    }
+
+    // Trả về danh sách dữ liệu và thông báo thành công
+    return res.status(200).json({
+      message: "Danh sách bình luận",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi xảy ra trong quá trình lấy danh sách
+    return res.status(500).json({
+      message: "Lỗi khi lấy danh sách bình luận",
+    });
+  }
+};
+
 const create = async (req, res) => {
   try {
     // Kiểm tra token từ header của request
