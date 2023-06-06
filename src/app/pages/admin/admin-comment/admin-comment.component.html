@@ -1,0 +1,112 @@
+<div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-screen">
+  <div class="text-center">
+    <div class="p-3 text-2xl text-black">
+      <h3 class="font-bold pl-2">Quản lý bình luận</h3>
+    </div>
+  </div>
+
+  <div class="table-responsive p-3 md:w-full w-screen">
+    <table class="table table-hover">
+      <thead class="text-center">
+        <tr>
+          <th scope="col" class="md:w-screen">STT</th>
+          <th scope="col" class="md:w-screen">Người bình luận</th>
+          <th scope="col" class="md:w-screen">Nội dung</th>
+          <th scope="col" class="md:w-screen">Ngày bình luận</th>
+          <th scope="col" class="md:w-screen">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody
+        *ngFor="
+          let item of comments | paginate : { itemsPerPage: 8, currentPage: p };
+          index as i
+        "
+      >
+        <tr>
+          <th scope="row" class="text-center">1</th>
+          <td class="text-center">
+            <span>Lương</span>
+          </td>
+          <td class="text-center">
+            <span>Sản phẩm rất tốt</span>
+          </td>
+          <td class="text-center">
+            <span>10/02</span>
+          </td>
+          <td>
+            <div class="flex gap-1 justify-center">
+              <button
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#delete_cmt"
+              >
+                <span>Xóa</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex justify-end mr-5 mt-3">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+<!-- The Modal Delete Comment -->
+<div class="modal" id="delete_cmt">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Xóa bình luận</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>Chi tiết bình luận muốn xóa</form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#delete_success"
+        >
+          <span>Đồng ý</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Delete Category Success -->
+<div class="modal" id="delete_success">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <span>Xóa bình luận thành công!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

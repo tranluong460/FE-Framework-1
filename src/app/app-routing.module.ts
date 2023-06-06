@@ -23,6 +23,7 @@ import { IntroducePageComponent } from './pages/client/introduce-page/introduce-
 import { ContactPageComponent } from './pages/client/contact-page/contact-page.component';
 import { AdminCategoryComponent } from './pages/admin/admin-category/admin-category.component';
 import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
+import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
       { path: 'products', component: AdminProductComponent },
       { path: 'users', component: AdminUserComponent },
       { path: 'categories', component: AdminCategoryComponent },
+      { path: 'comments', component: AdminCommentComponent },
       { path: 'orders', component: AdminOrderComponent },
     ],
   },
