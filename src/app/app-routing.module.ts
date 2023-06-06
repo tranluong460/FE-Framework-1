@@ -24,6 +24,7 @@ import { ContactPageComponent } from './pages/client/contact-page/contact-page.c
 import { AdminCategoryComponent } from './pages/admin/admin-category/admin-category.component';
 import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
 import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
+import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'categories', component: AdminCategoryComponent },
       { path: 'comments', component: AdminCommentComponent },
       { path: 'orders', component: AdminOrderComponent },
+      { path: 'contacts', component: AdminContactComponent },
     ],
   },
 
