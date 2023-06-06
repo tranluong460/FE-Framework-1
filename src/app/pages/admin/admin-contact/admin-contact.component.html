@@ -5,81 +5,78 @@
     </div>
   </div>
 
-  <div class="table-responsive p-3 md:w-full w-screen">
-    <table class="table table-hover">
-      <thead class="text-center">
-        <tr>
-          <th scope="col" class="md:w-screen">STT</th>
-          <th scope="col" class="md:w-screen">Người phản hồi</th>
-          <th scope="col" class="md:w-screen">Email</th>
-          <th scope="col" class="md:w-screen">Số điện thoại</th>
-          <th scope="col" class="md:w-screen">Địa chỉ</th>
-          <th scope="col" class="md:w-screen">Ngày phản hồi</th>
-          <th scope="col" class="md:w-screen">Nội dung</th>
-          <th scope="col" class="md:w-screen">Thao tác</th>
-        </tr>
-      </thead>
-      <tbody
-        *ngFor="
-          let item of contacts | paginate : { itemsPerPage: 8, currentPage: p };
-          index as i
-        "
-      >
-        <tr>
-          <th scope="row" class="text-center">{{ i + 1 }}</th>
-          <td class="text-center">
-            <span>{{ item.name }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.email }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.phone }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.address }}</span>
-          </td>
-          <td class="text-center">
-            <span>{{ item.createdAt }}</span>
-          </td>
-          <td class="text-center">
-            <span>
-              <button
-                type="submit"
-                data-bs-toggle="modal"
-                data-bs-target="#content"
-                (click)="show(item._id)"
-              >
-                Xem
-              </button>
-            </span>
-          </td>
-          <td>
-            <div class="flex gap-1 justify-center">
-              <button
-                class="btn btn-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#delete_contact"
-              >
-                <span>Xóa</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="contacts.length !== 0; else loadingContent">
+    <div class="table-responsive p-3 md:w-full w-screen">
+      <table class="table table-hover">
+        <thead class="text-center">
+          <tr>
+            <th scope="col" class="md:w-screen">STT</th>
+            <th scope="col" class="md:w-screen">Người phản hồi</th>
+            <th scope="col" class="md:w-screen">Email</th>
+            <th scope="col" class="md:w-screen">Số điện thoại</th>
+            <th scope="col" class="md:w-screen">Địa chỉ</th>
+            <th scope="col" class="md:w-screen">Ngày phản hồi</th>
+            <th scope="col" class="md:w-screen">Nội dung</th>
+          </tr>
+        </thead>
+        <tbody
+          *ngFor="
+            let item of contacts
+              | paginate : { itemsPerPage: 8, currentPage: p };
+            index as i
+          "
+        >
+          <tr>
+            <th scope="row" class="text-center">{{ i + 1 }}</th>
+            <td class="text-center">
+              <span>{{ item.name }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.email }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.phone }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.address }}</span>
+            </td>
+            <td class="text-center">
+              <span>{{ item.createdAt }}</span>
+            </td>
+            <td class="text-center">
+              <span>
+                <button
+                  type="submit"
+                  data-bs-toggle="modal"
+                  data-bs-target="#content"
+                  (click)="show(item._id)"
+                >
+                  Xem
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex justify-end mr-5 mt-3">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </div>
 
-  <div class="flex justify-end mr-5 mt-3">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
+  <ng-template #loadingContent>
+    <div class="md:1 lg:2 xl:3">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
 
 <!-- The Modal Content -->
 <div class="modal" id="content">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">{{ contact.content }}</div>
+      <div class="modal-body">{{ contact?.content }}</div>
     </div>
   </div>
 </div>

@@ -7,18 +7,14 @@ import { CommentsService } from '../../../services/comments/comments.service';
   styleUrls: ['./admin-comment.component.css'],
 })
 export class AdminCommentComponent {
-  comments:any []=[];
+  comments: any[] = [];
 
   p: number = 1;
 
-  constructor( private commentsService: CommentsService
-    ) {
-    
-    this.commentsService.getAllComments().subscribe(cmt =>{
-      this.comments = cmt.data
+  constructor(private commentsService: CommentsService) {
+    this.commentsService.getAllComments().subscribe((cmt) => {
+      this.comments = cmt.data;
       console.log(cmt.data);
-      
-
-    })
-}
+    });
+  }
 }
