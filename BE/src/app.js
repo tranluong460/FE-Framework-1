@@ -9,6 +9,7 @@ import commentRouter from "./router/comment";
 import contactRouter from "./router/contact";
 import authRouter from "./router/auth";
 import forgotRouter from "./router/forgot";
+import verifyRouter from "./router/verify";
 
 import cors from "cors";
 
@@ -25,6 +26,7 @@ app.use("/order", orderRouter);
 app.use("/comment", commentRouter);
 app.use("/contact", contactRouter);
 app.use("/", forgotRouter);
+app.use("/", verifyRouter);
 app.use("/", authRouter);
 
 mongoose.connect(process.env.URI);

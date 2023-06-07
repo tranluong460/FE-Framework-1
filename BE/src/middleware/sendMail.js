@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { FormEmail } from "../component/formEmail";
+import { FormEmail, FormVerify } from "../component/formEmail";
 
 dotenv.config();
 
@@ -45,7 +45,26 @@ export const sendContact = async ({ name, email, content }) => {
     <p>Nếu bạn có bất kỳ yêu cầu hoặc câu hỏi nào khác, xin vui lòng liên hệ với chúng tôi. Chúng tôi luôn sẵn lòng hỗ trợ bạn.</p>
     <p>Một lần nữa, chúng tôi xin chân thành cảm ơn sự phản hồi của bạn. Sự hỗ trợ và đóng góp của bạn là điều quan trọng để chúng tôi có thể tiếp tục cung cấp dịch vụ tốt nhất cho người dùng.</p>
     <br>
-    <p>Trân trọng,</p>
+    <p>Trân trọng.</p>
   </div>`,
+  });
+};
+
+export const sendVerifyEmail = async (email, name, randomCode, verifyUrl) => {
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+      user: process.env.MAIL,
+      pass: process.env.PASS,
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: "bavuongnganhthuongcung4@gmail.com",
+    to: email,
+    subject: "Xác minh tài khoản",
+    text: "Chào bạn, " + email,
+    html: `${FormVerify(name, email, randomCode, verifyUrl)}`,
   });
 };
