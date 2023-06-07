@@ -19,7 +19,7 @@
       <div class="row" style="margin-right: 60px">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Giỏ hàng : 2 Sản Phẩm</span>
+            <span>Giỏ hàng : {{ cart.products.length }} Sản Phẩm</span>
             <span class="badge badge-secondary badge-pill">2</span>
           </h4>
           <ul class="list-group mb-3">
@@ -35,29 +35,34 @@
               class="list-group-item d-flex justify-content-between lh-condensed"
             >
               <tbody>
-                <tr class="product">
-                  <td class="product__image">
-                    <div class="product-thumbnail">
-                      <div class="product-thumbnail__wrapper" data-tg-static="">
-                        <img
-                          src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/googleshoppingsonduongmediheal.jpg?v=1678198704733"
-                          alt=""
-                          class="product-thumbnail__image"
-                        />
+                <div>
+                  <tr class="product" *ngFor="let item of cart.products">
+                    <td class="product__image">
+                      <div class="product-thumbnail">
+                        <div
+                          class="product-thumbnail__wrapper"
+                          data-tg-static=""
+                        >
+                          <img
+                            src="{{item.product.images?.[0].base_url}}"
+                            alt=""
+                            class="product-thumbnail__image"
+                          />
+                        </div>
+                        <span class="product-thumbnail__quantity"></span>
                       </div>
-                      <span class="product-thumbnail__quantity"></span>
-                    </div>
-                  </td>
-                  <th class="product__description">
-                    <span class="product__description__name text-muted">
-                      Son Dưỡng Mediheal Hỗ Trợ Giảm Thâm Môi Ban Ngày 10ml
-                    </span>
-                  </th>
-                  <td class="product__quantity visually-hidden">
-                    <em>Số lượng:</em> 3
-                  </td>
-                  <td class="product__price">186.000₫</td>
-                </tr>
+                    </td>
+                    <th class="product__description">
+                      <span class="product__description__name text-muted">
+                        {{ item.product.name }}
+                      </span>
+                    </th>
+                    <td class="product__quantity visually-hidden">
+                      <em>Số lượng:</em> {{ item.quantity }}
+                    </td>
+                    <td class="product__price">{{ item.product.price }}₫</td>
+                  </tr>
+                </div>
               </tbody>
             </li>
             <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4" />
@@ -67,38 +72,6 @@
               value="14990000.00"
             />
             <input type="hidden" name="sanphamgiohang[2][soluong]" value="8" />
-
-            <li
-              class="list-group-item d-flex justify-content-between lh-condensed"
-            >
-              <tbody>
-                <tr class="product">
-                  <td class="product__image">
-                    <div class="product-thumbnail">
-                      <div class="product-thumbnail__wrapper" data-tg-static="">
-                        <img
-                          src="//bizweb.dktcdn.net/thumb/thumb/100/479/848/products/12a7837c0c1e8408db7234f27b403b.jpg?v=1678198705697"
-                          alt=""
-                          class="product-thumbnail__image"
-                        />
-                      </div>
-                      <span class="product-thumbnail__quantity"> </span>
-                    </div>
-                  </td>
-                  <th class="product__description">
-                    <span class="product__description__name text-muted">
-                      Son Kem Lì Black Rouge A04 Rasberry Syrup Đỏ Cherry 4.5g
-                    </span>
-
-                    <span class="product__description__property"> </span>
-                  </th>
-                  <td class="product__quantity visually-hidden">
-                    <em>Số lượng:</em> 1
-                  </td>
-                  <td class="product__price">189.000₫</td>
-                </tr>
-              </tbody>
-            </li>
           </ul>
 
           <div>
@@ -125,12 +98,12 @@
           <div>
             <tr>
               <th>Tạm tính:</th>
-              <td style="padding-left: 240px">365.000₫</td>
+              <td style="padding-left: 240px">{{ cart.totalPrice }}₫</td>
             </tr>
 
             <tr>
               <th>Phí VC:</th>
-              <td style="padding-left: 250px">40.000₫</td>
+              <td style="padding-left: 250px">50000₫</td>
             </tr>
           </div>
 
@@ -138,7 +111,9 @@
           <div>
             <tr>
               <th>Tổng:</th>
-              <td style="padding-left: 270px">405.000₫</td>
+              <td style="padding-left: 270px">
+                {{ cart.totalPrice + 50000 }}₫
+              </td>
             </tr>
           </div>
           <button
@@ -146,6 +121,7 @@
             type="submit"
             name="btnDatHang"
             style="margin-top: 50px"
+            (click)="onHandleSubmit()"
           >
             Đặt hàng
           </button>

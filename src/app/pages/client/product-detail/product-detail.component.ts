@@ -19,8 +19,11 @@ export class ProductDetailComponent {
   activeTab: number = 0;
   errorMessage: any;
 
+  info: any = localStorage.getItem('user');
+  user: any = JSON.parse(this.info);
+
   cart: any = {
-    user: '',
+    user: this.user?._id,
     products: [],
     totalPrice: 0,
   };
@@ -81,7 +84,7 @@ export class ProductDetailComponent {
     this.cart = cartData
       ? JSON.parse(cartData)
       : {
-          user: '',
+          user: this.user?._id,
           products: [],
           totalPrice: 0,
         };
