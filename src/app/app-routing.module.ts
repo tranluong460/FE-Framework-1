@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { HasRoleGuard } from './has-role.guard';
+
 import { BaseClientComponent } from './layouts/client/base-client/base-client.component';
 import { HomePageComponent } from './pages/client/home-page/home-page.component';
 import { ProductPageComponent } from './pages/client/product-page/product-page.component';
@@ -25,6 +27,7 @@ import { AdminCategoryComponent } from './pages/admin/admin-category/admin-categ
 import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.component';
 import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
+import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
 
 const routes: Routes = [
   {
@@ -59,6 +62,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: BaseAdminComponent,
+    canActivate: [HasRoleGuard],
+    data: {
+      role: 'admin',
+    },
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashBoardComponent },
@@ -69,6 +76,11 @@ const routes: Routes = [
       { path: 'orders', component: AdminOrderComponent },
       { path: 'contacts', component: AdminContactComponent },
     ],
+  },
+
+  {
+    path: 'unauthorized',
+    component: ErrorAdminPageComponent,
   },
 
   {

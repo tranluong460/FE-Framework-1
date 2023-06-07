@@ -45,6 +45,7 @@ import { NavAdminComponent } from './layouts/admin/nav-admin/nav-admin.component
 import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.component';
 import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
+import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact
     FooterAdminComponent,
     AdminCommentComponent,
     AdminContactComponent,
+    ErrorAdminPageComponent,
   ],
   imports: [
     BrowserModule,
