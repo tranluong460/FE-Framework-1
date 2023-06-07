@@ -36,17 +36,21 @@
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
           </div>
-          <p><b>Brand:</b> {{ product.brand.name }}</p>
+          <p><b>Brand:</b> {{ product.brand?.name }}</p>
           <p><b>Product Code:</b> Product 16</p>
           <p><b>Availability:</b> In Stock</p>
         </div>
         <div class="prices">
           <div class="price">
-            <del class="old-price">{{ product.original_price }}đ</del>
-            <span class="special-price">{{ product.price }}đ</span>
+            <del class="old-price"
+              >{{ product.original_price.toLocaleString() }}₫</del
+            >
+            <span class="special-price"
+              >{{ product.price.toLocaleString() }}₫</span
+            >
           </div>
           <div class="add-carts">
-            <button>Thêm vào giỏ hàng</button>
+            <button (click)="addToCart(product)">Thêm vào giỏ hàng</button>
           </div>
         </div>
       </div>
@@ -197,7 +201,7 @@
                   {{ item.name }}
                 </a>
               </h4>
-              <p class="product-price">{{ item.price }}đ</p>
+              <p class="product-price">{{ item.price.toLocaleString() }}₫</p>
             </div>
           </div>
         </div>

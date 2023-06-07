@@ -13,7 +13,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  items: any[];
+  items: any;
 
   constructor(
     private renderer: Renderer2,

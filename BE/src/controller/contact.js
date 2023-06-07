@@ -8,6 +8,60 @@ import { contactSchema } from "../validate/contact";
 
 dotenv.config();
 
+export const getAll = async (req, res) => {
+  try {
+    // Lấy danh sách dữ liệu từ cơ sở dữ liệu
+    const data = await Contact.find();
+
+    // Kiểm tra xem có dữ liệu nào không
+    if (!data || data.length === 0) {
+      return res.status(200).json({
+        message: "Không có dữ liệu",
+      });
+    }
+
+    // Trả về danh sách dữ liệu và thông báo thành công
+    return res.status(200).json({
+      message: "Danh sách phản hồi",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi xảy ra trong quá trình lấy danh sách
+    return res.status(500).json({
+      message: "Lỗi khi lấy danh sách phản hồi",
+    });
+  }
+};
+
+export const getOne = async (req, res) => {
+  try {
+    // Tìm kiếm một phản hồi dựa trên id được cung cấp
+    const data = await Contact.findById(req.params.id);
+
+    // Kiểm tra xem có dữ liệu nào không
+    if (!data) {
+      return res.status(404).json({
+        message: "Không tìm thấy phản hồi",
+      });
+    }
+
+    // Trả về thông tin phản hồi và thông báo thành công
+    return res.status(200).json({
+      message: "Thông tin phản hồi",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    // Trả về lỗi nếu có lỗi xảy ra trong quá trình lấy thông tin
+    return res.status(500).json({
+      message: "Lỗi khi lấy thông tin phản hồi",
+    });
+  }
+};
+
 const create = async (req, res) => {
   try {
     // Validate dữ liệu liên hệ

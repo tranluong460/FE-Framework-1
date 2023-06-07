@@ -39,7 +39,16 @@
     <button class="cart-icon">
       <a href="cart">
         <i class="fa fa-shopping-cart fa-lg"></i>
-        <span class="cart-total">0</span>
+        <span
+          class="cart-total"
+          *ngIf="cart && cart?.products && cart?.products.length"
+          >{{ cart?.products.length }}</span
+        >
+        <span
+          class="cart-total"
+          *ngIf="!cart || !cart?.products || !cart?.products.length"
+          >0</span
+        >
       </a>
     </button>
   </div>

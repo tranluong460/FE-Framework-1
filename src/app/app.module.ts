@@ -43,6 +43,9 @@ import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.compo
 import { HeaderAdminComponent } from './layouts/admin/header-admin/header-admin.component';
 import { NavAdminComponent } from './layouts/admin/nav-admin/nav-admin.component';
 import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.component';
+import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
+import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
+import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.
     HeaderAdminComponent,
     NavAdminComponent,
     FooterAdminComponent,
+    AdminCommentComponent,
+    AdminContactComponent,
+    ErrorAdminPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,4 +100,4 @@ import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
