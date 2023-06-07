@@ -21,7 +21,7 @@ export class SignInComponent {
     private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   routers() {
     this.router.navigate(['/auth/signUp']);

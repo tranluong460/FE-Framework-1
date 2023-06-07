@@ -1,109 +1,57 @@
-/* .header {
-  display: flex;
-  padding: 5vh;
-  gap: 20vh;
-  justify-content: center;
-} */
-
-.logo a img {
-  width: 20vh;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.menu {
-  display: flex;
-  font-weight: 600;
+.hero {
+  width: 100%;
+  height: 20vh;
+  background-color: #e6e6e6;
+  background-size: cover;
+  background-position: center;
 }
-.menu > ul > li {
-  list-style: none;
-  margin: 0 auto;
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+nav > ul > li {
+  list-style-type: none;
   display: inline-block;
-  padding: 0 30px;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  font-family: arvo;
-}
-.menu > ul > li > a {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-}
-.menu > ul > li > a:hover {
-  color: #3ca0e7;
-}
-.menu > ul > li:hover {
-  cursor: pointer;
-}
-.sub-menu-parent {
-  position: relative;
-}
-.sub-menu {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 100%;
-  padding-left: 0;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  transform: translateY(-2em);
-  z-index: 1;
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
-    z-index 0s linear 0.01s;
-  margin-top: 5px;
-}
-.sub-menu-parent:focus .sub-menu,
-.sub-menu-parent:focus-within .sub-menu,
-.sub-menu-parent:hover .sub-menu {
-  visibility: visible;
-  opacity: 1;
-  z-index: 1;
-  transform: translateY(0%);
-  transition-delay: 0s, 0s, 0.3s;
-  text-align: left;
-  padding-top: 10px;
-  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-.sub-menu > li {
-  clear: both;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 20px;
-  border-style: none;
-}
-.sub-menu > li > a {
-  text-decoration: none;
-  color: #000;
-  margin-left: 20px;
-  padding: 5px;
-  transition: all 0.5s ease;
-  font-size: 16px;
-  font-weight: 600;
-}
-.sub-menu > li > a:hover {
-  padding-left: 10px;
-  color: #3ca0e7;
-  border-left: 1px solid #3ca0e7;
-  transition: all 0.3s ease;
+  padding: 10px 20px;
+  transition: 0.4s;
 }
 
-.icon button {
-  margin-left: 3vh;
-}
-.icon button i {
-  font-size: 18px;
+nav > ul > li > a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.icon i:hover {
+nav > ul > li > a:hover {
   color: #3ca0e7;
 }
-.icon {
-  display: flex;
+
+button {
+  border: none;
+  padding: 15px 15px;
+  margin: 5px;
+  border-radius: 30px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  transition: 0.4s;
 }
-.icon a {
-  color: #000;
+
+button:hover {
+  color: red;
 }
+
 .cart-total {
   position: absolute;
   margin-left: 10px;
@@ -121,32 +69,41 @@
   border-radius: 50%;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    padding: 4vh;
-    gap: 15vh;
-    align-items: center;
-  }
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .logo a img {
-    width: 30vh;
-  }
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
-  .menu {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
-  .menu li a {
-    margin-left: 0;
-    margin-bottom: 10px;
-    margin-left: 10px;
-  }
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
-  .icon button {
-    margin-left: 10px;
-    margin-top: 10px;
-  }
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }
