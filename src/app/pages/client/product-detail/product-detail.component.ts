@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { NgClass, CurrencyPipe } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
 import { Router } from '@angular/router';
 
-// import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
+  providers: [CurrencyPipe],
 })
 export class ProductDetailComponent {
   product: any;
@@ -23,7 +23,7 @@ export class ProductDetailComponent {
   user: any = JSON.parse(this.info);
 
   cart: any = {
-    user: this.user?._id,
+    user: '',
     products: [],
     totalPrice: 0,
   };
@@ -40,8 +40,9 @@ export class ProductDetailComponent {
     private productService: ProductsService,
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService, // private _snackBar: MatSnackBar
-    private navigate: Router
+    private commentsService: CommentsService,
+    private navigate: Router,
+    private currencyPipe: CurrencyPipe
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -64,6 +65,14 @@ export class ProductDetailComponent {
       (response) => {
         console.log('Response', response);
         this.errorMessage = response.message;
+
+        this.router.paramMap.subscribe((params) => {
+          const id = params.get('id');
+          this.productService.getProduct(id).subscribe((product) => {
+            this.product = product.data;
+            this.comments = product.data.comments;
+          });
+        });
       },
       (error) => {
         console.log('Error', error);
@@ -72,14 +81,12 @@ export class ProductDetailComponent {
     );
   }
 
-  // openSnackBar() {
-  //   this._snackBar.open(this.errorMessage, 'Đóng', {
-  //     duration: 3000,
-  //     verticalPosition: 'top',
-  //   });
-  // }
-
   addToCart(product: any) {
+    if (!this.user) {
+      alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
+      return;
+    }
+
     const cartData = sessionStorage.getItem('cart');
     this.cart = cartData
       ? JSON.parse(cartData)
