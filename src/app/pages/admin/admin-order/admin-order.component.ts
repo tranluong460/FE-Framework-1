@@ -1,3 +1,4 @@
+import { OrderService } from 'src/app/services/order/order.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,15 +9,24 @@ import { Component } from '@angular/core';
 export class AdminOrderComponent {
   selectedValue: string = '';
 
-  orders: any[];
+  orders: any[] = [];
+  order: any;
 
   p: number = 1;
+
+  constructor(private oderService: OrderService) {
+    this.oderService.gerAll().subscribe((res) => {
+      this.orders = res.data;
+    });
+  }
 
   onSubmit() {
     console.log(this.selectedValue);
   }
 
-  constructor() {
-    this.orders = Array(14).fill(0);
+  getOrder(id: any) {
+    this.oderService.getById(id).subscribe((res) => {
+      this.order = res.data;
+    });
   }
 }
