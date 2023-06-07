@@ -1,5 +1,6 @@
 import { OrderService } from 'src/app/services/order/order.service';
 import { Component } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-order',
@@ -7,21 +8,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-order.component.css'],
 })
 export class AdminOrderComponent {
-  selectedValue: string = '';
+  orderForm = this.formBuilder.group({
+    status: ['', [Validators.required]],
+  });
 
   orders: any[] = [];
   order: any;
 
   p: number = 1;
 
-  constructor(private oderService: OrderService) {
+  constructor(
+    private oderService: OrderService,
+    private formBuilder: FormBuilder
+  ) {
     this.oderService.gerAll().subscribe((res) => {
       this.orders = res.data;
     });
   }
 
-  onSubmit() {
-    console.log(this.selectedValue);
+  onSubmit(id: any) {
+    const orderStatus: any = {
+      status: this.orderForm.value.status || '',
+    };
+
+    this.oderService.updateOrder(id, orderStatus).subscribe(() => {
+      this.oderService.gerAll().subscribe((res) => {
+        this.orders = res.data;
+      });
+    });
   }
 
   getOrder(id: any) {
