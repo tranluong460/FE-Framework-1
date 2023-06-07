@@ -80,7 +80,11 @@ export class ProductDetailComponent {
     const cartData = sessionStorage.getItem('cart');
     this.cart = cartData
       ? JSON.parse(cartData)
-      : sessionStorage.setItem('cart', JSON.stringify(this.cart));
+      : {
+          user: '',
+          products: [],
+          totalPrice: 0,
+        };
 
     const checkProduct = this.cart.products.findIndex(
       (prod: any) => prod.product._id === product._id
@@ -100,5 +104,7 @@ export class ProductDetailComponent {
     this.cart.totalPrice += product.price;
 
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
+
+    this.navigate.navigate(['cart']);
   }
 }

@@ -12,6 +12,8 @@ export class HeaderClientComponent {
 
   search: any;
 
+  cart: any;
+
   constructor(
     private categoryService: CategoryService,
     private matDialog: MatDialog
@@ -19,6 +21,11 @@ export class HeaderClientComponent {
     this.categoryService
       .getAllCategories()
       .subscribe((cate) => (this.cates = cate.data));
+
+    const cartData = sessionStorage.getItem('cart');
+    this.cart = cartData
+      ? JSON.parse(cartData)
+      : { products: [], totalPrice: 0 };
   }
 
   openDialog(): void {
