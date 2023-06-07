@@ -46,7 +46,6 @@ export class SignUpComponent {
         console.log('Response', response);
 
         this.errorMessage = response.message;
-        this.router.navigate(['/auth/signIn']);
       },
       (error) => {
         console.log('Error', error);
