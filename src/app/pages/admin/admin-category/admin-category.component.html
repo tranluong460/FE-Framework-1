@@ -23,12 +23,12 @@
         "
       >
         <tr>
-          <th scope="row" class="text-center">1</th>
+          <th scope="row" class="text-center">{{ i + 1 }}</th>
           <td class="text-center">
-            <span>Apple</span>
+            <span>{{ item.name }}</span>
           </td>
           <td class="text-center">
-            <span>Apple</span>
+            <span>{{ item.slug }}</span>
           </td>
           <td>
             <div class="flex gap-1 justify-center">
@@ -43,6 +43,7 @@
                 class="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_cate"
+                (click)="getCate(item._id)"
               >
                 <span>Xóa</span>
               </button>
@@ -55,40 +56,6 @@
 
   <div class="flex justify-end mr-5 mt-3">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
-</div>
-
-<!-- The Modal Edit Category -->
-<div class="modal" id="editCategory">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Chỉnh sửa thông tin danh mục</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form>Form thông tin danh mục</form>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#alert"
-        >
-          <span>Lưu</span>
-        </button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -141,8 +108,9 @@
           class="btn btn-secondary"
           data-bs-toggle="modal"
           data-bs-target="#delete_success"
+          (click)="removeCategories(category._id)"
         >
-          <span>Đồng ý</span>
+          <span> Xóa</span>
         </button>
       </div>
     </div>

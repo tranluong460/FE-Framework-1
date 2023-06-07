@@ -12,7 +12,7 @@ export class CategoryService {
     return this.http.get<any>(`http://localhost:8080/category`);
   }
 
-  getCategories(id: number): Observable<any> {
+  getCategories(id: any): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/category/${id}`);
   }
 
@@ -27,7 +27,11 @@ export class CategoryService {
     );
   }
 
-  removeCategories(id: number): Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/category/${id}`);
+  removeCategories(id: any): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/category/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
   }
 }
