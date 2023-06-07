@@ -127,7 +127,6 @@ export const login = async (req, res) => {
 
     // So sánh mật khẩu đã nhập với mật khẩu được lưu trữ
     const isMatch = await bcrypt.compare(password, user.password);
-
     if (!isMatch) {
       // Trả về lỗi nếu mật khẩu không đúng
       return res.status(401).json({
@@ -135,6 +134,13 @@ export const login = async (req, res) => {
       });
     }
 
+    const isLockAccount = user.isLockAccount;
+    if (isLockAccount) {
+      // Trả về lỗi nếu mật khẩu không đúng
+      return res.status(401).json({
+        message: "Tài khoản bị khóa",
+      });
+    }
     // Tạo mã thông báo JWT
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1h",

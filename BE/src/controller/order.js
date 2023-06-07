@@ -9,7 +9,7 @@ const getAll = async (req, res) => {
       .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm trong đơn hàng
 
     // Kiểm tra xem có dữ liệu đơn hàng hay không
-    if (!data) {
+    if (!data || !data.length === 0) {
       return res.status(404).json({
         message: "Không có dữ liệu",
       });
@@ -38,7 +38,7 @@ const getOne = async (req, res) => {
       .populate("products.product"); // Tham chiếu đến model Product để lấy thông tin sản phẩm liên quan
 
     // Kiểm tra xem có dữ liệu đơn hàng hay không
-    if (!data) {
+    if (!data || !data.length === 0) {
       return res.status(404).json({
         message: "Không tìm thấy đơn hàng",
       });
