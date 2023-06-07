@@ -26,16 +26,22 @@
         >
           <th scope="row" class="text-center">1</th>
           <td class="text-center">
-            <span>Lương</span>
+            <span>{{ item.user.name }}</span>
           </td>
           <td class="text-center">
-            <span>Chi tiết</span>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#details"
+              (click)="getOrder(item._id)"
+            >
+              <span> Chi tiết </span>
+            </button>
           </td>
           <td class="text-center">
-            <span>102.000.000đ</span>
+            <span>{{ item.totalPrice }}đ</span>
           </td>
           <td class="text-center">
-            <span>Đang lấy hàng</span>
+            <span>{{ item.status }}</span>
           </td>
           <td>
             <div class="flex gap-1 justify-center">
@@ -58,7 +64,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Orders-->
 <div class="modal" id="updateStatus">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -110,7 +116,7 @@
   </div>
 </div>
 
-<!-- The Modal -->
+<!-- The Modal Success Order-->
 <div class="modal" id="alert">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -127,6 +133,42 @@
       <div class="modal-body">
         <div class="alert alert-success">
           <span>Cập nhật trạng thái thành công!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Detail Product Order -->
+<div class="modal" id="details">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Thông tin đơn hàng</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div *ngFor="let item of order?.products; index as i">
+          <div class="flex">
+            <img
+              src="{{ item.product.images?.[0].base_url }}"
+              alt="img"
+              width="80"
+              height="80"
+            />
+            <div class="grid ml-5">
+              <span>{{ item.product.name }}</span>
+              <span>{{ item.product.price }}đ</span>
+              <span>x{{ item.quantity }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
