@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class CartPageComponent {
   items: any;
 
+  p: number = 1;
+
   constructor() {
     const cart: any = sessionStorage.getItem('cart');
-    this.items = JSON.parse(cart)
+    this.items = JSON.parse(cart);
   }
 }
