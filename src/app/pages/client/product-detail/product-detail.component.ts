@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
 import { Router } from '@angular/router';
 
+// import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -18,6 +19,9 @@ export class ProductDetailComponent {
   activeTab: number = 0;
   errorMessage: any;
 
+  info: any = localStorage.getItem('user');
+  user: any = JSON.parse(this.info);
+
   cart: any = {
     user: this.user?._id,
     products: [],
@@ -28,11 +32,15 @@ export class ProductDetailComponent {
     content: ['', [Validators.required]],
   });
 
+  changeTab(index: number) {
+    this.activeTab = index;
+  }
+
   constructor(
     private productService: ProductsService,
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService,
+    private commentsService: CommentsService, // private _snackBar: MatSnackBar
     private navigate: Router
   ) {
     this.router.paramMap.subscribe((params) => {
@@ -45,18 +53,6 @@ export class ProductDetailComponent {
     this.productService.getAllProducts().subscribe((data) => {
       this.products = data.data;
     });
-
-    // Tạo FormGroup cho cartForm
-    this.cartForm = this.formBuilder.group({
-      user: [this.user?._id],
-      products: this.formBuilder.array([]), // FormArray cho products
-      totalPrice: [0],
-    });
-  }
-
-  // Hàm getter cho thuộc tính products trong cartForm
-  get productsFormArray() {
-    return this.cartForm.get('products') as FormArray;
   }
 
   onSubmit() {
@@ -76,45 +72,42 @@ export class ProductDetailComponent {
     );
   }
 
+  // openSnackBar() {
+  //   this._snackBar.open(this.errorMessage, 'Đóng', {
+  //     duration: 3000,
+  //     verticalPosition: 'top',
+  //   });
+  // }
+
   addToCart(product: any) {
     const cartData = sessionStorage.getItem('cart');
-    this.cartForm.patchValue({
-      user: this.user?._id,
-    });
+    this.cart = cartData
+      ? JSON.parse(cartData)
+      : {
+          user: this.user?._id,
+          products: [],
+          totalPrice: 0,
+        };
 
-    const checkProduct = this.cartForm.value.products.findIndex(
-      (prod: any) => prod.product === product._id
+    const checkProduct = this.cart.products.findIndex(
+      (prod: any) => prod.product._id === product._id
     );
 
     if (checkProduct !== -1) {
-      this.cartForm.value.products[checkProduct].quantity += 1;
+      this.cart.products[checkProduct].quantity += 1;
     } else {
       const newProduct = {
-        product: product._id,
+        product: product,
         quantity: 1,
-        price: product.price,
       };
 
-      this.productsFormArray.push(
-        this.formBuilder.group({
-          product: [newProduct.product],
-          quantity: [newProduct.quantity],
-          price: [newProduct.price],
-        })
-      );
+      this.cart.products.push(newProduct);
     }
 
-    const totalPrice = this.cartForm.value.products.reduce(
-      (total: number, prod: any) => {
-        return total + prod.quantity * prod.price;
-      },
-      0
-    );
-    this.cartForm.patchValue({
-      totalPrice: totalPrice,
-    });
+    this.cart.totalPrice += product.price;
 
-    sessionStorage.setItem('cart', JSON.stringify(this.cartForm.value));
-    this.navigate.navigate(['/cart']);
+    sessionStorage.setItem('cart', JSON.stringify(this.cart));
+
+    this.navigate.navigate(['cart']);
   }
 }

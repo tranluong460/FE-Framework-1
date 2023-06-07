@@ -10,6 +10,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class PayPageComponent {
   user: any;
   cart: any;
+
   orderForm: FormGroup;
 
   constructor(private orderService: OrderService, private fb: FormBuilder) {
@@ -44,8 +45,9 @@ export class PayPageComponent {
 
   onHandleSubmit() {
     // Xử lý khi submit form
-    this.orderService.createOrder(this.orderForm.value).subscribe((data) => {
+    this.orderService.createOrder(this.orderForm.value).subscribe((res) => {
       sessionStorage.clear();
+      console.log(res.message);
     });
   }
 }
