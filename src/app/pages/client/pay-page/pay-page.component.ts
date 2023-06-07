@@ -9,9 +9,9 @@ import { OrderService } from 'src/app/services/order/order.service';
 export class PayPageComponent {
   user: any
   constructor(private orderService: OrderService) {
-    const info: any = localStorage.getItem('user');
-    this.user = JSON.parse(info)
-
+    const info: any = sessionStorage.getItem('cart');
+    const inf = JSON.parse(info)
+    this.user = inf.user
     console.log(this.user);
   }
 

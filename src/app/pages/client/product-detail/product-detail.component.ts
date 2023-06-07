@@ -18,9 +18,10 @@ export class ProductDetailComponent {
   comments: any;
   activeTab: number = 0;
   errorMessage: any;
-
+  info: any = localStorage.getItem('user');
+  user: any = JSON.parse(this.info)
   cart: any = {
-    user: "",
+    user: this.user?._id,
     products: [],
     totalPrice: 0
   }
@@ -77,6 +78,7 @@ export class ProductDetailComponent {
   // }
 
   addToCart(product: any) {
+    // console.log(this.user);
     const cartData = sessionStorage.getItem("cart");
     this.cart = cartData ? JSON.parse(cartData) : sessionStorage.setItem("cart", JSON.stringify(this.cart))
 
@@ -98,5 +100,6 @@ export class ProductDetailComponent {
     this.cart.totalPrice += product.price;
 
     sessionStorage.setItem("cart", JSON.stringify(this.cart));
+    this.navigate.navigate(['/cart'])
   }
 }
