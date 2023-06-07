@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-admin-category',
@@ -6,11 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-category.component.css'],
 })
 export class AdminCategoryComponent {
-  categories: any[];
+  categories: any[] = [];
+
+  category: any;
 
   p: number = 1;
 
-  constructor() {
-    this.categories = Array(14).fill(0);
+  constructor(private categoryService: CategoryService) {
+    this.categoryService.getAllCategories().subscribe((categories) => {
+      this.categories = categories.data;
+    });
+  }
+
+  getCate(id: any) {
+    this.categoryService.getCategories(id).subscribe((data) => {
+      this.category = data.data;
+    });
+  }
+
+  removeCategories(id: any) {
+    this.categoryService.removeCategories(id).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
