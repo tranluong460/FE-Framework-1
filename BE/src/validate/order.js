@@ -2,7 +2,7 @@ import Joi from "joi";
 
 export const orderSchema = Joi.object({
   status: Joi.string().valid(
-    "Đang chờ xử lý",
+    "Chờ thanh toán",
     "Đang xử lý",
     "Đang giao hàng",
     "Đã giao hàng",

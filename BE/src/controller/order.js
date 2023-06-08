@@ -61,10 +61,16 @@ const create = async (req, res) => {
       });
     }
 
-    const order = await Order.create(req.body);
+    let status = "Đang xử lý";
+    if (req.body.paymentMethod === "Thanh toán bằng thẻ") {
+      status = "Chờ thanh toán";
+    }
+
+    const order = await Order.create({ ...req.body, status });
 
     return res.status(201).json({
       message: "Tạo đơn hàng thành công",
+      orderId: order._id,
       order,
     });
   } catch (err) {

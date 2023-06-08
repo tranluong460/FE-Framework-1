@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OrderService } from 'src/app/services/order/order.service';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PaymentService } from 'src/app/services/payment/payment.service';
 
 @Component({
   selector: 'app-pay-page',
@@ -10,44 +11,99 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class PayPageComponent {
   user: any;
   cart: any;
+  p: number = 1;
+  paymentMethod: any = 'Thanh toán bằng thẻ';
+  errorMessage: any;
 
-  orderForm: FormGroup;
+  tax: any = 100000;
+  shipping: any = 50000;
+  totalCalc: any = 0;
 
-  constructor(private orderService: OrderService, private fb: FormBuilder) {
+  activeTab: number = 0;
+
+  orderForm = this.fb.group({
+    user: [''],
+    products: [[] as any[]],
+    totalPrice: [0],
+    paymentMethod: [''],
+  });
+
+  paymentForm = this.fb.group({
+    orderId: [''],
+    cardHolderName: [''],
+    cardNumber: [''],
+    day: [''],
+    month: [''],
+    expirationDate: [''],
+    cvv: [''],
+  });
+
+  constructor(
+    private orderService: OrderService,
+    private fb: FormBuilder,
+    private paymentService: PaymentService
+  ) {
     const info: any = localStorage.getItem('user');
     const cart: any = sessionStorage.getItem('cart');
-
     this.user = JSON.parse(info);
     this.cart = JSON.parse(cart);
 
-    this.orderForm = this.fb.group({
-      user: this.user._id,
-      products: this.fb.array([]),
-      totalPrice: this.cart.totalPrice,
-    });
+    this.calculateTotal();
+  }
 
-    // Lấy reference của FormArray 'products'
-    const productsFormArray = this.orderForm.get('products') as FormArray;
+  calculateTotal() {
+    this.totalCalc = this.cart.totalPrice + this.tax + this.shipping;
+  }
 
-    // Lặp qua từng sản phẩm trong giỏ hàng
-    this.cart.products.forEach((prod: any) => {
-      // Tạo FormGroup cho mỗi sản phẩm
-      const productFormGroup = this.fb.group({
-        product: prod.product._id,
-        quantity: prod.quantity,
-        price: prod.product.price,
-      });
-
-      // Thêm FormGroup vào FormArray 'products'
-      productsFormArray.push(productFormGroup);
-    });
+  setPaymentMethod(paymentMethod: any, activeTab: any) {
+    this.paymentMethod = paymentMethod;
+    this.activeTab = activeTab;
   }
 
   onHandleSubmit() {
-    // Xử lý khi submit form
-    this.orderService.createOrder(this.orderForm.value).subscribe((res) => {
-      sessionStorage.clear();
-      console.log(res.message);
-    });
+    const order: any = {
+      user: this.user._id,
+      products: this.cart.products.map((prod: any) => ({
+        product: prod.product._id,
+        quantity: prod.quantity,
+        price: prod.product.price,
+      })),
+      totalPrice: this.totalCalc,
+      paymentMethod: this.paymentMethod,
+    };
+
+    this.orderService.createOrder(order).subscribe(
+      (orderRes) => {
+        let orderID = orderRes.orderId;
+
+        if (this.paymentMethod === 'Thanh toán bằng thẻ') {
+          const payment: any = {
+            orderId: orderID || '',
+            cardHolderName: this.paymentForm.value.cardHolderName || '',
+            cardNumber: this.paymentForm.value.cardNumber || '',
+            expirationDate:
+              `${this.paymentForm.value.day}/${this.paymentForm.value.month}` ||
+              '',
+            cvv: this.paymentForm.value.cvv || '',
+          };
+
+          this.paymentService.paymentCard(payment).subscribe(
+            (paymentRes) => {
+              console.log('Payment Response', paymentRes);
+            },
+            (paymentErr) => {
+              console.log('Payment Error', paymentErr);
+
+              this.errorMessage = paymentErr.error.message[0];
+            }
+          );
+        }
+      },
+      (orderErr) => {
+        console.log('Order Error', orderErr);
+
+        this.errorMessage = orderErr.error.message;
+      }
+    );
   }
 }

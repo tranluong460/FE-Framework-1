@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnDestroy,
 } from '@angular/core';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cartService: CartService
   ) {
     this.items = Array(6).fill(0);
     this.productsService.getAllProducts().subscribe((data) => {
@@ -51,5 +53,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   formatCurrency(amount: number): string {
     const formattedAmount = amount.toLocaleString('en-US');
     return `${formattedAmount}₫`;
+  }
+
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
   }
 }
