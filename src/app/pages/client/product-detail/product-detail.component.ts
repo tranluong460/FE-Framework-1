@@ -1,16 +1,14 @@
+import { CartService } from './../../../services/cart/cart.service';
 import { Component } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgClass, CurrencyPipe } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from '../../../services/comments/comments.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  providers: [CurrencyPipe],
 })
 export class ProductDetailComponent {
   product: any;
@@ -18,15 +16,6 @@ export class ProductDetailComponent {
   comments: any;
   activeTab: number = 0;
   errorMessage: any;
-
-  info: any = localStorage.getItem('user');
-  user: any = JSON.parse(this.info);
-
-  cart: any = {
-    user: '',
-    products: [],
-    totalPrice: 0,
-  };
 
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],
@@ -41,8 +30,7 @@ export class ProductDetailComponent {
     private router: ActivatedRoute,
     private formBuilder: FormBuilder,
     private commentsService: CommentsService,
-    private navigate: Router,
-    private currencyPipe: CurrencyPipe
+    private cartService: CartService
   ) {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -82,39 +70,6 @@ export class ProductDetailComponent {
   }
 
   addToCart(product: any) {
-    if (!this.user) {
-      alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
-      return;
-    }
-
-    const cartData = sessionStorage.getItem('cart');
-    this.cart = cartData
-      ? JSON.parse(cartData)
-      : {
-          user: this.user?._id,
-          products: [],
-          totalPrice: 0,
-        };
-
-    const checkProduct = this.cart.products.findIndex(
-      (prod: any) => prod.product._id === product._id
-    );
-
-    if (checkProduct !== -1) {
-      this.cart.products[checkProduct].quantity += 1;
-    } else {
-      const newProduct = {
-        product: product,
-        quantity: 1,
-      };
-
-      this.cart.products.push(newProduct);
-    }
-
-    this.cart.totalPrice += product.price;
-
-    sessionStorage.setItem('cart', JSON.stringify(this.cart));
-
-    this.navigate.navigate(['cart']);
+    this.cartService.addToCart(product);
   }
 }

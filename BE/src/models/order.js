@@ -28,10 +28,19 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    paymentMethod: {
+      type: String,
+      enum: ["Thanh toán khi nhận hàng", "Thanh toán bằng thẻ"],
+      required: true,
+    },
+    payment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Payment",
+    },
     status: {
       type: String,
       enum: [
-        "Đang chờ xử lý",
+        "Chờ thanh toán",
         "Đang xử lý",
         "Đang giao hàng",
         "Đã giao hàng",
@@ -39,7 +48,7 @@ const orderSchema = new mongoose.Schema(
         "Đã hoàn tiền",
         "Đã hoàn thành",
       ],
-      default: "Đang chờ xử lý",
+      default: "Đang xử lý",
     },
   },
   { timestamps: true, versionKey: false }
