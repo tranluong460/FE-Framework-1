@@ -47,4 +47,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.timerIdRef);
   }
+
+  formatCurrency(amount: number): string {
+    const formattedAmount = amount.toLocaleString('en-US');
+    return `${formattedAmount}₫`;
+  }
 }

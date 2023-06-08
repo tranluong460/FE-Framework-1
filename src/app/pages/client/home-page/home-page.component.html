@@ -139,7 +139,9 @@
                 {{ item.name }}
               </a>
             </h4>
-            <p class="product-price">{{ item.price }}đ</p>
+            <p class="product-price">
+              {{ item.price ? formatCurrency(item.price) : "" }}
+            </p>
           </div>
         </div>
       </div>

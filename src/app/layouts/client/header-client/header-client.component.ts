@@ -9,10 +9,10 @@ import { DialogSearchComponent } from 'src/app/pages/sub/dialog-search/dialog-se
 })
 export class HeaderClientComponent {
   cates: any;
-
   search: any;
-
   cart: any;
+  user: any;
+  isLoggedIn: boolean;
 
   constructor(
     private categoryService: CategoryService,
@@ -26,6 +26,15 @@ export class HeaderClientComponent {
     this.cart = cartData
       ? JSON.parse(cartData)
       : { products: [], totalPrice: 0 };
+
+    const info: any = localStorage.getItem('user');
+    this.isLoggedIn = info !== null && info !== '';
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    window.location.reload();
   }
 
   openDialog(): void {

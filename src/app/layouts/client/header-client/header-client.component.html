@@ -33,10 +33,14 @@
       <button class="dropdown">
         <i class="fa-solid fa-user"></i>
         <ul class="dropdown-content">
-          <li>
+          <li *ngIf="isLoggedIn">
             <a href="#">Thông tin cá nhân</a>
             <a href="#">Đơn hàng</a>
-            <button>Đăng xuất</button>
+            <button (click)="logout()">Đăng xuất</button>
+          </li>
+          <li *ngIf="!isLoggedIn">
+            <a href="auth/signIn">Đăng nhập</a>
+            <a href="auth/signUp">Đăng ký</a>
           </li>
         </ul>
       </button>
