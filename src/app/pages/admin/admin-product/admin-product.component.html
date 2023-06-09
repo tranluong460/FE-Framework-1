@@ -5,6 +5,16 @@
     </div>
   </div>
 
+  <div class="mr-[5vh] text-right">
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#addProduct"
+    >
+      <span>Thêm</span>
+    </button>
+  </div>
+
   <div class="table-responsive p-3">
     <table class="table table-hover">
       <thead class="text-center">
@@ -33,25 +43,21 @@
         "
       >
         <tr class="text-center">
-          <th scope="row">1</th>
+          <th scope="row">{{ i + 1 }}</th>
           <td>
-            <span>Apple iPad mini (6th Gen) Wi-Fi, 2021</span>
+            <span>{{ item.name }}</span>
           </td>
           <td>
-            <span>12.650.000đ</span>
+            <span>{{ item.price }}đ</span>
           </td>
           <td class="md:table-cell hidden">
-            <span>14.990.000đ</span>
+            <span>{{ item.original_price }}đ</span>
           </td>
           <td>
-            <span>Apple</span>
+            <span>{{ item.brand?.slug }}</span>
           </td>
           <td class="md:hidden table-cell">
-            <button
-              type="submit"
-              data-bs-toggle="modal"
-              data-bs-target="#detail_prod"
-            >
+            <button data-bs-toggle="modal" data-bs-target="#detail_prod">
               Xem
             </button>
           </td>
@@ -60,6 +66,7 @@
               type="submit"
               data-bs-toggle="modal"
               data-bs-target="#short_description"
+              (click)="getItemById(item._id)"
             >
               <span class="hover:text-blue-500">Xem</span>
             </button>
@@ -69,6 +76,7 @@
               type="submit"
               data-bs-toggle="modal"
               data-bs-target="#description"
+              (click)="getItemById(item._id)"
             >
               <span class="hover:text-blue-500">Xem</span>
             </button>
@@ -79,13 +87,14 @@
               type="submit"
               data-bs-toggle="modal"
               data-bs-target="#specifications"
+              (click)="getItemById(item._id)"
             >
               <span class="hover:text-blue-500">Xem</span>
             </button>
           </td>
           <td class="md:table-cell hidden">
             <img
-              src="https://thuthuatnhanh.com/wp-content/uploads/2023/03/hinh-anh-cuc-tinh-y.jpg"
+              src="{{item.images?.[0].base_url}}"
               alt="product"
               class="w-[100px] h-[100px]"
             />
@@ -96,6 +105,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#editProduct"
+                (click)="updateProByid(item._id)"
               >
                 <span>Sửa</span>
               </button>
@@ -103,6 +113,7 @@
                 class="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_prod"
+                (click)="getItemById(item._id)"
               >
                 <span>Xóa</span>
               </button>
@@ -122,7 +133,7 @@
 <div class="modal" id="short_description">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">Mô tả ngắn</div>
+      <div class="modal-body">{{ product?.short_description }}</div>
     </div>
   </div>
 </div>
@@ -131,7 +142,7 @@
 <div class="modal" id="description">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">Mô tả dài</div>
+      <div class="modal-body">{{ product?.description }}</div>
     </div>
   </div>
 </div>
@@ -140,7 +151,14 @@
 <div class="modal" id="specifications">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">Thông số kỹ thuật</div>
+      <div class="modal-body">
+        <div *ngFor="let item of product?.specifications">
+          <div *ngFor="let pro of item.attributes">
+            <span>{{ pro.name }}: </span>
+            <span>{{ pro.value }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -161,7 +179,123 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>Form thông tin sản phẩm</form>
+        <form [formGroup]="formProduct">
+          <!-- name input -->
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tên sản phẩm"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá sản phẩm"
+              formControlName="price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá bán"
+              formControlName="original_price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Số lượng sản phẩm"
+              formControlName="quantity"
+            />
+          </div>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả ngắn của sản phẩm"
+              formControlName="short_description"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả của sản phẩm"
+              formControlName="description"
+            />
+          </div>
+
+          <div formArrayName="images">
+            <ng-container
+              *ngFor="let imageGroup of imageArray.controls; let i = index"
+            >
+              <div [formGroupName]="i">
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 1 của sản phẩm'"
+                    formControlName="base_url"
+                  />
+                </div>
+                <!-- Các trường input khác -->
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 2 của sản phẩm'"
+                    formControlName="large_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 3 của sản phẩm'"
+                    formControlName="medium_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 4 của sản phẩm'"
+                    formControlName="small_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 5 của sản phẩm'"
+                    formControlName="thumbnail_url"
+                  />
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-outline mb-4">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="brand"
+            >
+              <option *ngFor="let cate of cate" [value]="cate._id">
+                {{ cate.name }}
+              </option>
+            </select>
+          </div>
+          <!-- <span class="text-red-500">{{ errorMessage }}</span> -->
+        </form>
       </div>
 
       <!-- Modal footer -->
@@ -171,6 +305,7 @@
           class="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#alert"
+          (click)="onHandleUpdate()"
         >
           <span>Lưu</span>
         </button>
@@ -209,11 +344,9 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Xóa sản phẩm</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          >
+        </button>
       </div>
 
       <!-- Modal body -->
@@ -228,6 +361,7 @@
           class="btn btn-secondary"
           data-bs-toggle="modal"
           data-bs-target="#delete_success"
+          (click)="removeItem(product?._id)"
         >
           <span>Đồng ý</span>
         </button>
@@ -279,4 +413,179 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- The Modal Edit Product -->
+<div class="modal" id="addProduct">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Thêm mới sản phẩm</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="formProduct">
+          <!-- name input -->
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tên sản phẩm"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá sản phẩm"
+              formControlName="price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá bán"
+              formControlName="original_price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Số lượng sản phẩm sản phẩm"
+              formControlName="quantity"
+            />
+          </div>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả ngắn của sản phẩm"
+              formControlName="short_description"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả của sản phẩm"
+              formControlName="description"
+            />
+          </div>
+
+          <div formArrayName="images">
+            <ng-container
+              *ngFor="let imageGroup of imageArray.controls; let i = index"
+            >
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 1 của sản phẩm'"
+                  formControlName="base_url"
+                />
+              </div>
+              <!-- Các trường input khác -->
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 2 của sản phẩm'"
+                  formControlName="large_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 3 của sản phẩm'"
+                  formControlName="medium_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 4 của sản phẩm'"
+                  formControlName="small_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 5 của sản phẩm'"
+                  formControlName="thumbnail_url"
+                />
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-outline mb-4">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="brand"
+            >
+              <option *ngFor="let cate of cate" [value]="cate._id">
+                {{ cate.name }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#addAlert"
+          (click)="onHandleAdd()"
+        >
+          <span>Thêm</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Add Product Success -->
+<div class="modal" id="addAlert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+
+      <div class="modal-body" *ngIf="!errorMessage">
+        <div class="alert alert-success">
+          <span>Thêm sản phẩm thành công!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="errorMessage">
+  <span class="text-red-500">{{ errorMessage }}</span>
 </div>
