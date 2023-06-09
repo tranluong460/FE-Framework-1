@@ -7,8 +7,10 @@ import categoryRouter from "./router/category";
 import orderRouter from "./router/order";
 import commentRouter from "./router/comment";
 import contactRouter from "./router/contact";
+import paymentRouter from "./router/payment";
 import authRouter from "./router/auth";
 import forgotRouter from "./router/forgot";
+import verifyRouter from "./router/verify";
 
 import cors from "cors";
 
@@ -24,7 +26,9 @@ app.use("/category", categoryRouter);
 app.use("/order", orderRouter);
 app.use("/comment", commentRouter);
 app.use("/contact", contactRouter);
+app.use("/payment", paymentRouter);
 app.use("/", forgotRouter);
+app.use("/", verifyRouter);
 app.use("/", authRouter);
 
 mongoose.connect(process.env.URI);

@@ -5,18 +5,6 @@
   font-family: "Roboto", sans-serif;
 }
 
-/* Ảnh bìa */
-.banner-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.banner-top img {
-  width: auto;
-  height: auto;
-}
-/* Ảnh bìa */
-
 /* Slider */
 .slide {
   width: 20%;

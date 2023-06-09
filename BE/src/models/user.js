@@ -9,10 +9,12 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     phone: {
       type: String,
       required: true,
+      unique: true,
     },
     address: {
       type: String,
@@ -20,19 +22,20 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: false,
-    },
-    confirmPassword: {
-      type: String,
-      required: false,
+      required: true,
     },
     role: {
       type: String,
+      enum: ["User", "Admin"],
       default: "User",
     },
     isLockAccount: {
       type: Boolean,
       default: false,
+    },
+    isVerify: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Verify",
     },
   },
   { timestamps: true, versionKey: false }

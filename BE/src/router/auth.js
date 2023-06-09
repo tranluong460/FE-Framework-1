@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.get("/user", getUser);
 router.get("/user/:id", getOneUser);
-router.post("/lockAccount/:id", checkPermission, lockAccount);
 router.post("/login", login);
 router.post("/register", register);
+router.post("/lockAccount/:id", checkPermission, lockAccount);
 
 export default router;

@@ -1,208 +1,235 @@
-<main role="main">
-  <div class="container mt-4">
-    <form class="needs-validation" name="frmthanhtoan" method="post" action="#">
-      <input type="hidden" name="kh_tendangnhap" value="dnpcuong" />
+<main class="container">
+  <h1 class="heading flex justify-center">
+    <i class="fa-solid fa-cart-shopping" name="card-outline"></i>
+    <h2>Thanh toán</h2>
+  </h1>
 
-      <div class="py-5 text-center">
-        <i
-          class="fa fa-credit-card fa-4x"
-          aria-hidden="true"
-          style="margin-bottom: 50px"
-        ></i>
-        <h2>Thanh toán</h2>
-        <p class="lead">
-          Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi
-          Đặt hàng.
-        </p>
-      </div>
+  <div class="item-flex">
+    <section class="checkout">
+      <h2 class="section-heading">Chi tiết thanh toán</h2>
 
-      <div class="row" style="margin-right: 60px">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span>Giỏ hàng : {{ cart.products.length }} Sản Phẩm</span>
-            <span class="badge badge-secondary badge-pill">2</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2" />
-            <input
-              type="hidden"
-              name="sanphamgiohang[1][gia]"
-              value="11800000.00"
-            />
-            <input type="hidden" name="sanphamgiohang[1][soluong]" value="2" />
-
-            <li
-              class="list-group-item d-flex justify-content-between lh-condensed"
-            >
-              <tbody>
-                <div>
-                  <tr class="product" *ngFor="let item of cart.products">
-                    <td class="product__image">
-                      <div class="product-thumbnail">
-                        <div
-                          class="product-thumbnail__wrapper"
-                          data-tg-static=""
-                        >
-                          <img
-                            src="{{item.product.images?.[0].base_url}}"
-                            alt=""
-                            class="product-thumbnail__image"
-                          />
-                        </div>
-                        <span class="product-thumbnail__quantity"></span>
-                      </div>
-                    </td>
-                    <th class="product__description">
-                      <span class="product__description__name text-muted">
-                        {{ item.product.name }}
-                      </span>
-                    </th>
-                    <td class="product__quantity visually-hidden">
-                      <em>Số lượng:</em> {{ item.quantity }}
-                    </td>
-                    <td class="product__price">{{ item.product.price }}₫</td>
-                  </tr>
-                </div>
-              </tbody>
-            </li>
-            <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4" />
-            <input
-              type="hidden"
-              name="sanphamgiohang[2][gia]"
-              value="14990000.00"
-            />
-            <input type="hidden" name="sanphamgiohang[2][soluong]" value="8" />
-          </ul>
-
-          <div>
-            <label for="">
-              <h5>Vận chuyển</h5>
-            </label>
-            <select
-              name=""
-              id=""
-              class="form-control"
-              placeholder=""
-              role="presentation"
-            >
-              <option value="" class="from-control">Hoả tốc</option>
-              <option value="" class="from-control">Ship thường</option>
-            </select>
-          </div>
-          <div>
-            <h5>Phương thức thanh toán</h5>
-            <input type="radio" />Thanh toán COD
-            <input type="radio" style="margin-left: 50px" />Thanh toán thẻ ngân
-            hàng
-          </div>
-          <div>
-            <tr>
-              <th>Tạm tính:</th>
-              <td style="padding-left: 240px">{{ cart.totalPrice }}₫</td>
-            </tr>
-
-            <tr>
-              <th>Phí VC:</th>
-              <td style="padding-left: 250px">50000₫</td>
-            </tr>
-          </div>
-
-          <hr />
-          <div>
-            <tr>
-              <th>Tổng:</th>
-              <td style="padding-left: 270px">
-                {{ cart.totalPrice + 50000 }}₫
-              </td>
-            </tr>
-          </div>
+      <div class="payment-form">
+        <div class="payment-method">
           <button
-            class="btn btn-primary btn-lg btn-block"
-            type="submit"
-            name="btnDatHang"
-            style="margin-top: 50px"
-            (click)="onHandleSubmit()"
+            class="method"
+            [ngClass]="{ selected: activeTab === 0 }"
+            (click)="setPaymentMethod('Thanh toán bằng thẻ', 0)"
           >
-            Đặt hàng
+            <i class="fa-solid fa-credit-card" name="card"></i>
+
+            <span>Thẻ tín dụng</span>
+
+            <i
+              class="fa-solid fa-check checkmark"
+              [ngClass]="{ fill: activeTab === 0 }"
+              name="checkmark-circle"
+            ></i>
+          </button>
+
+          <button
+            class="method"
+            [ngClass]="{ selected: activeTab === 1 }"
+            (click)="setPaymentMethod('Thanh toán khi nhận hàng', 1)"
+          >
+            <i
+              class="fa-solid fa-handshake card-outline"
+              name="logo-paypal"
+            ></i>
+
+            <span>Thanh toán khi nhận hàng</span>
+
+            <i
+              class="fa-solid fa-check card-outline checkmark"
+              [ngClass]="{ fill: activeTab === 1 }"
+              name="checkmark-circle-outline"
+            ></i>
           </button>
         </div>
-        <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Thông tin khách hàng</h4>
 
-          <div class="row">
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_ten">Họ tên</label>
-              <input
-                type="text"
-                value="{{ user.name }}"
-                class="form-control"
-                name="kh_ten"
-                id="kh_ten"
-                placeholder="Họ và tên "
-              />
-            </div>
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_email">Email</label>
-              <input
-                type="text"
-                class="form-control"
-                name="kh_email"
-                id="kh_email"
-                value="{{ user.email }}"
-                placeholder="Email "
-              />
-            </div>
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_diachi">Địa chỉ</label>
-              <input
-                type="text"
-                class="form-control"
-                name="kh_diachi"
-                id="kh_diachi"
-                placeholder="Địa chỉ  "
-                value="{{ user.address }}"
-              />
-            </div>
+        <form
+          [formGroup]="paymentForm"
+          (ngSubmit)="onHandleSubmit()"
+          [hidden]="activeTab === 1"
+        >
+          <div class="cardholder-name">
+            <label for="cardholder-name" class="label-default"
+              >Tên chủ thẻ</label
+            >
+            <input
+              type="text"
+              formControlName="cardHolderName"
+              id="cardholder-name"
+              class="input-default"
+            />
+          </div>
 
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_dienthoai">Điện thoại</label>
-              <input
-                type="text"
-                class="form-control"
-                name="kh_dienthoai"
-                id="kh_dienthoai"
-                placeholder="Số điện thoại "
-                value="{{ user.phone }}"
-              />
-            </div>
+          <div class="card-number">
+            <label for="card-number" class="label-default">Số thẻ</label>
+            <input
+              type="number"
+              formControlName="cardNumber"
+              id="card-number"
+              class="input-default"
+            />
+          </div>
 
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_ngaysinh">Thành phố</label>
-              <select
-                name=""
-                id=""
-                class="form-control"
-                placeholder="Thành phố"
-                role="presentation"
+          <div class="input-flex">
+            <div class="expire-date">
+              <label for="expire-date" class="label-default"
+                >Ngày hết hạn</label
               >
-                <option value=""></option>
-                <option value="" class="from-control">Hà Nội</option>
-                <option value="" class="from-control">Huế</option>
-                <option value="" class="from-control">Bắc Giang</option>
-                <option value="" class="from-control">Bắc Ninh</option>
-                <option value="" class="from-control">Hà Nam</option>
-                <option value="" class="from-control">TP Hồ Chí Minh</option>
-              </select>
+              <div class="input-flex">
+                <input
+                  type="number"
+                  formControlName="day"
+                  id="expire-date"
+                  placeholder="31"
+                  min="1"
+                  max="31"
+                  class="input-default"
+                />
+                /
+                <input
+                  type="number"
+                  formControlName="month"
+                  id="expire-date"
+                  placeholder="12"
+                  min="1"
+                  max="12"
+                  class="input-default"
+                />
+              </div>
             </div>
-            <div class="col-md-12" style="width: 500px">
-              <label for="kh_cmnd">Ghi chú</label>
-              <textarea name="" id="" cols="30" rows="10" class="form-control">
-              </textarea>
+
+            <div class="cvv">
+              <label for="cvv" class="label-default">CVV</label>
+              <input
+                type="number"
+                formControlName="cvv"
+                id="cvv"
+                class="input-default"
+              />
             </div>
           </div>
-          <br />
+        </form>
+      </div>
+
+      <div class="text-red-500 text-center p-3">
+        {{ errorMessage }}
+      </div>
+
+      <div class="flex justify-center">
+        <button class="btn btn-primary" (click)="onHandleSubmit()">
+          <b>Mua</b>
+          <span id="payAmount"> {{ totalCalc.toLocaleString() }}₫ </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="cart">
+      <div class="cart-item-box">
+        <h2 class="section-heading flex justify-center border-b pb-3">
+          Tóm tắt
+        </h2>
+        <div
+          class="product-card"
+          *ngFor="
+            let item of cart.products
+              | paginate : { itemsPerPage: 3, currentPage: p };
+            index as i
+          "
+        >
+          <div class="card">
+            <div class="img-box">
+              <img
+                src="{{ item.product.images?.[0].base_url }}"
+                alt="img"
+                width="80px"
+                class="product-img"
+              />
+            </div>
+
+            <div class="detail">
+              <h4 class="product-name">
+                {{ item.product.name }}
+              </h4>
+              <div class="wrapper">
+                <div class="product-qty">
+                  <!-- <button id="decrement">
+                    <i class="fa-solid fa-minus" name="remove-outline"></i>
+                  </button> -->
+
+                  <span id="quantity">x{{ item.quantity }}</span>
+
+                  <!-- <button id="increment">
+                    <i class="fa-solid fa-plus" name="add-outline"></i>
+                  </button> -->
+                </div>
+
+                <div class="price">
+                  <span id="price">
+                    {{ item.product.price.toLocaleString() }}₫
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- <button class="product-close-btn">
+              <i class="fa-solid fa-xmark" name="close-outline"></i>
+            </button> -->
+          </div>
+        </div>
+
+        <div class="flex justify-end mr-5 mt-3">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
-    </form>
+
+      <div class="wrapper">
+        <div class="discount-token">
+          <label for="discount-token" class="label-default"
+            >Thẻ quà tặng/Mã giảm giá</label
+          >
+
+          <div class="wrapper-flex">
+            <input
+              type="text"
+              name="discount-token"
+              id="discount-token"
+              class="default-input"
+            />
+
+            <button class="btn btn-outline">Dùng</button>
+          </div>
+        </div>
+
+        <div class="amount">
+          <div class="subtotal">
+            <span>Tổng phụ</span>
+            <span>
+              <span id="subtotal">{{ cart.totalPrice.toLocaleString() }}₫</span>
+            </span>
+          </div>
+          <div class="tax">
+            <span>Thuế</span>
+            <span>
+              <span id="tax">{{ tax.toLocaleString() }}₫</span>
+            </span>
+          </div>
+          <div class="shipping">
+            <span>Phí vận chuyển</span>
+            <span>
+              <span id="shipping">{{ shipping.toLocaleString() }}₫</span>
+            </span>
+          </div>
+          <div class="total border-t">
+            <span>Tổng</span>
+            <span>
+              <span id="total"> {{ totalCalc.toLocaleString() }}₫ </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
