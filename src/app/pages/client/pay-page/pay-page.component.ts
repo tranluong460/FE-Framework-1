@@ -46,13 +46,14 @@ export class PayPageComponent {
     const info: any = localStorage.getItem('user');
     const cart: any = sessionStorage.getItem('cart');
     this.user = JSON.parse(info);
-    this.cart = JSON.parse(cart);
+
+    this.cart = cart ? JSON.parse(cart) : { products: [], totalPrice: 0 };
 
     this.calculateTotal();
   }
 
   calculateTotal() {
-    this.totalCalc = this.cart.totalPrice + this.tax + this.shipping;
+    this.totalCalc = this.cart?.totalPrice + this.tax + this.shipping;
   }
 
   setPaymentMethod(paymentMethod: any, activeTab: any) {
@@ -98,6 +99,9 @@ export class PayPageComponent {
             }
           );
         }
+
+        sessionStorage.removeItem('cart');
+        window.location.reload();
       },
       (orderErr) => {
         console.log('Order Error', orderErr);

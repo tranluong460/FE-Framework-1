@@ -20,7 +20,7 @@ export class CartPageComponent {
 
   constructor(private cartService: CartService) {
     const cart: any = sessionStorage.getItem('cart');
-    this.items = JSON.parse(cart);
+    this.items = cart ? JSON.parse(cart) : { products: [], totalPrice: 0 };
   }
 
   changeQuantity(item: any, action: string) {

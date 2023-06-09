@@ -578,6 +578,12 @@
 
       <!-- Modal body -->
 
+      <div class="modal-body" *ngIf="errorMessage">
+        <div class="alert alert-danger">
+          <span>{{ errorMessage }}</span>
+        </div>
+      </div>
+
       <div class="modal-body" *ngIf="!errorMessage">
         <div class="alert alert-success">
           <span>Thêm sản phẩm thành công!</span>
@@ -585,7 +591,4 @@
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="errorMessage">
-  <span class="text-red-500">{{ errorMessage }}</span>
 </div>

@@ -15,6 +15,7 @@ export class AdminProductComponent {
   p: number = 1;
   cate: any;
   pro: any;
+
   // add product
   formProduct = this.fb.group({
     name: ['', [Validators.required]],

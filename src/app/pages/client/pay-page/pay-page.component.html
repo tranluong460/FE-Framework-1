@@ -119,9 +119,15 @@
       </div>
 
       <div class="flex justify-center">
-        <button class="btn btn-primary" (click)="onHandleSubmit()">
+        <button
+          class="btn btn-primary"
+          (click)="onHandleSubmit()"
+          [disabled]="cart.products.length === 0"
+        >
           <b>Mua</b>
-          <span id="payAmount"> {{ totalCalc.toLocaleString() }}₫ </span>
+          <span *ngIf="totalCalc > 0" id="payAmount">
+            {{ totalCalc.toLocaleString() }}₫
+          </span>
         </button>
       </div>
     </section>
@@ -134,7 +140,7 @@
         <div
           class="product-card"
           *ngFor="
-            let item of cart.products
+            let item of cart?.products
               | paginate : { itemsPerPage: 3, currentPage: p };
             index as i
           "
@@ -207,7 +213,9 @@
           <div class="subtotal">
             <span>Tổng phụ</span>
             <span>
-              <span id="subtotal">{{ cart.totalPrice.toLocaleString() }}₫</span>
+              <span id="subtotal"
+                >{{ cart?.totalPrice.toLocaleString() }}₫</span
+              >
             </span>
           </div>
           <div class="tax">

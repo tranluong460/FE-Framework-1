@@ -35,8 +35,11 @@ export class ContactPageComponent {
     this.contactService.createContact(contact).subscribe(
       (response) => {
         console.log('Response', response);
-
         this.errorMessage = response.message;
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       },
       (error) => {
         console.log('Error', error);
