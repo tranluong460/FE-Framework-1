@@ -63,7 +63,6 @@ export class AdminProductComponent {
     this.products = Array(14).fill(0);
     this.productsService.getAllProducts().subscribe((product) => {
       this.products = product.data;
-      console.log(this.products);
       // lay id sp de edit
     });
 
@@ -74,14 +73,11 @@ export class AdminProductComponent {
 
   getItemById(id: any) {
     this.productsService.getProduct(id).subscribe((pro) => {
-      console.log(pro.data);
       this.product = pro.data;
-      console.log(this.product);
     });
   }
 
   removeItem(id: any) {
-    console.log(id);
     this.productsService
       .deleteProduct(id)
       .subscribe(() => window.location.reload());
@@ -130,7 +126,7 @@ export class AdminProductComponent {
       brand: this.formProduct.value.brand || '', // Lưu brand dưới dạng id
       specifications: specifications,
     };
-    console.log(product);
+
     this.productsService.createProduct(product).subscribe(
       (data) => {
         window.location.reload();
@@ -149,7 +145,7 @@ export class AdminProductComponent {
   updateProByid(id: any) {
     this.productsService.getProduct(id).subscribe((product) => {
       this.pro = product.data;
-      console.log(this.pro);
+
       if (this.pro && this.pro.images) {
         this.formProduct.patchValue({
           name: this.pro.name,
@@ -189,8 +185,6 @@ export class AdminProductComponent {
   }
   // edit
   onHandleUpdate() {
-    console.log(123);
-    // if (this.formProduct.valid) {
     const product: any = {
       _id: this.pro._id,
       name: this.formProduct.value.name || '',
@@ -227,7 +221,6 @@ export class AdminProductComponent {
     };
     this.productsService.updateProduct(product).subscribe(
       (item) => {
-        console.log(item.data);
         window.location.reload();
       },
       (error) => {
@@ -239,6 +232,5 @@ export class AdminProductComponent {
         }
       }
     );
-    // }
   }
 }
