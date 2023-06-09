@@ -5,6 +5,16 @@
     </div>
   </div>
 
+  <div class="mr-[5vh] text-right">
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#addProduct"
+    >
+      <span>Thêm</span>
+    </button>
+  </div>
+
   <div class="table-responsive p-3">
     <table class="table table-hover">
       <thead class="text-center">
@@ -95,6 +105,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#editProduct"
+                (click)="updateProByid(item._id)"
               >
                 <span>Sửa</span>
               </button>
@@ -102,6 +113,7 @@
                 class="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#delete_prod"
+                (click)="getItemById(item._id)"
               >
                 <span>Xóa</span>
               </button>
@@ -167,7 +179,122 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>Form thông tin sản phẩm</form>
+        <form [formGroup]="formProduct">
+          <!-- name input -->
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tên sản phẩm"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá sản phẩm"
+              formControlName="price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá bán"
+              formControlName="original_price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Số lượng sản phẩm"
+              formControlName="quantity"
+            />
+          </div>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả ngắn của sản phẩm"
+              formControlName="short_description"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả của sản phẩm"
+              formControlName="description"
+            />
+          </div>
+
+          <div formArrayName="images">
+            <ng-container
+              *ngFor="let imageGroup of imageArray.controls; let i = index"
+            >
+              <div [formGroupName]="i">
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 1 của sản phẩm'"
+                    formControlName="base_url"
+                  />
+                </div>
+                <!-- Các trường input khác -->
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 2 của sản phẩm'"
+                    formControlName="large_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 3 của sản phẩm'"
+                    formControlName="medium_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 4 của sản phẩm'"
+                    formControlName="small_url"
+                  />
+                </div>
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="'Ảnh 5 của sản phẩm'"
+                    formControlName="thumbnail_url"
+                  />
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-outline mb-4">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="brand"
+            >
+              <option *ngFor="let cate of cate" [value]="cate._id">
+                {{ cate.name }}
+              </option>
+            </select>
+          </div>
+        </form>
       </div>
 
       <!-- Modal footer -->
@@ -177,6 +304,7 @@
           class="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#alert"
+          (click)="onHandleUpdate()"
         >
           <span>Lưu</span>
         </button>
@@ -215,11 +343,9 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Xóa sản phẩm</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+          >
+        </button>
       </div>
 
       <!-- Modal body -->
@@ -234,6 +360,7 @@
           class="btn btn-secondary"
           data-bs-toggle="modal"
           data-bs-target="#delete_success"
+          (click)="removeItem(product?._id)"
         >
           <span>Đồng ý</span>
         </button>
@@ -282,6 +409,177 @@
       <!-- Modal body -->
       <div class="modal-body">
         <form>Chi tiết sản phẩm</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Edit Product -->
+<div class="modal" id="addProduct">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Thêm mới sản phẩm</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="formProduct">
+          <!-- name input -->
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tên sản phẩm"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá sản phẩm"
+              formControlName="price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Giá bán"
+              formControlName="original_price"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Số lượng sản phẩm sản phẩm"
+              formControlName="quantity"
+            />
+          </div>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả ngắn của sản phẩm"
+              formControlName="short_description"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Mô tả của sản phẩm"
+              formControlName="description"
+            />
+          </div>
+
+          <div formArrayName="images">
+            <ng-container
+              *ngFor="let imageGroup of imageArray.controls; let i = index"
+            >
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 1 của sản phẩm'"
+                  formControlName="base_url"
+                />
+              </div>
+              <!-- Các trường input khác -->
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 2 của sản phẩm'"
+                  formControlName="large_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 3 của sản phẩm'"
+                  formControlName="medium_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 4 của sản phẩm'"
+                  formControlName="small_url"
+                />
+              </div>
+              <div class="form-outline mb-4" [formGroupName]="i">
+                <input
+                  type="text"
+                  class="form-control"
+                  [placeholder]="'Ảnh 5 của sản phẩm'"
+                  formControlName="thumbnail_url"
+                />
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-outline mb-4">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="brand"
+            >
+              <option *ngFor="let cate of cate" [value]="cate._id">
+                {{ cate.name }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#addAlert"
+          (click)="onHandleAdd()"
+        >
+          <span>Thêm</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Add Product Success -->
+<div class="modal" id="addAlert">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success">
+          <span>Thêm sản phẩm thành công!</span>
+        </div>
       </div>
     </div>
   </div>

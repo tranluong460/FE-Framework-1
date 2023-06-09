@@ -12,21 +12,39 @@ export class ProductsService {
   }
 
   getProduct(id: any): Observable<any> {
-    return this.http.get<any>(`http://localhost:8080/product/${id}`);
+    return this.http.get<any>(`http://localhost:8080/product/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
   }
 
   createProduct(product: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/product`, product);
+    return this.http.post<any>(`http://localhost:8080/product`, product, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
   }
 
   deleteProduct(id: any): Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/product/${id}`);
+    return this.http.delete<any>(`http://localhost:8080/product/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
   }
 
   updateProduct(product: any): Observable<any> {
+    console.log(product);
     return this.http.patch<any>(
-      `http://localhost:8080/product/${product.id}`,
-      product
+      `http://localhost:8080/product/${product._id}`,
+      product,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
     );
   }
 }
