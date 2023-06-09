@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin-product.component.css'],
 })
 export class AdminProductComponent {
+  errorMessage: string = '';
   products: any[];
   product: any;
   p: number = 1;
@@ -130,9 +131,19 @@ export class AdminProductComponent {
       specifications: specifications,
     };
     console.log(product);
-    this.productsService.createProduct(product).subscribe((data) => {
-      window.location.reload();
-    });
+    this.productsService.createProduct(product).subscribe(
+      (data) => {
+        window.location.reload();
+      },
+      (error) => {
+        console.log('Error', error.error.message);
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
+      }
+    );
   }
 
   updateProByid(id: any) {
@@ -220,7 +231,12 @@ export class AdminProductComponent {
         window.location.reload();
       },
       (error) => {
-        console.log('Error', error);
+        console.log('Error', error.message);
+        if (Array.isArray(error.error.message)) {
+          this.errorMessage = error.error.message[0];
+        } else {
+          this.errorMessage = error.error.message;
+        }
       }
     );
     // }

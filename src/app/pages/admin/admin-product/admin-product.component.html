@@ -294,6 +294,7 @@
               </option>
             </select>
           </div>
+          <!-- <span class="text-red-500">{{ errorMessage }}</span> -->
         </form>
       </div>
 
@@ -576,11 +577,15 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+
+      <div class="modal-body" *ngIf="!errorMessage">
         <div class="alert alert-success">
           <span>Thêm sản phẩm thành công!</span>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="errorMessage">
+  <span class="text-red-500">{{ errorMessage }}</span>
 </div>
