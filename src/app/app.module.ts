@@ -46,6 +46,7 @@ import { FooterAdminComponent } from './layouts/admin/footer-admin/footer-admin.
 import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
 import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
+import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admi
     AdminCommentComponent,
     AdminContactComponent,
     ErrorAdminPageComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -197,7 +197,7 @@ export const register = async (req, res) => {
       process.env.SECRET_KEY
     );
 
-    const verifyUrl = `${process.env.APP_URL}/auth/verify-email/${randomString}`;
+    const verifyUrl = `${process.env.APP_URL}/auth/verify-email/${token}`;
 
     sendVerifyEmail(req.body.email, req.body.name, randomCode, verifyUrl);
 
@@ -205,6 +205,7 @@ export const register = async (req, res) => {
       userId: user._id,
       email: req.body.email,
       phone: req.body.phone,
+      verifyCode: token,
     });
 
     user.isVerify = verify._id;
@@ -213,7 +214,6 @@ export const register = async (req, res) => {
     return res.status(201).json({
       message:
         "Đăng ký thành công. Vui lòng kiểm tra email và xác minh tài khoản của bạn",
-      verifyEmailCode: token,
       user,
     });
   } catch (error) {

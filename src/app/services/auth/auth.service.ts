@@ -63,4 +63,8 @@ export class AuthService {
       }
     );
   }
+
+  verifyEmail(data: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/verify-email', data);
+  }
 }

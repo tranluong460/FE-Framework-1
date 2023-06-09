@@ -25,6 +25,10 @@ const verifySchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    verifyCode: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true, versionKey: false }
 );

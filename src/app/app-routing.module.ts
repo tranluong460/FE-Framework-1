@@ -28,6 +28,7 @@ import { AdminOrderComponent } from './pages/admin/admin-order/admin-order.compo
 import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment.component';
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
 import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
+import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'reset-password/:randomString',
         component: ResetPasswordComponent,
+      },
+      {
+        path: 'verify-email/:verifyCode',
+        component: VerifyEmailComponent,
       },
     ],
   },

@@ -1,0 +1,40 @@
+<div class="flex justify-center items-center h-screen bg-[#f9fafb]">
+  <form
+    class="w-[500px] p-5 bg-[#ffffff] rounded-lg shadow-2xl"
+    [formGroup]="verifyForm"
+    (ngSubmit)="onHandleSubmit()"
+  >
+    <div class="flex justify-center mb-3">
+      <h2
+        className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white flex justify-center items-center"
+      >
+        Xác minh email
+      </h2>
+    </div>
+
+    <div
+      class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    >
+      <input
+        formControlName="randomCode"
+        class="p-1 outline-none"
+        type="text"
+        placeholder="Mã xác nhận"
+      />
+    </div>
+
+    <div class="text-red-500 flex justify-center items-center">
+      <div class="pt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+      >
+        Xác minh
+      </button>
+    </div>
+  </form>
+</div>
