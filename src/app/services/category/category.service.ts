@@ -17,13 +17,22 @@ export class CategoryService {
   }
 
   createCategories(category: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/category`, category);
+    return this.http.post<any>(`http://localhost:8080/category`, category, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
   }
 
   updateCategories(category: any): Observable<any> {
     return this.http.patch<any>(
       `http://localhost:8080/product/${category.id}`,
-      category
+      category,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
     );
   }
 
