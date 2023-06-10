@@ -1,5 +1,6 @@
 import Payment from "../models/payment";
 import Order from "../models/order";
+import Discount from "../models/discount";
 import { paymentSchema } from "../validate/payment";
 
 export const processPayment = async (req, res) => {
@@ -56,6 +57,94 @@ export const processPayment = async (req, res) => {
 
     return res.status(500).json({
       message: "Có lỗi xảy ra khi thanh toán",
+    });
+  }
+};
+
+export const getAllDiscount = async (req, res) => {
+  try {
+    const data = await Discount.find();
+
+    if (!data || data.length === 0) {
+      return res.status(200).json({
+        message: "Không có dữ liệu",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Danh sách mã giảm giá",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Lỗi khi lấy danh sách mã giảm giá",
+    });
+  }
+};
+
+export const getOneDiscount = async (req, res) => {
+  try {
+    const data = await Discount.findById(req.params.id);
+
+    if (!data) {
+      return res.status(404).json({
+        message: "Không tìm thấy mã giảm giá",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Thông tin mã giảm giá",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Lỗi khi lấy thông tin mã giảm giá",
+    });
+  }
+};
+
+export const createDiscount = async (req, res) => {
+  try {
+    const discount = await Discount.create(req.body);
+
+    return res.status(201).json({
+      message: "Thêm mã giảm giá thành công",
+      discount,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Lỗi khi tạo mã giảm giá",
+    });
+  }
+};
+
+export const getDiscountByCode = async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    const data = await Discount.findOne({ code });
+
+    if (!data || data.length === 0) {
+      return res.status(404).json({
+        message: "Không tìm thấy mã giảm giá",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Thông tin mã giảm giá",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Lỗi khi lấy thông tin mã giảm giá",
     });
   }
 };

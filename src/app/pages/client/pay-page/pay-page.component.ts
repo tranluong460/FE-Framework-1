@@ -12,20 +12,27 @@ export class PayPageComponent {
   user: any;
   cart: any;
   p: number = 1;
-  paymentMethod: any = 'Thanh toán bằng thẻ';
+  paymentMethod: any = 'Thanh toán khi nhận hàng';
   errorMessage: any;
 
-  tax: any = 100000;
+  tax: any = 0;
   shipping: any = 50000;
   totalCalc: any = 0;
 
+  discount: any = [];
+
   activeTab: number = 0;
 
+  // Định nghĩa các FormGroup
   orderForm = this.fb.group({
     user: [''],
     products: [[] as any[]],
     totalPrice: [0],
     paymentMethod: [''],
+  });
+
+  discountForm = this.fb.group({
+    code: [''],
   });
 
   paymentForm = this.fb.group({
@@ -43,24 +50,73 @@ export class PayPageComponent {
     private fb: FormBuilder,
     private paymentService: PaymentService
   ) {
-    const info: any = localStorage.getItem('user');
-    const cart: any = sessionStorage.getItem('cart');
-    this.user = JSON.parse(info);
+    // Khởi tạo user và cart
+    const user: any = JSON.parse(localStorage.getItem('user') || '{}');
+    const cart: any = JSON.parse(sessionStorage.getItem('cart') || '{}');
+    this.user = user;
+    this.cart = cart.products ? cart : { products: [], totalPrice: 0 };
 
-    this.cart = cart ? JSON.parse(cart) : { products: [], totalPrice: 0 };
-
+    // Tính tổng
     this.calculateTotal();
   }
 
-  calculateTotal() {
-    this.totalCalc = this.cart?.totalPrice + this.tax + this.shipping;
+  // Áp dụng mã giảm giá
+  applyDiscount() {
+    const discountCode: string = this.discountForm.value.code || '';
+
+    // Kiểm tra xem mã giảm giá cùng loại đã được áp dụng chưa
+    const isDiscountApplied = this.discount.some(
+      (discountItem: any) => discountItem.code === discountCode
+    );
+
+    if (!isDiscountApplied) {
+      const discount: any = {
+        code: discountCode,
+      };
+
+      this.paymentService.getDiscount(discount).subscribe(
+        (discountRes) => {
+          console.log('Discount Res', discountRes);
+          this.discount.push(discountRes.data);
+          this.calculateTotal();
+        },
+        (discountErr) => {
+          console.log('Discount Error', discountErr);
+          this.errorMessage = discountErr.error.message;
+        }
+      );
+    }
   }
 
+  // Tính tổng giá
+  calculateTotal() {
+    if (this.discount.length > 0) {
+      let totalDiscount = 0;
+
+      this.discount.forEach((discountItem: any) => {
+        if (discountItem.type === 'FreeShip') {
+          this.shipping = 0;
+        } else if (discountItem.type === 'FixedAmount') {
+          totalDiscount += discountItem.value;
+        } else if (discountItem.type === 'Percentage') {
+          totalDiscount += (discountItem.value / 100) * this.cart?.totalPrice;
+        }
+      });
+
+      this.totalCalc =
+        this.cart?.totalPrice + this.tax + this.shipping - totalDiscount;
+    } else {
+      this.totalCalc = this.cart?.totalPrice + this.tax + this.shipping;
+    }
+  }
+
+  // Đặt phương thức thanh toán và activeTab
   setPaymentMethod(paymentMethod: any, activeTab: any) {
     this.paymentMethod = paymentMethod;
     this.activeTab = activeTab;
   }
 
+  // Xử lý khi form được submit
   onHandleSubmit() {
     const order: any = {
       user: this.user._id,

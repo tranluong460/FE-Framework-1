@@ -13,23 +13,7 @@
           <button
             class="method"
             [ngClass]="{ selected: activeTab === 0 }"
-            (click)="setPaymentMethod('Thanh toán bằng thẻ', 0)"
-          >
-            <i class="fa-solid fa-credit-card" name="card"></i>
-
-            <span>Thẻ tín dụng</span>
-
-            <i
-              class="fa-solid fa-check checkmark"
-              [ngClass]="{ fill: activeTab === 0 }"
-              name="checkmark-circle"
-            ></i>
-          </button>
-
-          <button
-            class="method"
-            [ngClass]="{ selected: activeTab === 1 }"
-            (click)="setPaymentMethod('Thanh toán khi nhận hàng', 1)"
+            (click)="setPaymentMethod('Thanh toán khi nhận hàng', 0)"
           >
             <i
               class="fa-solid fa-handshake card-outline"
@@ -40,8 +24,24 @@
 
             <i
               class="fa-solid fa-check card-outline checkmark"
-              [ngClass]="{ fill: activeTab === 1 }"
+              [ngClass]="{ fill: activeTab === 0 }"
               name="checkmark-circle-outline"
+            ></i>
+          </button>
+
+          <button
+            class="method"
+            [ngClass]="{ selected: activeTab === 1 }"
+            (click)="setPaymentMethod('Thanh toán bằng thẻ', 1)"
+          >
+            <i class="fa-solid fa-credit-card" name="card"></i>
+
+            <span>Thẻ tín dụng</span>
+
+            <i
+              class="fa-solid fa-check checkmark"
+              [ngClass]="{ fill: activeTab === 1 }"
+              name="checkmark-circle"
             ></i>
           </button>
         </div>
@@ -49,7 +49,7 @@
         <form
           [formGroup]="paymentForm"
           (ngSubmit)="onHandleSubmit()"
-          [hidden]="activeTab === 1"
+          [hidden]="activeTab === 0"
         >
           <div class="cardholder-name">
             <label for="cardholder-name" class="label-default"
@@ -197,15 +197,28 @@
             >Thẻ quà tặng/Mã giảm giá</label
           >
 
-          <div class="wrapper-flex">
-            <input
-              type="text"
-              name="discount-token"
-              id="discount-token"
-              class="default-input"
-            />
+          <form [formGroup]="discountForm" (ngSubmit)="applyDiscount()">
+            <div class="wrapper-flex">
+              <input
+                type="text"
+                name="discount-token"
+                id="discount-token"
+                class="default-input"
+                formControlName="code"
+              />
 
-            <button class="btn btn-outline">Dùng</button>
+              <button class="btn btn-outline">Dùng</button>
+            </div>
+          </form>
+
+          <div class="text-red-500 text-center p-3">
+            {{ errorMessage }}
+          </div>
+
+          <div class="product-card" *ngFor="let item of discount; index as i">
+            <div class="border p-3">
+              <span id="quantity">{{ item.name }}</span>
+            </div>
           </div>
         </div>
 

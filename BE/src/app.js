@@ -26,7 +26,7 @@ app.use("/category", categoryRouter);
 app.use("/order", orderRouter);
 app.use("/comment", commentRouter);
 app.use("/contact", contactRouter);
-app.use("/payment", paymentRouter);
+app.use("/", paymentRouter);
 app.use("/", forgotRouter);
 app.use("/", verifyRouter);
 app.use("/", authRouter);

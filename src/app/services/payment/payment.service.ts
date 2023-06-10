@@ -11,4 +11,8 @@ export class PaymentService {
   paymentCard(data: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/payment', data);
   }
+
+  getDiscount(data: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/discountByCode', data);
+  }
 }
