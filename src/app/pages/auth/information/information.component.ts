@@ -19,6 +19,9 @@ export class InformationComponent {
   message: any;
   restPassMessage: any;
 
+  order: any;
+  proId: any;
+
   formUser = this.fb.group({
     _id: [{ value: '' }, [Validators.required]],
     name: [{ value: '' }, [Validators.required]],
@@ -40,7 +43,8 @@ export class InformationComponent {
   constructor(
     private userService: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) {
     const userData = localStorage.getItem('user');
     const user = userData ? JSON.parse(userData) : {};
@@ -60,6 +64,17 @@ export class InformationComponent {
         phone: data.userWithoutPassword.phone,
         address: data.userWithoutPassword.address,
       });
+    });
+
+    this.orderService.getOrderByIdUser(user._id).subscribe((item: any) => {
+      this.order = item.orders;
+    });
+  }
+
+  getProductById(id: any) {
+    this.orderService.getById(id).subscribe((data) => {
+      console.log(data.data.products);
+      this.proId = data.data;
     });
   }
 
