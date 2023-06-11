@@ -47,14 +47,6 @@ const routes: Routes = [
         path: 'verify-email/:verifyCode',
         component: VerifyEmailComponent,
       },
-      {
-        path: 'information',
-        component: InfomationComponent,
-      },
-      {
-        path: 'information-update',
-        component: InformationUpdateComponent,
-      },
     ],
   },
 
@@ -70,6 +62,14 @@ const routes: Routes = [
       { path: 'search', component: SearchPageComponent },
       { path: 'introduce', component: IntroducePageComponent },
       { path: 'contact', component: ContactPageComponent },
+      {
+        path: 'information',
+        component: InfomationComponent,
+      },
+      {
+        path: 'information-update',
+        component: InformationUpdateComponent,
+      },
     ],
   },
 
