@@ -9,4 +9,150 @@ import { OrderService } from 'src/app/services/order/order.service';
   templateUrl: './information.component.html',
   styleUrls: ['./information.component.css'],
 })
-export class InformationComponent {}
+export class InformationComponent {
+  info: any;
+  isDisabled: boolean = true;
+  activeTab: any = 0;
+
+  currentStep: any = 0;
+  activeRestPass: any = 0;
+  message: any;
+  restPassMessage: any;
+
+  formUser = this.fb.group({
+    _id: [{ value: '' }, [Validators.required]],
+    name: [{ value: '' }, [Validators.required]],
+    email: [{ value: '' }, [Validators.required]],
+    phone: [{ value: '' }, [Validators.required]],
+    address: [{ value: '' }, [Validators.required]],
+  });
+
+  firstFormGroup = this.fb.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this.fb.group({
+    oldPassword: ['', Validators.required],
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
+  });
+  isLinear = false;
+
+  constructor(
+    private userService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    const userData = localStorage.getItem('user');
+    const user = userData ? JSON.parse(userData) : {};
+
+    if (JSON.stringify(user) === '{}') {
+      this.router.navigate(['/auth/signIn']);
+      return;
+    }
+
+    this.info = user;
+
+    this.userService.getOneUser(user._id).subscribe((data) => {
+      this.formUser.patchValue({
+        _id: data.userWithoutPassword._id,
+        name: data.userWithoutPassword.name,
+        email: data.userWithoutPassword.email,
+        phone: data.userWithoutPassword.phone,
+        address: data.userWithoutPassword.address,
+      });
+    });
+  }
+
+  changeTab(index: number) {
+    this.activeTab = index;
+  }
+
+  updateUser() {
+    const updatedUser = {
+      _id: this.formUser.value._id || '',
+      name: this.formUser.value.name || '',
+      email: this.formUser.value.email || '',
+      phone: this.formUser.value.phone || '',
+      address: this.formUser.value.address || '',
+    };
+
+    this.userService.updateUser(updatedUser).subscribe(
+      (data) => {
+        console.log(data);
+        localStorage.setItem('user', JSON.stringify(data.data));
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  sendCode() {
+    const FormEmail = {
+      email: this.info.email,
+    };
+
+    this.userService.sendCode(FormEmail).subscribe(
+      (res) => {
+        this.message = res.message + ', vào mail để lấy mã bảo mật';
+        sessionStorage.setItem('activeCode', res.code);
+        setTimeout(() => {
+          this.activeRestPass = 1;
+        }, 3000);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  checkCode() {
+    const FormCode = {
+      code: this.firstFormGroup.value.firstCtrl,
+    };
+
+    this.userService.checkCode(FormCode).subscribe(
+      (res) => {
+        this.activeRestPass = 2;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  next() {
+    this.activeRestPass = 3;
+  }
+
+  restPassword() {
+    const FormRestPassword = {
+      oldPassword: this.secondFormGroup.value.oldPassword,
+      password: this.secondFormGroup.value.password,
+      confirmPassword: this.secondFormGroup.value.confirmPassword,
+    };
+
+    console.log(FormRestPassword);
+
+    this.userService.changePass(FormRestPassword).subscribe(
+      (res) => {
+        console.log(res.message);
+        this.restPassMessage = res.message;
+        setTimeout(() => {
+          this.currentStep = 2;
+        }, 1000);
+
+        setTimeout(() => {
+          sessionStorage.removeItem('activeCode');
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          window.location.href = '/auth/signIn';
+        }, 3000);
+      },
+      (error) => {
+        console.log(error);
+        this.restPassMessage = error.error.message;
+      }
+    );
+  }
+}
