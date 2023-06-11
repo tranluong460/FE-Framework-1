@@ -9,6 +9,7 @@ import { loginSchema } from "../validate/login";
 import { registerSchema } from "../validate/register";
 import { sendVerifyEmail } from "../middleware/sendMail";
 import { generateRandomCode } from "../component/function";
+import user from "../models/user";
 
 dotenv.config();
 
@@ -221,6 +222,46 @@ export const register = async (req, res) => {
 
     return res.status(500).json({
       message: "Đã có lỗi xảy ra khi đăng ký",
+    });
+  }
+};
+
+// thay doi thong tin
+export const updateUser = async (req, res) => {
+  try {
+    const { error } = registerSchema.validate(req.body, { abortEarly: false });
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(400).json({
+        message: errors,
+      });
+    }
+
+    const phoneNumberRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+    const isPhoneNumberValid = phoneNumberRegex.test(req.body.phone);
+
+    if (!isPhoneNumberValid) {
+      return res.status(400).json({
+        message: "Số điện thoại không đúng định dạng",
+      });
+    }
+
+    const data = await user.findOneAndUpdate({ _id: req.body.id }, req.body, { new: true });
+
+    if (!data) {
+      return res.status(404).json({
+        message: 'Không tìm thấy người dùng để cập nhật thông tin',
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Cập nhật thông tin người dùng thành công',
+      data
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Lỗi hệ thống',
+      error: error.message
     });
   }
 };

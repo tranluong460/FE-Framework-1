@@ -5,6 +5,7 @@ import {
   login,
   register,
   lockAccount,
+  updateUser,
 } from "../controller/auth";
 import { checkPermission } from "../middleware/checkPermission";
 
@@ -15,5 +16,6 @@ router.get("/user/:id", getOneUser);
 router.post("/login", login);
 router.post("/register", register);
 router.post("/lockAccount/:id", checkPermission, lockAccount);
+router.patch('/:id', updateUser)
 
 export default router;
