@@ -32,11 +32,11 @@ export class InformationUpdateComponent {
       this.formUser.patchValue({
         name: this.info.name,
         phone: this.info.phone,
-        email: this.info.email,
+        // email: this.info.email,
         address: this.info.address,
-        isLockAccount: this.info.isLockAccount,
-        role: this.info.role,
-        isVerify: this.info.isVerify._id,
+        // isLockAccount: this.info.isLockAccount,
+        // role: this.info.role,
+        // isVerify: this.info.isVerify._id,
       });
     });
   }
@@ -46,7 +46,7 @@ export class InformationUpdateComponent {
       name: this.formUser.value.name || '',
       phone: this.formUser.value.phone || '',
       address: this.formUser.value.address || '',
-      email: this.info.email,
+      // email: this.info.email,
       _id: this.info._id,
     };
     console.log(updatedUser);

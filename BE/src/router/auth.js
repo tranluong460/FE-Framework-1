@@ -16,6 +16,6 @@ router.get("/user/:id", getOneUser);
 router.post("/login", login);
 router.post("/register", register);
 router.post("/lockAccount/:id", checkPermission, lockAccount);
-router.patch('/:id', updateUser)
+router.patch('/update-user/:id', updateUser)
 
 export default router;
