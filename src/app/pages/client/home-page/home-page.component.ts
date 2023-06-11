@@ -15,6 +15,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   items: any;
+  isLoading: any = true;
 
   constructor(
     private renderer: Renderer2,
@@ -26,6 +27,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.productsService.getAllProducts().subscribe((data) => {
       this.items = data.data;
     });
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
   private counter = 1;

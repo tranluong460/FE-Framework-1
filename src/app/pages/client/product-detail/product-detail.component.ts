@@ -17,6 +17,8 @@ export class ProductDetailComponent {
   activeTab: number = 0;
   errorMessage: any;
 
+  isLoading: any = true;
+
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],
   });
@@ -42,6 +44,9 @@ export class ProductDetailComponent {
     this.productService.getAllProducts().subscribe((data) => {
       this.products = data.data;
     });
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
   onSubmit() {

@@ -1,3 +1,4 @@
+<!-- <div *ngIf="!isLoading; else loadingContent"> -->
 <div class="flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-gray-50 h-screen">
   <div class="text-center">
     <div class="p-3 text-2xl text-black">
@@ -5,7 +6,6 @@
     </div>
   </div>
 
-  <!-- <div *ngIf="users.length !== 0; else loadingContent"> -->
   <div class="table-responsive p-3">
     <table class="table table-hover">
       <thead class="text-center">
@@ -65,13 +65,12 @@
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
-
-<!-- <ng-template #loadingContent>
-    <div class="md:1 lg:2 xl:3">
-      <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
-</div> -->
+<!-- </div>
+<ng-template #loadingContent>
+  <div class="md:1 lg:2 xl:3">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template> -->
 
 <!-- The Modal -->
 <div class="modal" id="bandUser">

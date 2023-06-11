@@ -15,6 +15,8 @@ export class AdminUserComponent {
 
   p: number = 1;
 
+  // isLoading: any = true;
+
   onSubmit(id: any) {
     this.authService.lockAccount(id).subscribe((data) => {
       this.authService.getUser().subscribe((data) => {
@@ -27,6 +29,10 @@ export class AdminUserComponent {
     this.authService.getUser().subscribe((data) => {
       this.users = data.usersWithoutPassword;
     });
+
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 3000);
   }
 
   lockAccount(id: any) {
