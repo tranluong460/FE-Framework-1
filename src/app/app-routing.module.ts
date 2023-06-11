@@ -59,7 +59,7 @@ const routes: Routes = [
       { path: 'cart', component: CartPageComponent },
       { path: 'cart/pay', component: PayPageComponent },
       { path: 'productDetail/:id', component: ProductDetailComponent },
-      { path: 'search', component: SearchPageComponent },
+      { path: 'search/:keyword', component: SearchPageComponent },
       { path: 'introduce', component: IntroducePageComponent },
       { path: 'contact', component: ContactPageComponent },
       {

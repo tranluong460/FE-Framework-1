@@ -1,10 +1,19 @@
 import express from "express";
-import { create, del, edit, getAll, getOne } from "../controller/product";
+import {
+  create,
+  del,
+  edit,
+  getAll,
+  getOne,
+  searchProduct,
+} from "../controller/product";
 import { checkPermission } from "../middleware/checkPermission";
 
 const router = express.Router();
 
 router.get("/", getAll);
+
+router.get("/search/:keyword", searchProduct);
 
 router.get("/:id", getOne);
 

@@ -43,7 +43,7 @@ export class HeaderClientComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      window.location.href = '/search/' + result;
     });
   }
 }
