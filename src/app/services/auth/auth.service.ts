@@ -74,4 +74,24 @@ export class AuthService {
   verifyEmail(data: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/verify-email', data);
   }
+
+  sendCode(email: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/send-code', email);
+  }
+
+  checkCode(code: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/check-code', code, {
+      headers: {
+        Authorization: 'Bearer ' + sessionStorage.getItem('activeCode'),
+      },
+    });
+  }
+
+  changePass(data: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/change-pass', data, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    });
+  }
 }
