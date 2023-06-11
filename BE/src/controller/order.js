@@ -138,4 +138,22 @@ const del = async (req, res) => {
   }
 };
 
-export { getAll, getOne, edit, create, del };
+// lấy thông tin đơn hàng
+const findOrdersByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const orders = await Order.find({ user: userId }).populate("products.product")
+
+    if (orders.length === 0) {
+      return res.status(404).json({ message: 'Không tìm thấy đơn hàng cho userId đã chỉ định.' });
+    }
+
+    res.status(200).json({ orders });
+  } catch (err) {
+    console.error('Lỗi truy vấn:', err);
+    res.status(500).json({ message: 'Đã xảy ra lỗi trong quá trình tìm đơn hàng.' });
+  }
+};
+
+export { getAll, getOne, edit, create, del, findOrdersByUserId };
