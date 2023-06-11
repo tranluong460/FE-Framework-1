@@ -21,6 +21,14 @@ export class InformationComponent {
     address: [{ value: '' }, [Validators.required]],
   });
 
+  firstFormGroup = this.fb.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this.fb.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
+
   constructor(
     private userService: AuthService,
     private fb: FormBuilder,

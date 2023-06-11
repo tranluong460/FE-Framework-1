@@ -35,3 +35,11 @@
   border-radius: 100%;
   border: 5px solid #fff;
 }
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
