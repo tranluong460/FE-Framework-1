@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-information',
@@ -19,8 +20,18 @@ export class InformationComponent {
     address: [{ value: '', disabled: true }, [Validators.required]],
   });
 
-  constructor(private userService: AuthService, private fb: FormBuilder) {
+  constructor(
+    private userService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     const user = JSON.parse(localStorage.getItem('user')!);
+
+    if (!user) {
+      this.router.navigate(['/auth/signIn']);
+      return;
+    }
+
     this.userService.getOneUser(user._id).subscribe((data) => {
       this.formUser.patchValue({
         _id: data.userWithoutPassword._id,
