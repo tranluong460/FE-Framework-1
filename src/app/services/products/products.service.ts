@@ -47,4 +47,10 @@ export class ProductsService {
       }
     );
   }
+
+  searchProduct(keyword: any): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:8080/product/search/${keyword}`
+    );
+  }
 }

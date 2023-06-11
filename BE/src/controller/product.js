@@ -1,5 +1,6 @@
 import Product from "../models/product";
 import { productSchema } from "../validate/product";
+import mongoose from "mongoose";
 
 const getAll = async (req, res) => {
   try {
@@ -140,4 +141,45 @@ const del = async (req, res) => {
   }
 };
 
-export { getAll, getOne, edit, create, del };
+const searchProduct = async (req, res) => {
+  try {
+    const keyword = req.params.keyword;
+
+    let query;
+    if (mongoose.Types.ObjectId.isValid(keyword)) {
+      query = { brand: keyword };
+    } else {
+      const regex = new RegExp(keyword, "i");
+      query = { name: { $regex: regex } };
+    }
+
+    const data = await Product.find(query)
+      .populate("brand")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          select: "name",
+        },
+      });
+
+    if (data.length === 0) {
+      return res.status(404).json({
+        message: "Không tìm thấy sản phẩm",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Thông tin sản phẩm",
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra",
+    });
+  }
+};
+
+export { getAll, getOne, edit, create, del, searchProduct };
