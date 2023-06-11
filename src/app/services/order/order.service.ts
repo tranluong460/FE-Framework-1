@@ -13,6 +13,9 @@ export class OrderService {
   getById(id: any): Observable<any> {
     return this.http.get<any>(` http://localhost:8080/order/${id}`);
   }
+  getOrderByIdUser(id: any): Observable<any> {
+    return this.http.get<any>(` http://localhost:8080/order/user/${id}`);
+  }
   createOrder(order: any): Observable<any> {
     return this.http.post<any>(` http://localhost:8080/order`, order);
   }

@@ -174,6 +174,43 @@
           >
             <h3 class="mb-4">Thông tin đơn hàng</h3>
             <div class="row">Danh sách đơn hàng</div>
+            <div class="table-responsive p-3">
+              <table class="table table-hover">
+                <thead class="text-center">
+                  <tr>
+                    <th scope="col" class="md:w-screen">STT</th>
+                    <!-- <th scope="col" class="md:w-screen">Người mua</th> -->
+                    <th scope="col" class="md:w-screen">Sản phẩm</th>
+                    <th scope="col" class="md:w-screen">Tổng giá</th>
+                    <th scope="col" class="md:w-screen">Trạng thái</th>
+                    <!-- <th scope="col" class="md:w-screen">Thao tác</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of order; index as i">
+                    <th scope="row" class="text-center">{{ i + 1 }}</th>
+                    <!-- <td class="text-center">
+                      <span>{{ item.user.name }}</span>
+                    </td> -->
+                    <td class="text-center">
+                      <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#details"
+                        (click)="getProductById(item._id)"
+                      >
+                        <span> Chi tiết </span>
+                      </button>
+                    </td>
+                    <td class="text-center">
+                      <span>{{ item.totalPrice }}đ</span>
+                    </td>
+                    <td class="text-center">
+                      <span>{{ item.status }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div
@@ -273,6 +310,41 @@
             <div>
               <button class="btn btn-primary">Update</button>
               <button class="btn btn-light">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="details">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Thông tin đơn hàng</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div *ngFor="let item of proId?.products; index as i">
+            <div class="flex">
+              <img
+                src="{{ item.product.images?.[0].base_url }}"
+                alt="img"
+                width="80"
+                height="80"
+              />
+              <div class="grid ml-5">
+                <span>{{ item.product.name }}</span>
+                <span>{{ item.product.price }}đ</span>
+                <span>x{{ item.quantity }}</span>
+              </div>
             </div>
           </div>
         </div>
