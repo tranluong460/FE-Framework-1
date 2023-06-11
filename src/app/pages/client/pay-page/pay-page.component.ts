@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OrderService } from 'src/app/services/order/order.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PaymentService } from 'src/app/services/payment/payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pay-page',
@@ -48,13 +49,19 @@ export class PayPageComponent {
   constructor(
     private orderService: OrderService,
     private fb: FormBuilder,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private router: Router
   ) {
     // Khởi tạo user và cart
     const user: any = JSON.parse(localStorage.getItem('user') || '{}');
     const cart: any = JSON.parse(sessionStorage.getItem('cart') || '{}');
     this.user = user;
     this.cart = cart.products ? cart : { products: [], totalPrice: 0 };
+
+    if (JSON.stringify(user) === '{}') {
+      this.router.navigate(['/auth/signIn']);
+      return;
+    }
 
     // Tính tổng
     this.calculateTotal();

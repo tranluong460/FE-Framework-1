@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
 export class InformationComponent {
   info: any;
   isDisabled: boolean = true;
+  activeTab: any = 0;
 
   formUser = this.fb.group({
     _id: [{ value: '' }, [Validators.required]],
-    name: [{ value: '', disabled: true }, [Validators.required]],
-    email: [{ value: '', disabled: true }, [Validators.required]],
-    phone: [{ value: '', disabled: true }, [Validators.required]],
-    address: [{ value: '', disabled: true }, [Validators.required]],
+    name: [{ value: '' }, [Validators.required]],
+    email: [{ value: '' }, [Validators.required]],
+    phone: [{ value: '' }, [Validators.required]],
+    address: [{ value: '' }, [Validators.required]],
   });
 
   constructor(
@@ -25,12 +26,15 @@ export class InformationComponent {
     private fb: FormBuilder,
     private router: Router
   ) {
-    const user = JSON.parse(localStorage.getItem('user')!);
+    const userData = localStorage.getItem('user');
+    const user = userData ? JSON.parse(userData) : {};
 
-    if (!user) {
+    if (JSON.stringify(user) === '{}') {
       this.router.navigate(['/auth/signIn']);
       return;
     }
+
+    this.info = user;
 
     this.userService.getOneUser(user._id).subscribe((data) => {
       this.formUser.patchValue({
@@ -43,18 +47,15 @@ export class InformationComponent {
     });
   }
 
-  update() {
-    this.isDisabled = false;
-    this.formUser.get('name')?.enable();
-    this.formUser.get('phone')?.enable();
-    this.formUser.get('address')?.enable();
+  changeTab(index: number) {
+    this.activeTab = index;
   }
 
   updateUser() {
     const updatedUser = {
-      _id: this.formUser.getRawValue()._id || '',
+      _id: this.formUser.value._id || '',
       name: this.formUser.value.name || '',
-      email: this.formUser.getRawValue().email || '',
+      email: this.formUser.value.email || '',
       phone: this.formUser.value.phone || '',
       address: this.formUser.value.address || '',
     };

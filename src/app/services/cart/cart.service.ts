@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class CartService {
   info: any = localStorage.getItem('user');
-  user: any = JSON.parse(this.info);
+  user = this.info ? JSON.parse(this.info) : {};
   items: any;
   cart: any = {
     user: '',
