@@ -21,8 +21,8 @@ export class AuthService {
   getOneUser(id: any): Observable<any> {
     return this.http.get<any[]>(`http://localhost:8080/user/${id}`);
   }
+
   updateUser(user: any): Observable<any> {
-    console.log(user);
     return this.http.patch<any>(
       `http://localhost:8080/update-user/${user._id}`,
       user

@@ -29,8 +29,8 @@ import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
 import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
 import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
-import { InfomationComponent } from './pages/auth/infomation/infomation.component';
-import { InformationUpdateComponent } from './pages/auth/information-update/information-update.component';
+import { InformationComponent } from './pages/auth/information/information.component';
+
 const routes: Routes = [
   {
     path: 'auth',
@@ -64,11 +64,7 @@ const routes: Routes = [
       { path: 'contact', component: ContactPageComponent },
       {
         path: 'information',
-        component: InfomationComponent,
-      },
-      {
-        path: 'information-update',
-        component: InformationUpdateComponent,
+        component: InformationComponent,
       },
     ],
   },

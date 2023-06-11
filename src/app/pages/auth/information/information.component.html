@@ -11,6 +11,15 @@
       />
     </div>
     <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
       <label for="phone">Số điện thoại:</label>
       <input
         type="text"
@@ -30,13 +39,21 @@
     </div>
     <div class="mt-3 flex justify-center">
       <button
-        type="button"
+        type="submit"
         class="btn btn-primary mr-10"
+        [hidden]="isDisabled"
         (click)="updateUser()"
       >
-        Lưu thông tin
+        Cập nhật
       </button>
-      <button type="button" class="btn btn-success mr-10">Trở về</button>
+      <button
+        type="submit"
+        class="btn btn-primary mr-10"
+        (click)="update()"
+        [hidden]="!isDisabled"
+      >
+        Thay đổi thông tin
+      </button>
     </div>
   </form>
 </div>
