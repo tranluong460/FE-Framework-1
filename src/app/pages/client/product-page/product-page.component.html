@@ -10,5 +10,68 @@
     </ul>
   </div>
 
-  <div>product</div>
+  <div *ngIf="!isLoading; else loadingContent">
+    <section class="list-products">
+      <div class="container">
+        <div class="products">
+          <div *ngFor="let item of items; let i = index" class="card-product">
+            <div class="img-product">
+              <a href="productDetail/{{ item._id }}">
+                <div class="card-img">
+                  <img
+                    src="{{item.images?.[0].base_url}}"
+                    alt="product"
+                    class="img1"
+                  />
+                  <img
+                    src="{{item.images?.[0]?.base_url}}"
+                    alt="product"
+                    class="img2"
+                  />
+                </div>
+              </a>
+              <div class="button-group">
+                <button class="wishlist">
+                  <span>Yêu thích</span>
+                  <i class="far fa-heart"></i>
+                </button>
+                <a href="productDetail/{{ item._id }}">
+                  <button class="quick-view">
+                    <span>Xem thông tin</span>
+                    <i class="far fa-eye"></i>
+                  </button>
+                </a>
+                <button class="add-cart" (click)="addToCart(item)">
+                  <span>Thêm vào giỏ hàng</span>
+                  <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="info-product">
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <h4 class="product-name">
+                <a href="productDetail/{{ item._id }}">
+                  {{ item.name }}
+                </a>
+              </h4>
+              <p class="product-price">
+                {{ item.price ? formatCurrency(item.price) : "" }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <ng-template #loadingContent>
+    <div class="flex justify-center h-screen items-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </div>
