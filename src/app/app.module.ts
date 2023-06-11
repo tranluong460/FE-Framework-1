@@ -47,7 +47,8 @@ import { AdminCommentComponent } from './pages/admin/admin-comment/admin-comment
 import { AdminContactComponent } from './pages/admin/admin-contact/admin-contact.component';
 import { ErrorAdminPageComponent } from './pages/sub/error-admin-page/error-admin-page.component';
 import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
-
+import { InfomationComponent } from './pages/auth/infomation/infomation.component';
+import { InformationUpdateComponent } from './pages/auth/information-update/information-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +82,8 @@ import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.com
     AdminContactComponent,
     ErrorAdminPageComponent,
     VerifyEmailComponent,
+    InfomationComponent,
+    InformationUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,4 +105,4 @@ import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.com
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
