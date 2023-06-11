@@ -24,13 +24,8 @@ export class AuthService {
   updateUser(user: any): Observable<any> {
     console.log(user);
     return this.http.patch<any>(
-      `http://localhost:8080/user/${user._id}`,
-      user,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      }
+      `http://localhost:8080/update-user/${user._id}`,
+      user
     );
   }
 
