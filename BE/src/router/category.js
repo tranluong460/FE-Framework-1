@@ -10,7 +10,7 @@ router.get("/:id", getOne);
 
 router.post("/", checkPermission, create);
 
-router.put("/:id", checkPermission, edit);
+router.patch("/:id", checkPermission, edit);
 
 router.delete("/:id", checkPermission, del);
 

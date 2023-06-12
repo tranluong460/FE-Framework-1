@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <div class="text-right mr-[5vh]">
+  <div class="mr-[5vh] text-right">
     <button
       class="btn btn-primary"
       data-bs-toggle="modal"
@@ -14,7 +14,8 @@
       <span>Thêm</span>
     </button>
   </div>
-  <div class="table-responsive p-3 md:w-full w-screen">
+
+  <div class="table-responsive p-3">
     <table class="table table-hover">
       <thead class="text-center">
         <tr>
@@ -27,24 +28,26 @@
       <tbody
         *ngFor="
           let item of categories
-            | paginate : { itemsPerPage: 8, currentPage: p };
+            | paginate : { itemsPerPage: 7, currentPage: p };
           index as i
         "
       >
-        <tr>
-          <th scope="row" class="text-center">{{ i + 1 }}</th>
-          <td class="text-center">
+        <tr class="text-center">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
             <span>{{ item.name }}</span>
           </td>
-          <td class="text-center">
+          <td>
             <span>{{ item.slug }}</span>
           </td>
+
           <td>
             <div class="flex gap-1 justify-center">
               <button
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#editCategory"
+                data-bs-target="#editCategories"
+                (click)="updateCateById(item._id)"
               >
                 <span>Sửa</span>
               </button>
@@ -68,13 +71,13 @@
   </div>
 </div>
 
-<!-- The Modal Edit Category -->
-<div class="modal" id="editCategory">
+<!-- The Modal Edit Product -->
+<div class="modal" id="editCategories">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Chỉnh sửa thông tin danh mục</h4>
+        <h4 class="modal-title">Chỉnh sửa thông tin sản phẩm</h4>
         <button
           type="button"
           class="btn-close"
@@ -83,37 +86,48 @@
       </div>
 
       <!-- Modal body -->
-      <form action="/sua-danh-muc" method="POST">
-        <div class="modal-body">
-          <h4>Chỉnh sửa danh mục</h4>
-          <div>
-            <label for="category-name">Tên danh mục:</label>
+      <div class="modal-body">
+        <form [formGroup]="formCategory">
+          <!-- name input -->
+          <div class="form-outline mb-4">
             <input
               type="text"
-              id="category-name"
-              name="category-name"
-              value="Tên danh mục hiện tại"
+              class="form-control"
+              placeholder="Tên danh mục"
+              formControlName="name"
             />
           </div>
-        </div>
 
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#alert"
-          >
-            <span>Lưu</span>
-          </button>
-        </div>
-      </form>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="slug"
+              formControlName="slug"
+            />
+          </div>
+
+          <!-- <span class="text-red-500">{{ errorMessage }}</span> -->
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#alert"
+          (click)="updateCate()"
+        >
+          <span>Lưu</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- The Modal Edit Category Success-->
+<!-- The Modal Edit Product Success -->
 <div class="modal" id="alert">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -129,7 +143,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         <div class="alert alert-success">
-          <span>Chỉnh sửa thông tin danh mục thành công!</span>
+          <span>Chỉnh sửa thông tin sản phẩm thành công!</span>
         </div>
       </div>
     </div>
@@ -194,7 +208,7 @@
   </div>
 </div>
 
-<!-- The Modal Add Category -->
+<!-- The Modal Edit Product -->
 <div class="modal" id="addCategory">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -209,37 +223,46 @@
       </div>
 
       <!-- Modal body -->
-      <form action="/sua-danh-muc" method="POST">
-        <div class="modal-body">
-          <h4>Thêm mới danh mục</h4>
-          <div>
-            <label for="category-name">Tên danh mục:</label>
+      <div class="modal-body">
+        <form [formGroup]="formCategory">
+          <!-- name input -->
+          <div class="form-outline mb-4">
             <input
               type="text"
-              id="category-name"
-              name="category-name"
-              value="Tên danh mục hiện tại"
+              class="form-control"
+              placeholder="Tên danh mục"
+              formControlName="name"
             />
           </div>
-        </div>
 
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#addAlert"
-          >
-            <span>Thêm</span>
-          </button>
-        </div>
-      </form>
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="slug"
+              formControlName="slug"
+            />
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#addAlert"
+          (click)="addCate()"
+        >
+          <span>Thêm</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- The Modal Edit Category Success-->
+<!-- The Modal Add Product Success -->
 <div class="modal" id="addAlert">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -255,7 +278,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         <div class="alert alert-success">
-          <span>Thêm mới danh mục thành công!</span>
+          <span>Thêm danh mục thành công!</span>
         </div>
       </div>
     </div>
