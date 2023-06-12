@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from 'src/app/interface/product';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 @Component({
@@ -7,8 +8,8 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./product-page.component.css'],
 })
 export class ProductPageComponent {
-  items: any;
-  isLoading: any = true;
+  items: IProduct[] = [];
+  isLoading: boolean = true;
 
   formatCurrency(amount: number): string {
     const formattedAmount = amount.toLocaleString('en-US');
@@ -19,7 +20,6 @@ export class ProductPageComponent {
     private productsService: ProductsService,
     private cartService: CartService
   ) {
-    this.items = Array(6).fill(0);
     this.productsService.getAllProducts().subscribe((data) => {
       this.items = data.data;
     });
@@ -28,7 +28,7 @@ export class ProductPageComponent {
     }, 1000);
   }
 
-  addToCart(product: any) {
+  addToCart(product: IProduct) {
     this.cartService.addToCart(product);
   }
 }

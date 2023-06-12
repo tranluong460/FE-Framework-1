@@ -16,20 +16,28 @@
         <div class="products">
           <div *ngFor="let item of items; let i = index" class="card-product">
             <div class="img-product">
-              <a href="productDetail/{{ item._id }}">
-                <div class="card-img">
+              <a [routerLink]="'productDetail/' + item._id">
+                <div
+                  class="card-img"
+                  *ngIf="
+                    item.images &&
+                    item.images.length > 0 &&
+                    item.images[0].base_url
+                  "
+                >
                   <img
-                    src="{{item.images?.[0].base_url}}"
+                    [src]="item.images[0].base_url"
                     alt="product"
                     class="img1"
                   />
                   <img
-                    src="{{item.images?.[0]?.base_url}}"
+                    [src]="item.images[0].base_url"
                     alt="product"
                     class="img2"
                   />
                 </div>
               </a>
+
               <div class="button-group">
                 <button class="wishlist">
                   <span>Yêu thích</span>

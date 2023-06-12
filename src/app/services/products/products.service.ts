@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IProduct } from 'src/app/interface/product';
+
+interface ProductResponse {
+  message: string;
+  data: IProduct[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  getAllProducts(): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/product');
+  getAllProducts(): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>('http://localhost:8080/product');
   }
 
   getProduct(id: any): Observable<any> {
