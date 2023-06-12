@@ -19,13 +19,13 @@ export class AdminCategoryComponent {
     });
   }
 
-  getCate(id: any) {
+  getCate(id: string) {
     this.categoryService.getCategories(id).subscribe((data) => {
       this.category = data.data;
     });
   }
 
-  removeCategories(id: any) {
+  removeCategories(id: string) {
     this.categoryService.removeCategories(id).subscribe((res) => {
       console.log(res);
     });

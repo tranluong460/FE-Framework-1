@@ -143,7 +143,7 @@ export class AdminProductComponent {
     );
   }
 
-  updateProByid(id: any) {
+  updateProById(id: string) {
     this.productsService.getProduct(id).subscribe((product) => {
       this.pro = product.data;
 

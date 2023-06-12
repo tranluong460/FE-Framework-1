@@ -15,9 +15,9 @@ export class ProductDetailComponent {
   products: any;
   comments: any;
   activeTab: number = 0;
-  errorMessage: any;
+  errorMessage: string = '';
 
-  isLoading: any = true;
+  isLoading: boolean = true;
 
   commentForm = this.formBuilder.group({
     content: ['', [Validators.required]],

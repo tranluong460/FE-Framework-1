@@ -8,7 +8,7 @@ import { ContactService } from 'src/app/services/contacts/contact.service';
   styleUrls: ['./contact-page.component.css'],
 })
 export class ContactPageComponent {
-  errorMessage: any;
+  errorMessage: string = '';
 
   contactForm = this.formBuilder.group({
     name: ['', [Validators.required]],

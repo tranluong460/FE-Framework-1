@@ -12,12 +12,12 @@ import { OrderService } from 'src/app/services/order/order.service';
 export class InformationComponent {
   info: any;
   isDisabled: boolean = true;
-  activeTab: any = 0;
+  activeTab: number = 0;
 
-  currentStep: any = 0;
-  activeRestPass: any = 0;
-  message: any;
-  restPassMessage: any;
+  currentStep: number = 0;
+  activeRestPass: number = 0;
+  message: string = '';
+  restPassMessage: string = '';
 
   order: any;
   proId: any;
@@ -71,7 +71,7 @@ export class InformationComponent {
     });
   }
 
-  getProductById(id: any) {
+  getProductById(id: string) {
     this.orderService.getById(id).subscribe((data) => {
       console.log(data.data.products);
       this.proId = data.data;

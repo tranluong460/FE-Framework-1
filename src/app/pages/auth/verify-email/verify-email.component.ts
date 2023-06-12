@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VerifyEmailComponent {
   errorMessage: string = '';
-  verifyCode: any = '';
+  verifyCode: string = '';
 
   verifyForm = this.formBuilder.group({
     randomCode: [''],
@@ -23,7 +23,8 @@ export class VerifyEmailComponent {
     private authService: AuthService
   ) {
     this.router.paramMap.subscribe((params) => {
-      this.verifyCode = params.get('verifyCode');
+      const verifyCode = params.get('verifyCode');
+      this.verifyCode = verifyCode !== null ? verifyCode : '';
     });
   }
 

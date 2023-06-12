@@ -18,7 +18,7 @@ export class AdminContactComponent {
     });
   }
 
-  show(id: any) {
+  show(id: string) {
     this.contactService.getOne(id).subscribe((data) => {
       this.contact = data.data;
     });

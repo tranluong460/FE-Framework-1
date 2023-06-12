@@ -38,7 +38,7 @@ export class CartPageComponent {
     sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
-  delItemCart(id: any) {
+  delItemCart(id: string) {
     const cartData: any = sessionStorage.getItem('cart');
     this.cart = JSON.parse(cartData);
 

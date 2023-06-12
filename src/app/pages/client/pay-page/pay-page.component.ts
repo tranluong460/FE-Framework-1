@@ -3,6 +3,7 @@ import { OrderService } from 'src/app/services/order/order.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PaymentService } from 'src/app/services/payment/payment.service';
 import { Router } from '@angular/router';
+import { IProduct } from 'src/app/interface/product';
 
 @Component({
   selector: 'app-pay-page',
@@ -13,12 +14,12 @@ export class PayPageComponent {
   user: any;
   cart: any;
   p: number = 1;
-  paymentMethod: any = 'Thanh toán khi nhận hàng';
-  errorMessage: any;
+  paymentMethod: string = 'Thanh toán khi nhận hàng';
+  errorMessage: string = '';
 
-  tax: any = 0;
-  shipping: any = 50000;
-  totalCalc: any = 0;
+  tax: number = 0;
+  shipping: number = 50000;
+  totalCalc: number = 0;
 
   discount: any = [];
 
@@ -27,7 +28,7 @@ export class PayPageComponent {
   // Định nghĩa các FormGroup
   orderForm = this.fb.group({
     user: [''],
-    products: [[] as any[]],
+    products: [[] as IProduct[]],
     totalPrice: [0],
     paymentMethod: [''],
   });

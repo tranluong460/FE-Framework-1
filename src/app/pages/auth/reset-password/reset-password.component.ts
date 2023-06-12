@@ -17,10 +17,9 @@ export class ResetPasswordComponent {
   passwordForm = this.formBuilder.group({
     password: ['', [Validators.required, Validators.minLength(6)]],
     randomCode: [''],
-    // confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  randomString!: string | any;
+  randomString: string | any;
 
   constructor(
     private formBuilder: FormBuilder,

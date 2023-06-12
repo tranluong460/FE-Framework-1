@@ -10,7 +10,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 })
 export class SearchPageComponent {
   data: any;
-  isLoading: any = true;
+  isLoading: boolean = true;
 
   constructor(
     private productsService: ProductsService,

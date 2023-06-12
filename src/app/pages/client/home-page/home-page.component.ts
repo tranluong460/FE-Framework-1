@@ -15,7 +15,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   items: any;
-  isLoading: any = true;
+  isLoading: boolean = true;
 
   constructor(
     private renderer: Renderer2,
@@ -23,7 +23,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private cartService: CartService
   ) {
-    this.items = Array(6).fill(0);
     this.productsService.getAllProducts().subscribe((data) => {
       this.items = data.data;
     });

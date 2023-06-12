@@ -26,7 +26,7 @@ export class AdminOrderComponent {
     });
   }
 
-  onSubmit(id: any) {
+  onSubmit(id: string) {
     const orderStatus: any = {
       status: this.orderForm.value.status || '',
     };
@@ -38,7 +38,7 @@ export class AdminOrderComponent {
     });
   }
 
-  getOrder(id: any) {
+  getOrder(id: string) {
     this.oderService.getById(id).subscribe((res) => {
       this.order = res.data;
     });
