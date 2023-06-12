@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminProductComponent {
   errorMessage: string = '';
-  products: any[];
+  products: any[] = [];
   product: any;
   p: number = 1;
   cate: any;
@@ -61,10 +61,8 @@ export class AdminProductComponent {
     private fb: FormBuilder,
     private router: ActivatedRoute
   ) {
-    this.products = Array(14).fill(0);
     this.productsService.getAllProducts().subscribe((product) => {
       this.products = product.data;
-      // lay id sp de edit
     });
 
     this.cateService.getAllCategories().subscribe((category) => {
