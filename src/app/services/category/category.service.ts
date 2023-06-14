@@ -24,9 +24,9 @@ export class CategoryService {
     });
   }
 
-  updateCategories(category: any): Observable<any> {
+  updateCategories(category: any, id: any): Observable<any> {
     return this.http.patch<any>(
-      `http://localhost:8080/product/${category.id}`,
+      `http://localhost:8080/category/${id}`,
       category,
       {
         headers: {

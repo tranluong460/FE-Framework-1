@@ -22,7 +22,6 @@ export class AdminCategoryComponent {
   ) {
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categories = categories.data;
-      console.log(this.categories);
     });
   }
 
@@ -36,7 +35,6 @@ export class AdminCategoryComponent {
     this.categoryService.removeCategories(id).subscribe((res) => {
       this.categoryService.getAllCategories().subscribe((categories) => {
         this.categories = categories.data;
-        console.log(this.categories);
       });
     });
   }
@@ -48,7 +46,9 @@ export class AdminCategoryComponent {
     this.categoryService.createCategories(cate).subscribe((data) => {
       this.categoryService.getAllCategories().subscribe((categories) => {
         this.categories = categories.data;
-        console.log(this.categories);
+        this.categoryService.getAllCategories().subscribe((categories) => {
+          this.categories = categories.data;
+        });
       });
     });
   }
@@ -65,12 +65,16 @@ export class AdminCategoryComponent {
 
   updateCate() {
     const cate = {
-      _id: this.category._id,
       name: this.formCategory.value.name || '',
       slug: this.formCategory.value.slug || '',
     };
-    this.categoryService.updateCategories(cate).subscribe((data) => {
-      console.log(data);
-    });
+    console.log(cate);
+    this.categoryService
+      .updateCategories(cate, this.category._id)
+      .subscribe((data) => {
+        this.categoryService.getAllCategories().subscribe((categories) => {
+          this.categories = categories.data;
+        });
+      });
   }
 }
