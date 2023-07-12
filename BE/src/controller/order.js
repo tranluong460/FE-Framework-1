@@ -32,7 +32,7 @@ const getOne = async (req, res) => {
       .populate("user")
       .populate("products.product");
 
-    if (!data || !data.length === 0) {
+    if (!data || data.length === 0) {
       return res.status(404).json({
         message: "Không tìm thấy đơn hàng",
       });
@@ -143,16 +143,22 @@ const findOrdersByUserId = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const orders = await Order.find({ user: userId }).populate("products.product")
+    const orders = await Order.find({ user: userId }).populate(
+      "products.product"
+    );
 
     if (orders.length === 0) {
-      return res.status(404).json({ message: 'Không tìm thấy đơn hàng cho userId đã chỉ định.' });
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy đơn hàng cho userId đã chỉ định." });
     }
 
     res.status(200).json({ orders });
   } catch (err) {
-    console.error('Lỗi truy vấn:', err);
-    res.status(500).json({ message: 'Đã xảy ra lỗi trong quá trình tìm đơn hàng.' });
+    console.error("Lỗi truy vấn:", err);
+    res
+      .status(500)
+      .json({ message: "Đã xảy ra lỗi trong quá trình tìm đơn hàng." });
   }
 };
 
